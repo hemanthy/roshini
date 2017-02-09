@@ -271,7 +271,7 @@ session_start();
                          hideModal();
                     }
                     else if(response = "Incorrect Email or Password!!!"){
-                            shakeModal();
+                            shakeModal("Incorrect Email or Password!!!");
                         /*$("#error").fadeIn(1000, function(){
                             $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
                             // $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In');
@@ -344,10 +344,12 @@ session_start();
 
                     }
                     else{
-                        $("#error").fadeIn(1000, function(){
-                            $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
+                      //  $(".error").fadeIn(1000, function(){
+                      //  alert(response);
+                            shakeModal(response);
+                       //     $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
                             // $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In');
-                        });
+                      //  });
                     }
                 }
             });

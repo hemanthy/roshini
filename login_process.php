@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 
 /*if(isset($_SESSION['usr_id'])!="") {
 	header("Location: index.php");
@@ -54,7 +54,12 @@ if (isset($_POST['signup'])) {
         $cpassword_error = "Password and Confirm Password doesn't match";
     }
     if (!$error) {
-        if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
+
+        $sql = "SELECT * FROM users WHERE email = '" . $email. "'";
+        $result = mysqli_query($con, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            echo "Email ID already exists";
+        }else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
             $successmsg = "Successfully Registered";
             echo $successmsg;
         } else {

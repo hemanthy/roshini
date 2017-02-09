@@ -43,7 +43,7 @@ function openRegisterModal(){
     }, 230);
     
 }
-
+/* 
 function loginAjax(){
 
     $.post( "/login", function( data ) {
@@ -55,13 +55,13 @@ function loginAjax(){
         });
 
 
+
+} */
 /*   Simulate error message from the server   */
 /*     shakeModal(); */
-}
-
-function shakeModal(){
+function shakeModal(errormsg){
     $('#loginModal .modal-dialog').addClass('shake');
-             $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
+             $('.error').addClass('alert alert-danger').html(errormsg);
              $('input[type="password"]').val('');
              setTimeout( function(){ 
                 $('#loginModal .modal-dialog').removeClass('shake'); 
