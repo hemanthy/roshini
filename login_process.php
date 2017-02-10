@@ -5,8 +5,16 @@ session_start();
 	header("Location: index.php");
 }*/
 
+
 include_once 'dbconnect.php';
 
+include('Constants.php');
+
+$msg = '';
+
+//var constVar = new Constants();
+
+echo $msg;
 //check if form is submitted
 if (isset($_POST['login'])) {
 
@@ -17,12 +25,12 @@ if (isset($_POST['login'])) {
     if ($row = mysqli_fetch_array($result)) {
         $_SESSION['usr_id'] = $row['id'];
         $_SESSION['usr_name'] = $row['name'];
-        $errormsg = "ok";
-        echo $errormsg;
+        $msg = Constants::LOGIN_SUCCESS;
+       // echo $errormsg;
         //header("Location: index.php");
     } else {
-        $errormsg = "Incorrect Email or Password!!!";
-        echo $errormsg;
+        $msg = Constants::INCORRECT_EMAIL_OR_PASSWORD;
+       // echo $errormsg;
     }
 }
 
@@ -51,23 +59,26 @@ if (isset($_POST['signup'])) {
     }*/
     if($password != $cpassword) {
         $error = true;
-        $cpassword_error = "Password and Confirm Password doesn't match";
-    }
-    if (!$error) {
-
+        $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
+      //  $cpassword_error = "Password and Confirm Password doesn't match";
+    }else{
         $sql = "SELECT * FROM users WHERE email = '" . $email. "'";
         $result = mysqli_query($con, $sql);
         if (mysqli_num_rows($result) > 0) {
-            echo "Email ID already exists";
+            $msg = Constants::EMAIL_ALREADY_EXISTS;
+        //    echo "Email ID already exists";
         }else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
-            $successmsg = "Successfully Registered";
-            echo $successmsg;
+            $msg = Constants::REGISTRATION_SUCCESSFUL;
+            //$successmsg = "Successfully Registered";
+            //echo $successmsg;
         } else {
-            $errormsg = "Error in registering...Please try again later!";
+            $msg = "Error in registering...Please try again later!";
         }
     }
 }
 
+
+echo $msg;
 
 
 ?>

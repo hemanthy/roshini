@@ -1,6 +1,23 @@
 <?php
 session_start();
 ?>
+<script>
+var config = (function() {
+var private = {
+    '1' : 'Incorrect Email or Password!!!',
+    '2' : 'CONGRATULATION REGISTRATION SUCCESSFUL',
+    '3' : "Password and Confirm Password doesn't match",
+    '4' : 'LOGIN SUCCESS',
+    '5' : 'Email ID already exists',
+    '6' : 'CONGRATULATION REGISTRATION SUCCESSFUL',
+
+};
+
+return {
+get: function(name) { return private[name]; }
+};
+})();
+</script>
 
 <link href="css/login-register.css" rel="stylesheet" />
 <link rel="stylesheet" href="../netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -147,7 +164,7 @@ session_start();
     <div class="modal-dialog login animated">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" id="closebtn" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Login with</h4>
             </div>
             <div class="modal-body">
@@ -265,17 +282,16 @@ session_start();
                 {
                      console.log(response);
 
-                    if(response=="ok"){
+                    if(response == "4"){
                         $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
                         // setTimeout(' window.location.href = "/index.php"; ',4000);
                          hideModal();
+                         console.log(window.location.href)
+                        location.href = window.location.href;
+                         //location.href();
                     }
-                    else if(response = "Incorrect Email or Password!!!"){
-                            shakeModal("Incorrect Email or Password!!!");
-                        /*$("#error").fadeIn(1000, function(){
-                            $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                            // $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In');
-                        });*/
+                    else {
+                            shakeModal(config.get(response));
                     }
                 }
             });
@@ -314,7 +330,7 @@ session_start();
                         required: "please enter your name"
                     },
                     cpassword:{
-                        required: "please enter your password"
+                        required: "please enter your confirm password"
                     },
                     email: "Please enter a valid email address",
                 },
@@ -337,20 +353,7 @@ session_start();
                 },
                 success :  function(response)
                 {
-                    if(response=="Successfully Registered"){
-                        alert(response);
-                        /*$("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
-                        setTimeout(' window.location.href = "/index.php"; ',4000);*/
-
-                    }
-                    else{
-                      //  $(".error").fadeIn(1000, function(){
-                      //  alert(response);
-                            shakeModal(response);
-                       //     $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
-                            // $("#btn-login").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In');
-                      //  });
-                    }
+                    shakeModal(config.get(response));
                 }
             });
             return false;
@@ -358,5 +361,16 @@ session_start();
 
 
     });
+</script>
 
+<script>
+    $(document).ready(function(){
+
+        $( ".close" ).click(function() {
+            hideModal();
+        });
+        $( ".modal-title" ).click(function() {
+            hideModal();
+        });
+    });
 </script>

@@ -73,3 +73,4 @@ function hideModal() {
         $('#loginModal').modal('hide');
     }, 230);
 }
+
