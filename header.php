@@ -4,13 +4,11 @@ session_start();
 <script>
 var config = (function() {
 var private = {
-    '1' : 'Incorrect Email or Password!!!',
-    '2' : 'CONGRATULATION REGISTRATION SUCCESSFUL',
-    '3' : "Password and Confirm Password doesn't match",
-    '4' : 'LOGIN SUCCESS',
-    '5' : 'Email ID already exists',
-    '6' : 'CONGRATULATION REGISTRATION SUCCESSFUL',
-
+    'INCORRECT_EMAIL_OR_PASSWORD' : 'Incorrect Email or Password!!!',
+    'REGISTRATION_SUCCESSFUL' : 'CONGRATULATION REGISTRATION SUCCESSFUL',
+    'PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH' : "Password and Confirm Password doesn't match",
+    'LOGIN_SUCCESS' : 'LOGIN SUCCESS',
+    'EMAIL_ALREADY_EXISTS' : 'Email ID already exists'
 };
 
 return {
@@ -282,7 +280,7 @@ get: function(name) { return private[name]; }
                 {
                      console.log(response);
 
-                    if(response == "4"){
+                    if(response == "LOGIN_SUCCESS"){
                         $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
                         // setTimeout(' window.location.href = "/index.php"; ',4000);
                          hideModal();
