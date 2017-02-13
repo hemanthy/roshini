@@ -17,8 +17,17 @@ get: function(name) { return private[name]; }
 })();
 </script>
 
+<style>
+
+    .hover-item:hover {
+        background-color: #FFFFFF;
+    }
+
+</style>
+
 <link href="css/login-register.css" rel="stylesheet" />
-<link rel="stylesheet" href="../netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <script src="js/login-register.js" type="text/javascript"></script>
 <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js" type="text/javascript"></script>-->
 <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
@@ -37,7 +46,7 @@ get: function(name) { return private[name]; }
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <input id="typeahead" type="text" class="form-control" placeholder="Search for coupons..." autocomplete="off" data-provide="typeahead">
+                                <input id="typeahead" type="text" class="form-control" placeholder="Search for stores..." autocomplete="off" data-provide="typeahead">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </div>
@@ -119,10 +128,8 @@ get: function(name) { return private[name]; }
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a class="" href="index.php" title="">Home</a></li>
-                            <li><a class="active" href="store-single.php" title="">Flipkart</a></li>
-                            <li><a class="" href="Stores.php" title="">Stores</a></li>
-                            <li><a class="" title="">Login</a></li>
-                            <li><a class="" title="" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Register</a></li>
+                            <li><a class="active" href="store-single.php" title="">Flipkart Store</a></li>
+                            <!--<li><a class="" href="Stores.php" title="">Stores</a></li>-->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -130,16 +137,16 @@ get: function(name) { return private[name]; }
                                 <li><a data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a></li>
                                 <li><a class="" title="" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a></li>
                             <?php } else { ?>
-                                <li><p class="navbar-text">Signed in as <?php echo $_SESSION['usr_name']; ?></p></li>
+                                <li style="font-size: 16px;margin-top: 6px;">Hi <?php echo $_SESSION['usr_name']; ?></li>
                                 <li><a href="logout.php">Log Out</a></li>
                                 <li class="dropdown hasmenu userpanel">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="uploads/testi_03.png" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
                                     <ul class="dropdown-menu start-right" role="menu">
                                         <li><a href="user-dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                                        <li><a href="user-favorites.php"><i class="fa fa-star"></i> Favorite Stores</a></li>
                                         <li><a href="user-saved.php"><i class="fa fa-heart-o"></i> Saved Coupons</a></li>
-                                        <li><a href="user-submit.php"><i class="fa fa-bullhorn"></i> Submit Coupon</a></li>
-                                        <li><a href="#"><i class="fa fa-lock"></i> Sign Out</a></li>
+                                        <!--<li><a href="user-favorites.php"><i class="fa fa-star"></i> Favorite Stores</a></li>
+                                        <li><a href="user-submit.php"><i class="fa fa-bullhorn"></i> Submit Coupon</a></li>-->
+                                        <li><a href="logout.php"><i class="fa fa-lock"></i> Sign Out</a></li>
                                     </ul>
                                 </li>
                             <?php } ?>
@@ -187,7 +194,6 @@ get: function(name) { return private[name]; }
                         <div class="error"></div>
                         <div class="form loginBox">
                             <form method="POST" action="" accept-charset="UTF-8" id="login-form">
-                                <!-- <input id="email" class="form-control" type="text" placeholder="Email" name="email" value="<?php if($error) echo $email; ?>"> -->
                                 <input type="email" class="form-control" placeholder="Email address" name="email" id="email"  />
                                 <input id="password" class="form-control" type="password" placeholder="Password" name="password">
                                 <input class="btn btn-default btn-login" type="submit" name="login" value="login" id="btn-login">

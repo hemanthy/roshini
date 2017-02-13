@@ -25,6 +25,7 @@ if (isset($_POST['login'])) {
     if ($row = mysqli_fetch_array($result)) {
         $_SESSION['usr_id'] = $row['id'];
         $_SESSION['usr_name'] = $row['name'];
+        $_SESSION['email_id'] = $row['email'];
         $msg = Constants::LOGIN_SUCCESS;
        // echo $errormsg;
         //header("Location: index.php");

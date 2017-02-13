@@ -68,8 +68,8 @@ wow.init();
 
 $(function(){
   $(".element").typed({
-    strings: ["Flipkart", "Amazon"],
-    typeSpeed: 200
+    strings: ["ONLINE BANK TRANSFER", "PAYTM WALLET","ONLINE BANK TRANSFER", "PAYTM WALLET"],
+    typeSpeed: 500
   });
 });
 

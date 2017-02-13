@@ -143,8 +143,8 @@
         <div class="section wb">
             <div class="container">
                <div class="section-title m30 text-center">
-                  <h1>Flipkart, Amazon Stores Publishes 20.000+ <span class="element"></span></h1>
-               </div>
+                    <h1>Users can get their cashback through <span class="element"></span></h1>
+                </div>
                <!-- end title -->
                <!-- slider -->
                <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;visibility:hidden;">
@@ -180,50 +180,31 @@
                <span data-u="arrowright" class="jssora22r" style="top:0px;right:8px;width:40px;height:58px;" data-autocenter="2"></span>
                <!-- end slider -->
                <hr class="invis1">
-               <div class="row">
+               <!--<div class="row">
                   <div class="col-md-12">
-                     <h4>Popular Stores12</h4>
+                     <h4>Popular Stores</h4>
                   </div>
-                  <!-- end col -->
-               </div>
-               <div class="text-center store-list row">
-                  <div class="col-md-2 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+                 </div>-->
+               <!--<div class="text-center store-list row">
+                  <div class="col-md-4 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
                      <div class="post-media">
                         <a href="coupon-single.php"><img src="uploads/store_01.jpg" alt="" class="img-responsive"></a>
                         <small>Takifest.com</small>
                      </div>
-                     <!-- end media -->
                   </div>
-                  <div class="col-md-2 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                  <div class="col-md-4 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                      <div class="post-media">
                         <a href="coupon-single.php"><img src="uploads/store_02.jpg" alt="" class="img-responsive"></a>
                         <small>WPServis.com</small>
                      </div>
-                     <!-- end media -->
                   </div>
-                  <div class="col-md-2 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="2s">
+                  <div class="col-md-4 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="2s">
                      <div class="post-media">
                         <a href="coupon-single.php"><img src="uploads/store_03.jpg" alt="" class="img-responsive"></a>
                         <small>PurplebyBanu.com</small>
                      </div>
-                     <!-- end media -->
                   </div>
-                  <div class="col-md-2 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-                     <div class="post-media">
-                        <a href="coupon-single.php"><img src="uploads/store_04.jpg" alt="" class="img-responsive"></a>
-                        <small>Tutsplus.com</small>
-                     </div>
-                     <!-- end media -->
-                  </div>
-                  <div class="col-md-2 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
-                     <div class="post-media">
-                        <a href="coupon-single.php"><img src="uploads/store_05.jpg" alt="" class="img-responsive"></a>
-                        <small>Showwp.com</small>
-                     </div>
-                     <!-- end media -->
-                  </div>
-                  <!-- end row -->
-               </div>
+               </div>-->
                <!-- end container -->
             </div>
             <!-- end section -->
@@ -250,15 +231,17 @@
 				  <!-- end col -->
 			    </div>
                 <div class="row grid-coupons">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="coupon-list">
                             <div class="coupon-wrapper">
                                 <div class="post-media">
-                                    <a href="coupon-single.php"><img src="uploads/store_01.jpg" alt="" class="img-responsive"></a>
+                                    <a href="store-single.php">
+                                       <img src="http://www.afaqs.com/all/news/images/news_story_grfx/2015/05/44375/Flipkart's-brand-new-mobile-friendly-logo.jpg" alt="" width="318" height="187" class="img-responsive">
+                                    </a>
                                 </div><!-- end media -->
 
                                 <div class="coupon-meta">
-                                   <!-- <div class="coupon-top clearfix">
+                                   <!-- <d  iv class="coupon-top clearfix">
                                         <div class="rating pull-left">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -271,7 +254,7 @@
                                             <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite it"><i class="fa fa-heart-o"></i></a>
                                         </div>
                                     </div> --> <!-- end coupon-top -->
-                                    <h3><a href="coupon-single.php">Flipkart.com</a></h3>
+                                    <h3><a href="/stores/store-single.php">Flipkart.com</a></h3>
                                     <p>At reasonable prices, quality assurance, 100% secure shopping. </p>
                                 </div><!-- end meta -->
                             </div><!-- end coupon-wrapper -->
@@ -279,11 +262,13 @@
                         </div><!-- end coupon list -->
                     </div><!-- end col -->
 
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="coupon-list">
                             <div class="coupon-wrapper">
                                 <div class="post-media">
-                                    <a href="coupon-single.php"><img src="uploads/store_04.jpg" alt="" class="img-responsive"></a>
+                                    <a href="coupon-single.php">
+                                        <img src="http://www.musthavedeal.com/wp-content/uploads/2016/10/Amazon-logo.jpg" style="height: 187px;" alt="" class="img-responsive" onMouseOver="Comingsoon('https://thecliparts.com/wp-content/uploads/2016/11/note-coming-soon-clipart.png',this)" onMouseOut="Comingsoon('http://www.musthavedeal.com/wp-content/uploads/2016/10/Amazon-logo.jpg',this)">
+                                    </a>
                                 </div><!-- end media -->
 
                                 <div class="coupon-meta">
@@ -302,6 +287,7 @@
                                     </div><!-- end coupon-top -->
                                     <h3><a href="coupon-single.php">Amazon.in</a></h3>
                                     <p>Those new members to the site via our instant KnowLogoDesign.com...</p>
+
                                 </div><!-- end meta -->
                             </div><!-- end coupon-wrapper -->
 
@@ -373,16 +359,109 @@
                         </div><!-- end coupon list -->
                     </div><!-- end col -->
 
-                    
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="coupon-list">
+                            <div class="coupon-wrapper">
+                                <div class="post-media">
+                                    <a href="coupon-single.php">
+                                        <img src="http://st1.bgr.in/wp-content/uploads/2014/12/paytm-logo.jpg" alt="" style="height: 187px;" class="img-responsive" onMouseOver="Comingsoon('https://thecliparts.com/wp-content/uploads/2016/11/note-coming-soon-clipart.png',this)" onMouseOut="Comingsoon('http://st1.bgr.in/wp-content/uploads/2014/12/paytm-logo.jpg',this)">
+                                    </a>
+                                </div><!-- end media -->
+
+                                <div class="coupon-meta">
+                                    <!-- <div class="coupon-top clearfix">
+                                         <div class="rating pull-left">
+                                             <i class="fa fa-star"></i>
+                                             <i class="fa fa-star"></i>
+                                             <i class="fa fa-star"></i>
+                                             <i class="fa fa-star"></i>
+                                             <i class="fa fa-star"></i>
+                                             <small>44 Rating</small>
+                                         </div>
+                                         <div class="favorite-coupon pull-right text-right">
+                                             <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite it"><i class="fa fa-heart-o"></i></a>
+                                         </div>
+                                     </div><!-- end coupon-top -->
+                                    <h3><a href="coupon-single.php">Amazon.in</a></h3>
+                                    <p>We are working on...</p>
+
+                                </div><!-- end meta -->
+                            </div><!-- end coupon-wrapper -->
+
+                            <!-- Modal -->
+                            <div id="code_id_04" class="modal fade code-modal">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4><a href="coupon-single.php">10% Discount Coupon from KnowLogoDesign</a></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <a href="store-single.php"><img src="uploads/store_04.jpg" alt="" class="img-responsive"></a>
+                                                    <div class="modal-button">
+                                                        <a href="http://themeforest.net/" target="_blank" title="" class="btn btn-default btn-block">Visit Store <i class="fa fa-angle-right"></i></a>
+                                                    </div>
+                                                </div><!-- end col -->
+
+                                                <div class="col-md-8">
+                                                    <div class="coupon-meta">
+                                                        <div class="coupon-top clearfix">
+                                                            <div class="rating pull-left">
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <small>44 Rating</small>
+                                                            </div>
+                                                            <div class="favorite-coupon pull-right text-right">
+                                                                <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-heart-o"></i></a>
+                                                            </div>
+                                                        </div><!-- end coupon-top -->
+                                                    </div><!-- end coupon-meta -->
+
+                                                    <p>Those new members to the site via our instant KnowLogoDesign.com... You can save awesome discount with our coupon code today!</p>
+                                                    <div class="modal-share clearfix">
+                                                        <ul class="list-inline social-small">
+                                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                        </ul>
+                                                    </div><!-- end share -->
+                                                </div><!-- end col -->
+                                            </div><!-- end row -->
+                                        </div><!-- end modal-body -->
+
+                                        <div class="modal-footer">
+                                            <div class="coupon-area">
+                                                <div class="showcode row">
+                                                    <div class="col-md-4 text-left">
+                                                        <div class="coupon-vote">
+                                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Work!"><i class="fa fa-smile-o"></i></a>
+                                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Poor!"><i class="fa fa-frown-o"></i></a>
+                                                        </div><!-- end coupon-meta -->
+                                                    </div><!-- end col -->
+                                                    <div class="col-md-8 text-center">
+                                                        <button data-clipboard-text="MYANOTHERCODE" class="coupon-code btn btn-primary btn-block" type="submit" title="Click to Copy">MYANOTHERCODE</button>
+                                                        <small>Click to Copy</small>
+                                                    </div>
+                                                </div><!-- end row -->
+                                            </div><!-- end coupon-area -->
+                                        </div><!-- end modal-footer -->
+                                    </div><!-- end mpdal-content -->
+                                </div><!-- end modal-dialog -->
+                            </div><!-- end modal -->
+                        </div><!-- end coupon list -->
+                    </div><!-- end col -->
 
                   <!-- end col -->
+                </div><!-- end row -->
 
-                    
-				</div><!-- end row -->
-
-                <div class="loadmorebutton text-center clearfix">
+                <!--<div class="loadmorebutton text-center clearfix">
                     <a href="stores.php" class="btn btn-custom">Browse more stores</a>
-                </div><!-- end loadmore -->
+                </div>--><!-- end loadmore -->
 
                 <hr class="invis1">
 				
@@ -452,6 +531,14 @@
       $("#headerId").load("header.php");
 	  $("#footerId").load("footer.php");
     });
+
+     function Comingsoon(url, element) {
+         element.setAttribute('src', url);
+         element.style.width = '318px';
+         element.style.height = '187px';
+           //  element.setAttribute('src', 'uploads/store_04.jpg');
+             /*element.setAttribute('src', 'http://www.wallpaperama.com/post-images/forums/200901/11-880-aaaa.jpg');*/
+   }
     </script> 
 	
 	<!--<script type="text/javascript">
@@ -459,7 +546,15 @@
         openLoginModal();
     });
 	</script> -->
-	  
+          <style type="text/css">
+              #Style {
+                  position:absolute;
+                  visibility:hidden;
+                  border:solid 1px #CCC;
+                  padding:5px;
+
+              }
+          </style>
 	  
 
 </body>

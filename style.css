@@ -2002,7 +2002,7 @@ hr.invis3 {
 .copyrights p {
     margin-bottom: 0;
     padding-bottom: 0;
-}
+}☺
 
 .copyrights p,
 .copyrights a {
@@ -2644,4 +2644,26 @@ small {
 hr.invishalf {
 	border: 0;
     margin: 45px 0;
+}
+
+.tile_stats_count .count {
+    font-size: 40px;
+}
+
+.tile_stats_count .count {
+    font-size: 30px;
+    line-height: 47px;
+    font-weight: 600;
+}
+
+.tile_count .tile_stats_count:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 65px;
+    border-left: 2px solid #ADB2B5;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: rgb(173, 178, 181);
+    margin-top: 10px;
 }

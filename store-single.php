@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
 
+?>
 
 <!-- Mirrored from psdconverthtml.com/live/yourcoupon/coupon-v2/store-single.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Jan 2017 19:23:32 GMT -->
 <head>
@@ -259,10 +262,10 @@
                                 <p>Your email is safe with us and we hate spam as much as you do.</p>
                                 <form class="row">
                                     <div class="col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Enter your name..">
+                                    <input type="text" class="form-control" value="<?php if (isset($_SESSION['usr_name'])) echo $_SESSION['usr_name']; ?>" placeholder="Enter your name..">
                                     </div>
                                     <div class="col-sm-6">
-                                    <input type="email" class="form-control" placeholder="Enter your email..">
+                                    <input type="email" class="form-control" value="<?php if (isset($_SESSION['email_id'])) echo $_SESSION['email_id']; ?>" placeholder="Enter your email..">
                                     </div>
 
                                     <div class="col-md-12">
@@ -302,7 +305,7 @@
                             </div>
                         </div><!-- end widget -->
 
-                        <div class="widget clearfix">
+                       <!-- <div class="widget clearfix">
                             <div class="featured hidden-xs"><i class="fa fa-star-o"></i></div>
                             <div class="widget-title">
                                 <h4><span>Best Stores</span></h4>
@@ -314,14 +317,14 @@
                                         <a href="coupon-single.php"><img src="uploads/store_01.jpg" alt="" class="img-responsive"></a>
                                         <small>Takifest.com</small>
                                     </div>
-                                    <!-- end media -->
+
                                 </div>
                                 <div class="col-md-6 col-xs-6">
                                     <div class="post-media">
                                         <a href="coupon-single.php"><img src="uploads/store_02.jpg" alt="" class="img-responsive"></a>
                                         <small>WPServis.com</small>
                                     </div>
-                                    <!-- end media -->
+
                                 </div>
 
                                 <div class="col-md-6 col-xs-6">
@@ -329,7 +332,7 @@
                                         <a href="coupon-single.php"><img src="uploads/store_03.jpg" alt="" class="img-responsive"></a>
                                         <small>PurplebyBanu.com</small>
                                     </div>
-                                    <!-- end media -->
+
                                 </div>
 
                                 <div class="col-md-6 col-xs-6">
@@ -337,7 +340,7 @@
                                         <a href="coupon-single.php"><img src="uploads/store_04.jpg" alt="" class="img-responsive"></a>
                                         <small>Tutsplus.com</small>
                                     </div>
-                                    <!-- end media -->
+
                                 </div>
 
                                 <div class="col-md-6 col-xs-6">
@@ -345,7 +348,7 @@
                                         <a href="coupon-single.php"><img src="uploads/store_05.jpg" alt="" class="img-responsive"></a>
                                         <small>Showwp.com</small>
                                     </div>
-                                    <!-- end media -->
+
                                 </div>
 
                                 <div class="col-md-6 col-xs-6">
@@ -353,10 +356,10 @@
                                         <a href="coupon-single.php"><img src="uploads/store_06.jpg" alt="" class="img-responsive"></a>
                                         <small>PSDConvertHTML.com</small>
                                     </div>
-                                    <!-- end media -->
+
                                 </div>
-                            </div><!-- end row -->
-                        </div><!-- end widget -->
+                            </div>
+                        </div>--><!-- end widget -->
                     </div><!-- end sidebar -->
                 </div><!-- end row -->
   <!-- end ttmenu-content -->
