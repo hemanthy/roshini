@@ -2667,3 +2667,23 @@ hr.invishalf {
     border-left-color: rgb(173, 178, 181);
     margin-top: 10px;
 }
+
+.green {
+    color: #1ABB9C;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: #00BBFF;
+}
+
+.light_green{
+    color : lightgreen;
+}
+
+.no_left_border {
+    border-left: none;
+}

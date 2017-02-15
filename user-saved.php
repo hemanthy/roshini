@@ -191,86 +191,52 @@
                         <div class="coupon-list list-wrapper">
                             <div class="coupon-wrapper">
                                 <div class="row tile_count">
-                                    <div class="col-md-2 col-sm-2 col-xs-12 tile_stats_count">
-                                        <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count no_left_border">
+                                        <span class="count_top"><i class="fa fa-user"></i> Available Balance</span>
+                                        <div class="count green">2500</div>
+                                        <!--<span class="count_bottom"><i class="green">4% </i> From last Week</span>-->
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i> Pending Balance</span>
+                                        <div class="count blue">2500</div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i> Redemption Made</span>
+                                        <div class="count light_green">2500</div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i> Redemption Applied</span>
                                         <div class="count">2500</div>
-                                        <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-                                    </div><!-- end col -->
-                                    <div class="col-md-2 col-sm-2 col-xs-12 tile_stats_count">
-                                        <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                                        <div class="count">2500</div>
-                                        <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-                                    </div><!-- end col -->
-                                </div><!-- end row -->
-
-                                <!-- Modal -->
-                                <div id="code_id_01" class="modal fade code-modal">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4><a href="coupon-single.php">50% Discount Coupon Code from CatiLogoms.com</a></h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <a href="store-single.php"><img src="uploads/store_01.jpg" alt="" class="img-responsive"></a>
-                                                        <div class="modal-button">
-                                                            <a href="http://themeforest.net/" target="_blank" title="" class="btn btn-default btn-block">Visit Store <i class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div><!-- end col -->
-
-                                                    <div class="col-md-8">
-                                                        <div class="coupon-meta">
-                                                            <div class="coupon-top clearfix">
-                                                                <div class="rating pull-left">
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <small>21 Rating</small>
-                                                                </div>
-                                                                <div class="favorite-coupon pull-right text-right">
-                                                                    <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-heart-o"></i></a>
-                                                                </div>
-                                                            </div><!-- end coupon-top -->
-                                                        </div><!-- end coupon-meta -->
-
-                                                        <p>At reasonable prices, quality assurance, 100% secure shopping. You can save awesome discount with our coupon code today!</p>
-
-                                                        <div class="modal-share clearfix">
-                                                            <ul class="list-inline social-small">
-                                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                            </ul>   
-                                                        </div><!-- end share -->
-                                                    </div><!-- end col -->
-                                                </div><!-- end row -->
-                                            </div><!-- end modal-body -->
-
-                                            <div class="modal-footer">
-                                                <div class="coupon-area">
-                                                    <div class=" row">
-                                                        <div class="col-md-4 text-left">
-                                                            <div class="coupon-vote">
-                                                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Work!"><i class="fa fa-smile-o"></i></a>
-                                                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Poor!"><i class="fa fa-frown-o"></i></a>
-                                                            </div><!-- end coupon-meta -->
-                                                        </div><!-- end col -->
-                                                        <div class="col-md-8 text-center">
-                                                            <button data-clipboard-text="2016TATILRA50" class="coupon-code btn btn-primary btn-block" type="submit" title="Click to Copy">2016TATILRA50</button>
-                                                            <small>Click to Copy</small>
-                                                        </div>
-                                                    </div><!-- end row -->
-                                                </div><!-- end coupon-area -->
-                                            </div><!-- end modal-footer -->
-                                        </div><!-- end mpdal-content -->
-                                    </div><!-- end modal-dialog -->
-                                </div><!-- end modal -->
+                                    </div>
+                                  </div><!-- end row -->
                             </div><!-- end coupon-wrapper -->
                         </div><!-- end coupon list -->
+                        <div class="coupon-tab post-wrapper nopadtop clearfix">
+                            <table id="showcashbacktableid" class="table table-sm table-striped table-bordered table-hover table-responsive">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>Order Date</th>
+                                    <th>Store</th>
+                                    <th>Cashback</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>12/2/2017</td>
+                                    <td>Flipkart</td>
+                                    <td>100</td>
+                                    <td>Pending</td>
+                                </tr>
+                                <tr>
+                                    <td>12/2/2017</td>
+                                    <td>Flipkart</td>
+                                    <td>100</td>
+                                    <td>Pending</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div><!-- end content -->
                 </div><!-- end row -->
                 <!-- end ttmenu-content -->

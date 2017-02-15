@@ -39,6 +39,23 @@ if (isset($_POST['login'])) {
 $error = false;
 
 //check if form is submitted
+/**
+ * @param $name
+ * @param $email
+ * @param $password
+ * @return mixed
+ */
+/*function insertQuery($name, $email, $password)
+{
+
+ //   $refNo = mt_rand(10000,99999);
+    $sql = "INSERT INTO users(name,email,password) VALUES(?,?,?)";
+    $sql->bind_param('sss', $name, $email, md5($password));
+    $sql->execute();
+    $result = $sql->get_result();
+    return $result;
+}*/
+
 if (isset($_POST['signup'])) {
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -58,6 +75,7 @@ if (isset($_POST['signup'])) {
         $error = true;
         $password_error = "Password must be minimum of 6 characters";
     }*/
+    $refNo = mt_rand(10000,99999);
     if($password != $cpassword) {
         $error = true;
         $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
@@ -68,7 +86,8 @@ if (isset($_POST['signup'])) {
         if (mysqli_num_rows($result) > 0) {
             $msg = Constants::EMAIL_ALREADY_EXISTS;
         //    echo "Email ID already exists";
-        }else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
+        }else if(mysqli_query($con, "INSERT INTO users(name,email,password,user_reference_number) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "',$refNo )")) {
+        //}else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
             $msg = Constants::REGISTRATION_SUCCESSFUL;
             //$successmsg = "Successfully Registered";
             //echo $successmsg;
