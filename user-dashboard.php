@@ -45,6 +45,16 @@ session_start();
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-touch.js"></script>
+    <!--   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+     <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>  -->
+    <script src="http://ui-grid.info/release/ui-grid-unstable.js"></script>
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css">
+
+
     <!-- Skin Examples -->
     <link rel="alternate stylesheet" type="text/css" href="css/skins/skin1.css" title="skin1" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="css/skins/skin2.css" title="skin2" media="all" />
@@ -63,8 +73,10 @@ session_start();
     <!-- Style switcher -->
     <link href="switcher/switcher.css" rel="stylesheet">
 
+
+
 </head>
-<body>
+<body ng-app="app">
 
     <!-- ADD Switcher -->
     <div class="demo_changer">
@@ -174,14 +186,18 @@ session_start();
             </div>
         </section><!-- end section -->
 
-        <div class="section">
+        <div class="section"  ng-controller="MainCtrl" ng-init="tabChanged(2)">
             <div class="container">
                 <div class="row">
                     <div class="sidebar col-md-4">
                         <div class="widget clearfix">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="user-dashboard.php"><span class="glyphicon glyphicon-off"></span>  Dashboard</a></li>
-                                <li><a href="user-saved.php"><span class="fa fa-heart-o"></span>  Saved Coupons</a></li>
+                                <li ng-class="tabs.selectedTab === 1 ? 'active' : ''">
+                                    <a  href="#" ng-click="tabChanged(1);"><span class="glyphicon glyphicon-off"></span>  Dashboard</a>
+                                </li>
+                                <li ng-class="tabs.selectedTab === 2 ? 'active' : ''">
+                                    <a  href="#" ng-click="tabChanged(2);"><span class="fa fa-heart-o"></span>  Saved Coupons</a>
+                                </li>
                                 <!--<li><a href="user-favorites.php"><span class="fa fa-star"></span>  Favorite Stores</a></li>
                                 <li><a href="user-submit.php"><span class="fa fa-bullhorn"></span>  Submit a Coupon</a></li>-->
                                 <li><a href="logout.php"><span class="fa fa-lock"></span>  Logout</a></li>
@@ -189,7 +205,7 @@ session_start();
                         </div><!-- end widget -->
                     </div><!-- end col -->
     
-                    <div class="sidebar col-md-8">
+                    <div class="sidebar col-md-8" ng-show="tabs.selectedTab === 1">
                         <div class="widget clearfix">
 
                             <form id="submit" class="contact-form newsletter">
@@ -266,6 +282,34 @@ session_start();
                             </form>
                         </div>
                     </div><!-- end content -->
+                    <div class="sidebar col-md-8" ng-show="tabs.selectedTab === 2">
+                        <div class="coupon-list list-wrapper">
+                            <div class="coupon-wrapper">
+                                <div class="row tile_count">
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count no_left_border">
+                                        <span class="count_top"><i class="fa fa-user"></i> Available Balance</span>
+                                        <div class="count green">2500</div>
+                                        <!--<span class="count_bottom"><i class="green">4% </i> From last Week</span>-->
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i> Pending Balance</span>
+                                        <div class="count blue">2500</div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i> Redemption Made</span>
+                                        <div class="count light_green">2500</div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i> Redemption Applied</span>
+                                        <div class="count">2500</div>
+                                    </div>
+                                </div><!-- end row -->
+                            </div><!-- end coupon-wrapper -->
+                        </div><!-- end coupon list -->
+                        <div class="coupon-tab post-wrapper nopadtop clearfix">
+                            <div ui-grid="gridOptions" ui-grid-edit ui-grid-cellnav  class="grid"></div>
+                        </div>
+                    </div><!-- end content -->
                 </div><!-- end row -->
             </div><!-- end container -->
         </div><!-- end section -->
@@ -284,13 +328,28 @@ session_start();
     <script src="js/custom.js"></script>
 
     <script src="switcher/switcher.js"></script>
-
+    <script src="js/app.js"></script>
     <script>
         $(function(){
             $("#headerId").load("header.php");
             $("#footerId").load("footer.php");
-        });
+            });
     </script>
 
+
+    <style>
+        .grid {
+            height: auto;
+        }
+
+        .tabs div{background-color:rgb(0,188,212);padding:5px 10px 5px 10px;
+            cursor: pointer;
+
+            overflow: hidden;    font-size: 14px;
+            text-align: center;display:inline;}
+
+
+
+    </style>
 </body>
 </html>
