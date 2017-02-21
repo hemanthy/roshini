@@ -1,5 +1,7 @@
 <?php
 
+include_once '/pojo/FlipkartOrderDetailsPOJO.php';
+
 //$url ='https://affiliate-api.flipkart.net/affiliate/api/allgadget.json';
 $url ='https://affiliate-api.flipkart.net/affiliate/report/orders/detail/json?startDate=2015-10-22&endDate=2017-11-22&status=approved&offset=0';
 //  Initiate curl
@@ -42,26 +44,7 @@ if (!curl_errno($ch)) {
 }
 // Closing
 curl_close($ch);
-
-$ar = json_decode($result);
-// access first element of $ar array
-
-$flipkartDetailArray = array();
-
-$flipkartPojo = new FlipkartOrderDetailsPOJO();
-
-$flipkartPojo -> setPrice();
-
-array_push($flipkartDetailArray,$flipkartPojo);
-
-if($ar!=null && !empty($ar) && count($ar) > 0){
-
-    foreach($ar -> orderList as $mydata){
-        echo $mydata->sales -> amount . "\n\r";
-    }
-
-  //  echo $ar -> orderList[0] -> price;
-}
+return $result;
 //echo $result;
 // Will dump a beauty json :3
 //$resJson = var_dump(json_decode($result, false));
