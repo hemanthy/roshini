@@ -260,17 +260,18 @@ session_start();
 
                             <div class="comment-form newsletter">
                                 <p>Your email is safe with us and we hate spam as much as you do.</p>
-                                <form class="row">
+                                <form method="POST" action="userfeedback.php" accept-charset="UTF-8" id="feedback-form" class="row">
                                     <div class="col-sm-6">
                                     <input type="text" class="form-control" value="<?php if (isset($_SESSION['usr_name'])) echo $_SESSION['usr_name']; ?>" placeholder="Enter your name..">
                                     </div>
                                     <div class="col-sm-6">
-                                    <input type="email" class="form-control" value="<?php if (isset($_SESSION['email_id'])) echo $_SESSION['email_id']; ?>" placeholder="Enter your email..">
+                                    <input type="email" class="form-control" name="email_id" value="<?php if (isset($_SESSION['email_id'])) echo $_SESSION['email_id']; ?>" placeholder="Enter your email..">
+                                        <input type="hidden" value="1" name="store_id"/>
                                     </div>
 
                                     <div class="col-md-12">
                                     <textarea class="form-control" placeholder="Give us more details..."></textarea>
-                                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                    <button type="submit" name="feedbackform" class="btn btn-primary">Submit Feedback</button>
                                     </div>
                                 </form>
                             </div>

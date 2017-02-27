@@ -14,13 +14,13 @@ $msg = '';
 
 //var constVar = new Constants();
 
-echo $msg;
+//echo $msg;
 //check if form is submitted
 if (isset($_POST['login'])) {
 
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
-    $result = mysqli_query($con, "SELECT * FROM users WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
+    $result = mysqli_query($con, "SELECT * FROM user WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
 
     if ($row = mysqli_fetch_array($result)) {
         $_SESSION['usr_id'] = $row['id'];
@@ -81,12 +81,12 @@ if (isset($_POST['signup'])) {
         $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
       //  $cpassword_error = "Password and Confirm Password doesn't match";
     }else{
-        $sql = "SELECT * FROM users WHERE email = '" . $email. "'";
+        $sql = "SELECT * FROM user WHERE email = '" . $email. "'";
         $result = mysqli_query($con, $sql);
         if (mysqli_num_rows($result) > 0) {
             $msg = Constants::EMAIL_ALREADY_EXISTS;
         //    echo "Email ID already exists";
-        }else if(mysqli_query($con, "INSERT INTO users(name,email,password,user_reference_number) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "',$refNo )")) {
+        }else if(mysqli_query($con, "INSERT INTO user(name,email,password,user_reference_code) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "',$refNo )")) {
         //}else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
             $msg = Constants::REGISTRATION_SUCCESSFUL;
             //$successmsg = "Successfully Registered";

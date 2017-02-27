@@ -18,6 +18,9 @@ class Constants
     // Password and Confirm Password doesn't match
     const PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH = 'PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH';
 
+    // Password Changed Successfully
+    const PASSWORD_CHANGED_SUCCESSFULLY = 'PASSWORD_CHANGED_SUCCESSFULLY';
+
     // LOGIN SUCCESS,
     const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 

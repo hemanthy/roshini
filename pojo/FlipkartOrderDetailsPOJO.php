@@ -1,29 +1,21 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: heman
- * Date: 2/16/2017
- * Time: 10:54 AM
- */
 class FlipkartOrderDetailsPOJO
 {
- var $price;
- var $category;
- var $title;
- var $productId;
- var $quantity;
- var $salesAmount;
- var $status;
- var $affiliateOrderItemId;
- var $orderDate;
- var $commissionRate;
- var $tentativeCommission;
- var $affExtParam1;
- var $affExtParam2;
- var $salesChannel;
- var $customerType;
-
+    var $price;
+    var $category;
+    var $title;
+    var $productId;
+    var $quantity;
+    var $salesAmount;
+    var $status;
+    var $affiliateOrderItemId;
+    var $orderDate;
+    var $commissionRate;
+    var $tentativeCommission;
+    var $affExtParam1;
+    var $affExtParam2;
+    var $salesChannel;
+    var $customerType;
     /**
      * @return mixed
      */
@@ -31,7 +23,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->price;
     }
-
     /**
      * @param mixed $price
      */
@@ -39,7 +30,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->price = $price;
     }
-
     /**
      * @return mixed
      */
@@ -47,7 +37,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->category;
     }
-
     /**
      * @param mixed $category
      */
@@ -55,7 +44,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->category = $category;
     }
-
     /**
      * @return mixed
      */
@@ -63,7 +51,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->title;
     }
-
     /**
      * @param mixed $title
      */
@@ -71,7 +58,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->title = $title;
     }
-
     /**
      * @return mixed
      */
@@ -79,7 +65,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->productId;
     }
-
     /**
      * @param mixed $productId
      */
@@ -87,7 +72,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->productId = $productId;
     }
-
     /**
      * @return mixed
      */
@@ -95,7 +79,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->quantity;
     }
-
     /**
      * @param mixed $quantity
      */
@@ -103,7 +86,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->quantity = $quantity;
     }
-
     /**
      * @return mixed
      */
@@ -111,7 +93,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->salesAmount;
     }
-
     /**
      * @param mixed $salesAmount
      */
@@ -119,7 +100,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->salesAmount = $salesAmount;
     }
-
     /**
      * @return mixed
      */
@@ -127,7 +107,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->status;
     }
-
     /**
      * @param mixed $status
      */
@@ -135,7 +114,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->status = $status;
     }
-
     /**
      * @return mixed
      */
@@ -143,7 +121,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->affiliateOrderItemId;
     }
-
     /**
      * @param mixed $affiliateOrderItemId
      */
@@ -151,7 +128,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->affiliateOrderItemId = $affiliateOrderItemId;
     }
-
     /**
      * @return mixed
      */
@@ -159,7 +135,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->orderDate;
     }
-
     /**
      * @param mixed $orderDate
      */
@@ -167,7 +142,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->orderDate = $orderDate;
     }
-
     /**
      * @return mixed
      */
@@ -175,7 +149,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->commissionRate;
     }
-
     /**
      * @param mixed $commissionRate
      */
@@ -183,7 +156,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->commissionRate = $commissionRate;
     }
-
     /**
      * @return mixed
      */
@@ -191,7 +163,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->tentativeCommission;
     }
-
     /**
      * @param mixed $tentativeCommission
      */
@@ -199,7 +170,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->tentativeCommission = $tentativeCommission;
     }
-
     /**
      * @return mixed
      */
@@ -207,7 +177,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->affExtParam1;
     }
-
     /**
      * @param mixed $affExtParam1
      */
@@ -215,7 +184,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->affExtParam1 = $affExtParam1;
     }
-
     /**
      * @return mixed
      */
@@ -223,7 +191,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->affExtParam2;
     }
-
     /**
      * @param mixed $affExtParam2
      */
@@ -231,7 +198,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->affExtParam2 = $affExtParam2;
     }
-
     /**
      * @return mixed
      */
@@ -239,7 +205,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->salesChannel;
     }
-
     /**
      * @param mixed $salesChannel
      */
@@ -247,7 +212,6 @@ class FlipkartOrderDetailsPOJO
     {
         $this->salesChannel = $salesChannel;
     }
-
     /**
      * @return mixed
      */
@@ -255,7 +219,6 @@ class FlipkartOrderDetailsPOJO
     {
         return $this->customerType;
     }
-
     /**
      * @param mixed $customerType
      */
@@ -263,7 +226,5 @@ class FlipkartOrderDetailsPOJO
     {
         $this->customerType = $customerType;
     }
-
-
-
 }
+?>

@@ -55,6 +55,7 @@ session_start();
     <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css">
 
 
+
     <!-- Skin Examples -->
     <link rel="alternate stylesheet" type="text/css" href="css/skins/skin1.css" title="skin1" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="css/skins/skin2.css" title="skin2" media="all" />
@@ -186,7 +187,7 @@ session_start();
             </div>
         </section><!-- end section -->
 
-        <div class="section"  ng-controller="MainCtrl" ng-init="tabChanged(2)">
+        <div class="section"  ng-controller="MainCtrl" ng-init="tabChanged(1)">
             <div class="container">
                 <div class="row">
                     <div class="sidebar col-md-4">
@@ -265,18 +266,19 @@ session_start();
                             </form>
 
                             <hr class="invis3">
-                            <form id="submit1" class="contact-form newsletter">
+                            <form  method="POST" method="post" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8" id="changepasswordform" class="contact-form newsletter">
                                 <div class="row">
+                                    <div class="error"></div>
                                     <div class="col-md-6 col-sm-12">
                                         <label class="control-label">New Password <small>Enter new password</small></label>
-                                        <input type="password" class="form-control" placeholder="*********">
+                                        <input type="password" class="form-control" placeholder="" name="password">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label class="control-label">Re-New Password <small>Re-Enter new password</small></label>
-                                        <input type="password" class="form-control" placeholder="*********">
+                                        <input class="form-control" type="password" placeholder="" name="cpassword">
                                     </div>
                                     <div class="col-md-12 col-sm-12">
-                                        <button class="btn btn-primary">Change Password</button>
+                                        <button class="btn btn-primary" type="submit" name="changepassword">Change Password</button>
                                     </div>
                                 </div>
                             </form>
@@ -325,6 +327,7 @@ session_start();
     DEFAULT JAVASCRIPT FILES
     ********************************************** -->
     <script src="js/all.js"></script>
+    <script src="js/js-validate.js"></script>
     <script src="js/custom.js"></script>
 
     <script src="switcher/switcher.js"></script>
@@ -335,6 +338,72 @@ session_start();
             $("#footerId").load("footer.php");
             });
     </script>
+
+    <script>
+        $('document').ready(function()
+        {
+           /*  change password submit*/
+            $("#changepasswordform").validate({
+                rules:
+                    {
+                        password: {
+                            required: true,
+                            minlength: 1
+                        },
+                        cpassword: {
+                            required: true,
+                            minlength: 1
+                        },
+                    },
+                messages:
+                    {
+                        password:{
+                            required: "please enter your password",
+                            minlength: "Your password must be at least 5 characters long"
+                        },
+                        cpassword:{
+                            required: "please enter your confirm password"
+                        },
+                    },
+                submitHandler: passwordChangeForm
+            });
+
+            /* change password submit */
+            function passwordChangeForm()
+            {
+                var data = $("#changepasswordform").serialize();
+                $.ajax({
+
+                    type : 'POST',
+                    url  : 'changepassword.php',
+                    data : data,
+                    beforeSend: function()
+                    {
+                        $("#error").fadeOut();
+                        //$("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
+                    },
+                    success :  function(response)
+                    {
+                        if(response=='PASSWORD_CHANGED_SUCCESSFULLY'){
+                            $('.error').addClass('alert alert-danger').html('Password Changed Successfully');
+                           // alert('PASSWORD_CHANGED_SUCCESSFULLY');
+                        }else if(response=='PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH'){
+                            $('.error').addClass('alert alert-danger').html('Password and Confirm Password Does not Match');
+                        }
+                        setTimeout( function(){
+                            $('.error').addClass('alert alert-danger').html('');
+                            $('.error').removeClass('alert alert-danger');
+                        }, 5000 );
+                        //shakeModal(config.get(response));
+                    }
+                });
+                return false;
+            }
+
+
+        });
+    </script>
+
 
 
     <style>
