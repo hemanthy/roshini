@@ -2,8 +2,8 @@
 
 include_once ('dbconnect.php');
 
-//$url ='https://affiliate-api.flipkart.net/affiliate/api/allgadget.json';
-$url ='https://affiliate-api.flipkart.net/affiliate/report/orders/detail/json?startDate=2015-10-22&endDate=2017-11-22&status=approved&offset=0';
+//$url ='https://affiliate-api.flipkart.net/affiliate/api/allgadget.json'; //tentative // approved
+$url ='https://affiliate-api.flipkart.net/affiliate/report/orders/detail/json?startDate=2015-10-22&endDate=2017-11-22&status=tentative&offset=0';
 //  Initiate curl
 $ch = curl_init();
 // Disable SSL verification

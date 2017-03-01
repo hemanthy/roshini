@@ -26,6 +26,8 @@ if (isset($_POST['login'])) {
         $_SESSION['usr_id'] = $row['id'];
         $_SESSION['usr_name'] = $row['name'];
         $_SESSION['email_id'] = $row['email'];
+        $_SESSION['user_reference_code'] = $row['user_reference_code'];
+
         $msg = Constants::LOGIN_SUCCESS;
        // echo $errormsg;
         //header("Location: index.php");

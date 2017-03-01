@@ -1,8 +1,9 @@
--- drop users;
-
 drop database testdb;
 create database testdb;
 use testdb;
+
+
+
 create table user (
   id bigint(8) NOT NULL AUTO_INCREMENT,
   name varchar(30) NOT NULL,
@@ -14,15 +15,17 @@ create table user (
 
 Insert into user (name,email,password,user_reference_code,active) values ('Hemanth','ad@a.com','a',435,true);
 Insert into user (name,email,password,user_reference_code,active) values ('Hemanth2','add@a.com','a',589,true);
-Insert into user (name,email,password,user_reference_code,active) values ('Hemanth','adfad@a.com','a',547,true);
-Insert into user (name,email,password,user_reference_code,active) values ('Hemanth2','adasddd@a.com','a',577,true);
+Insert into user (name,email,password,user_reference_code,active) values ('hemanthroshini','hemanthroshini@gmail.com','be70992f04a63bc7d731a0ba36b94c5e',435,true);
+
 select * from user;
 
 SELECT * from user;
 
-create table store ( id bigint(8) NOT NULL AUTO_INCREMENT,store_name varchar(30) NOT NULL,category_name varchar(25), PRIMARY KEY (id));
-insert into store(store_name,category_name) values ('hi','free');
-select * from store;
+create table store ( id bigint(8) NOT NULL AUTO_INCREMENT,store_name varchar(30) NOT NULL,description text,category_name varchar(25),store_url text, store_img text,max_cashback float,PRIMARY KEY (id));
+
+insert into store(store_name,description,category_name,store_url) values
+  ('hi','You can add store description goes here.','free','https://dl.flipkart.com/dl/?affid=affname&affExtParam1=userreferencecode');
+
 
 -- drop table user_orders_history;
 
@@ -34,16 +37,25 @@ create table user_store_order_details(id bigint NOT NULL AUTO_INCREMENT,category
 select * from user_store_order_details;
 
 create table user_transaction_details (id bigint not null auto_increment,payment_requested_amount float,available_amount float,pending_amount float,redemption_amount float,payment_request_status varchar(20),payment_requested_date TIMESTAMP,payment_approved_date TIMESTAMP,user_id bigint,primary key(id),foreign key (user_id) references user(id));
-drop table user_store_feedback;
-create table user_store_feedback ( id bigint(8) NOT NULL AUTO_INCREMENT, feedback text,email varchar(30),PRIMARY KEY (id),user_id BIGINT,
-  store_id bigint,foreign key (store_id) references store(id),foreign key (user_id) references user(id));
+-- drop table user_store_feedback;
+create table user_store_feedback ( id bigint(8) NOT NULL AUTO_INCREMENT, feedback text,email varchar(30),PRIMARY KEY (id),user_id BIGINT, store_id bigint,foreign key (store_id) references store(id),foreign key (user_id) references user(id));
 
+
+create table user_store_visits (id bigint not null auto_increment,visited_time TIMESTAMP,redirect_store_url text,user_id bigint,store_id bigint,primary key (id),foreign key (user_id) references user(id),foreign key (store_id) references store(id));
+
+create table category ( id bigint(8) NOT NULL AUTO_INCREMENT,category_name text NOT NULL,category_type varchar(60) NOT NULL,store_id bigint not null,cashback_percent float,start_day TIMESTAMP,end_day timestamp,updated_date timestamp,foreign key (store_id) references store(id), PRIMARY KEY (id));
+
+insert into category (category_name, category_type, store_id, cashback_percent) VALUES ('hi','ecommerce',1,9.5);
+insert into category (category_name, category_type, store_id, cashback_percent) VALUES ('flipkart','ecommerc3',1,8.5);
+
+select * from store s, category c where s.id=1 and c.store_id =1;
 select * from user;
 select * from store;
 select * from user_transaction_details;
 select * from user_report_details;
 select * from user_store_order_details;
 select * from user_store_feedback;
+select * from user_store_visits;
 
 select * from user where email ='hemanthroshini@gmail.com';
 
