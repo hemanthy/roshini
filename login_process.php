@@ -16,25 +16,38 @@ $msg = '';
 
 //echo $msg;
 //check if form is submitted
-if (isset($_POST['login'])) {
-
+/**
+ * @param $con
+ * @param $email
+ * @param $password
+ * @param $result
+ * @param $msg
+ */
+function userLogin($con)
+{
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
-    $result = mysqli_query($con, "SELECT * FROM user WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
+    $result = mysqli_query($con, "SELECT * FROM user WHERE email = '" . $email . "' and password = '" . md5($password) . "'");
 
     if ($row = mysqli_fetch_array($result)) {
         $_SESSION['usr_id'] = $row['id'];
         $_SESSION['usr_name'] = $row['name'];
         $_SESSION['email_id'] = $row['email'];
+        $_SESSION['user_img'] = $row['user_img'];
         $_SESSION['user_reference_code'] = $row['user_reference_code'];
 
-        $msg = Constants::LOGIN_SUCCESS;
-       // echo $errormsg;
+        return Constants::LOGIN_SUCCESS;
+        // echo $errormsg;
         //header("Location: index.php");
     } else {
-        $msg = Constants::INCORRECT_EMAIL_OR_PASSWORD;
-       // echo $errormsg;
+        return Constants::INCORRECT_EMAIL_OR_PASSWORD;
+        // echo $errormsg;
     }
+}
+
+if (isset($_POST['login'])) {
+
+    $msg = userLogin($con);
 }
 
 //set validation error flag as false
@@ -93,6 +106,8 @@ if (isset($_POST['signup'])) {
             $msg = Constants::REGISTRATION_SUCCESSFUL;
             //$successmsg = "Successfully Registered";
             //echo $successmsg;
+
+           $msg = userLogin($con);
         } else {
             $msg = "Error in registering...Please try again later!";
         }

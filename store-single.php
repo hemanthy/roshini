@@ -205,7 +205,15 @@ START SITE HERE
                                         <h3>Flipkart.com</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-xs-12">
-                                        <a href="gotostore.php?ref=1" target="_blank" class="gp-button btn btn-primary">Get Cashback</a>
+                                        <div class="showcode">
+                                            <a href="#" class="code-link">OK<!--
+                                                <span class="coupon-code">2016TATILRA50</span>
+                                                <span class="show-code">Show Code</span>-->
+                                            </a>
+                                        </div><!-- end showcode -->
+                                        <!--href="gotostore.php?ref=1"-->
+                                        <!--<a data-toggle="modal" href="javascript:void(0)" onclick="showLoginForm();">Get Cashback</a>-->
+                                        <a  class="gp-button btn btn-primary btn1">Get Cashback</a>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -380,6 +388,93 @@ START SITE HERE
     <div id="footerId"></div>
 </div><!-- end wrapper -->
 
+<div class="modal fade login" id="loginModalPlus">
+    <div class="modal-dialog login animated" style="width: 600px;">
+        <div class="container">
+            <div class="row">
+                <div class="modal-content">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" id="closebtn" aria-hidden="true">&times;</button>
+                            <h4 class="modal-titlePlus">Login with</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="box">
+                                <div class="content">
+                                    <div class="social">
+                                        <a class="circle github" href="#">
+                                            <i class="fa fa-github fa-fw"></i>
+                                        </a>
+                                        <a id="google_login" class="circle google" href="#">
+                                            <i class="fa fa-google-plus fa-fw"></i>
+                                        </a>
+                                        <a id="facebook_login" class="circle facebook" href="#">
+                                            <i class="fa fa-facebook fa-fw"></i>
+                                        </a>
+                                    </div>
+                                    <div class="division">
+                                        <div class="line l"></div>
+                                        <span>or</span>
+                                        <div class="line r"></div>
+                                    </div>
+                                    <div class="alert"></div>
+                                    <div class="form loginBoxPlus">
+                                        <form method="POST" action="" accept-charset="UTF-8" id="login-form">
+                                            <input type="email" class="form-control" placeholder="Email address" name="email" id="email" />
+                                            <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                            <input class="btn btn-default btn-login" type="submit" name="login" value="login" id="btn-login">
+                                        </form>
+                                        <span class="text-danger"><?php /*if (isset($errormsg)) { echo $errormsg; } */?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="content registerBoxPlus" style="display:none;">
+                                    <div class="form">
+                                        <form method="post" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8" id="sign-form">
+
+                                            <input type="text" name="email" placeholder="Email" required class="form-control" />
+                                            <span class="text-danger"><?php /*if (isset($email_error)) echo $email_error; */?></span>
+
+                                            <input type="text" name="name" placeholder="Enter Full Name" required class="form-control" />
+                                            <span class="text-danger"><?php /*if (isset($name_error)) echo $name_error; */?></span>
+
+                                            <input type="password" name="password" placeholder="Password" required class="form-control" />
+                                            <span class="text-danger"><?php /*if (isset($password_error)) echo $password_error; */?></span>
+
+                                            <input type="password" name="cpassword" placeholder="Confirm Password" required class="form-control" />
+                                            <span class="text-danger"><?php /*if (isset($cpassword_error)) echo $cpassword_error; */?></span>
+
+                                            <input class="btn btn-default btn-register" type="submit" value="Create account" name="signup">
+                                        </form>
+                                        <span class="text-success"><?php /*if (isset($successmsg)) { echo $successmsg; } */?></span>
+                                        <span class="text-danger"><?php /*if (isset($errormsg)) { echo $errormsg; } */?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footerPlus">
+                                <span>Looking to
+                                 <a href="javascript: showRegisterForm();">create an account</a>
+                            ?</span>
+                            </div>
+                            <div class="forgot register-footerPlus" style="display:none">
+                                <span>Already have an account?</span>
+                                <a href="javascript: showLoginForm();">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ******************************************
 /END SITE
 ********************************************** -->
@@ -388,6 +483,7 @@ START SITE HERE
 DEFAULT JAVASCRIPT FILES
 ********************************************** -->
 <script src="js/all.js"></script>
+<script src="js/login-register.js"></script>
 <script src="js/custom.js"></script>
 <script src="switcher/switcher.js"></script>
 <script>

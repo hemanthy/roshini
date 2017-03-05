@@ -6,6 +6,7 @@ include_once ('dbconnect.php');
 $storeResult = '';
 $userRefCode = '';
 $userId = '1000';
+$GLOBALS['user_id'] = 1000;
 
 if (isset($_SESSION['user_reference_code'])) {
     $userRefCode = $_SESSION['user_reference_code'];
@@ -14,7 +15,7 @@ if (isset($_SESSION['user_reference_code'])) {
 }
 
 if (isset($_SESSION['usr_id'])) {
-    $userId =   $_SESSION['usr_id'];
+    $GLOBALS['user_id'] =   $_SESSION['usr_id'];
 }
 function getStoreInfoById($store_id,$conn){
 	$stmt = $conn->prepare("select *,id as store_id from store where id=:store_id");
@@ -57,7 +58,7 @@ echo "your directing...";
 	echo $redirectUrl;
 
 	$stmt1->bindValue(':redirect_store_url',$redirectUrl, PDO::PARAM_STR);   	 
-	$stmt1->bindValue(':user_id', 1, PDO::PARAM_STR);   
+	$stmt1->bindValue(':user_id', $GLOBALS['user_id'], PDO::PARAM_STR);
 	$stmt1->bindValue(':store_id', $store_id , PDO::PARAM_STR);
 	$stmt1->execute();
 	}

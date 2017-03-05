@@ -133,7 +133,6 @@ get: function(name) { return private[name]; }
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
-
                                 <li><a data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a></li>
                                 <li><a class="" title="" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a></li>
                             <?php } else { ?>
@@ -280,6 +279,7 @@ get: function(name) { return private[name]; }
                 beforeSend: function()
                 {
                     $("#error").fadeOut();
+                    $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
                     //$("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
                 },
                 success :  function(response)
@@ -287,7 +287,7 @@ get: function(name) { return private[name]; }
                      console.log(response);
 
                     if(response == "LOGIN_SUCCESS"){
-                        $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
+
                         // setTimeout(' window.location.href = "/index.php"; ',4000);
                          hideModal();
                          console.log(window.location.href)
@@ -357,7 +357,13 @@ get: function(name) { return private[name]; }
                 },
                 success :  function(response)
                 {
-                    shakeModal(config.get(response));
+                    if(response == 'INCORRECT_EMAIL_OR_PASSWORD' || response == 'PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH' || response =='INCORRECT_EMAIL_OR_PASSWORD' ||
+                    response == 'EMAIL_ALREADY_EXISTS'){
+                        shakeModal(config.get(response));
+                    }else if(response == 'REGISTRATION_SUCCESSFUL' || response == 'LOGIN_SUCCESS'){
+                        location.href = window.location.href;
+                    }
+
                 }
             });
             return false;

@@ -29,6 +29,31 @@ function showLoginForm(){
      $('.error').removeClass('alert alert-danger').html(''); 
 }
 
+
+$(".btn1").click(function(){
+    $("#loginModalPlus").fadeIn();
+});
+
+function showLoginFormPlus(){
+    alert("ok");
+
+/*    $('#loginModalPlus .registerBoxPlus').fadeIn('fast',function(){
+        alert("ok 12");
+       // debugger;
+        $('.loginBoxPlus').fadeOut('fast');
+        $('.register-footerPlus').fadeIn('fast',function(){
+            $('.login-footerPlus').fadeOut('fast');
+        });
+
+        $('.modal-titlePlus').html('Login with');
+    });
+    $('.alert').removeClass('alert-danger').html('');*/
+}
+
+
+
+
+
 function openLoginModal(){
     showLoginForm();
     setTimeout(function(){
@@ -62,7 +87,7 @@ function loginAjax(){
 function shakeModal(errormsg){
     $('#loginModal .modal-dialog').addClass('shake');
              $('.error').addClass('alert alert-danger').html(errormsg);
-             $('input[type="password"]').val('');
+          //   $('input[type="password"]').val('');
              setTimeout( function(){ 
                 $('#loginModal .modal-dialog').removeClass('shake'); 
     }, 1000 ); 

@@ -14,7 +14,7 @@ if(isset($_SESSION['usr_id'])!="") {
 $stmt = $conn->prepare("select * from user_report_details as urd where urd.user_id =:user_id;");
 //$stmt->bindParam(':aff_ext_param1',39152399);
 $stmt->execute(array(':user_id' => $user_id));
-$stmt->execute();
+//$stmt->execute();
 $result = $stmt->fetchAll();
 //$q->setFetchMode(PDO::FETCH_ASSOC);
 
