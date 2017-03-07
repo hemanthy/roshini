@@ -141,11 +141,13 @@ get: function(name) { return private[name]; }
                                 <li class="dropdown hasmenu userpanel">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="uploads/testi_03.png" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
                                     <ul class="dropdown-menu start-right" role="menu">
-                                        <li><a href="user-dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                                        <li><a href="user-saved.php"><i class="fa fa-heart-o"></i> Saved Coupons</a></li>
+                                        <li><a href="user-dashboard.php?1"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                                        <li><a href="user-dashboard.php?2"><i class="fa fa-heart-o"></i> My Wallet</a></li>
+                                        <li><a href="user-dashboard.php?3"><i class="fa fa-dashboard"></i> Bank Details</a></li>
+                                        <li><a href="user-dashboard.php?4"><i class="fa fa-heart-o"></i> Withdraw</a></li>
                                         <!--<li><a href="user-favorites.php"><i class="fa fa-star"></i> Favorite Stores</a></li>
-                                        <li><a href="user-submit.php"><i class="fa fa-bullhorn"></i> Submit Coupon</a></li>-->
-                                        <li><a href="logout.php"><i class="fa fa-lock"></i> Sign Out</a></li>
+                                        <li><a href="user-submit.php"><i class="fa fa-bullhorn"></i> Submit Coupon</a></li>
+                                        <li><a href="logout.php"><i class="fa fa-lock"></i> Sign Out</a></li>-->
                                     </ul>
                                 </li>
                             <?php } ?>
@@ -287,12 +289,14 @@ get: function(name) { return private[name]; }
                      console.log(response);
 
                     if(response == "LOGIN_SUCCESS"){
-
                         // setTimeout(' window.location.href = "/index.php"; ',4000);
                          hideModal();
-                         console.log(window.location.href)
-                        location.href = window.location.href;
-                         //location.href();
+                         var storeId = $( "#storeId" ).val();
+                        if(storeId){
+                            location.href = 'gotostore.php?ref=1';
+                        }else {
+                            location.href = window.location.href;
+                        }
                     }
                     else {
                             shakeModal(config.get(response));
@@ -361,7 +365,12 @@ get: function(name) { return private[name]; }
                     response == 'EMAIL_ALREADY_EXISTS'){
                         shakeModal(config.get(response));
                     }else if(response == 'REGISTRATION_SUCCESSFUL' || response == 'LOGIN_SUCCESS'){
-                        location.href = window.location.href;
+                        var storeId = $( "#storeId" ).val();
+                        if(storeId){
+                            location.href = 'gotostore.php?ref=1';
+                        }else {
+                            location.href = window.location.href;
+                        }
                     }
 
                 }

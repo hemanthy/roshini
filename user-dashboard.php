@@ -187,7 +187,7 @@ START SITE HERE
         </div>
     </section><!-- end section -->
 
-    <div class="section"  ng-controller="MainCtrl" ng-init="tabChanged(4)">
+    <div class="section"  ng-controller="MainCtrl" ng-init="initTabValue()">
         <div class="container">
             <div class="row">
                 <div class="sidebar col-md-4">

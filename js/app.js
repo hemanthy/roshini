@@ -21,11 +21,12 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
 
   //   $scope.gridOptions.enableCellEditOnFocus = true;
   //  $scope.myData = [{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"186.48","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"217.68","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"292.475","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"1368","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"197.99","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"79.92","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"74.52","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"29.94","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"10","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"5","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"9.999","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"271.88","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":null,"status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"64.7","status":"processed","userReferenceCode":null}];
-
-    $scope.tabChanged = function(tabIndex){
+    $scope.initTabValue = function(){
+        var tabIndex= 1;
         var url = window.location.href;
-        /*if(url.indexOf("#")!=-1){
-            var splitUrl = url.split("#");
+
+        if(url.indexOf("?")!=-1){
+            var splitUrl = url.split("?");
             if(splitUrl.length=2){
                 var secondUrl = splitUrl[1];
                 if(secondUrl==""){
@@ -35,13 +36,12 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
                     $scope.tabs.selectedTab = secondUrl;
                     tabIndex = secondUrl;
                 }
-
             }
-        }else{
-            $scope.tabs.selectedTab = 0;
         }
-*/
+        $scope.tabChanged(tabIndex);
+    }
 
+    $scope.tabChanged = function(tabIndex){
         $scope.tabs.selectedTab = tabIndex;
     if(tabIndex==2){
         $http({
