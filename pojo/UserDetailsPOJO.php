@@ -10,8 +10,15 @@ class UserDetailsPOJO {
     var $paytmnumber;
     var $ispaytmactive;
     var $paymentRequestedAmount;
+    var $pendingBal;
+    var $redemptionMade;
     var $paymentReqStatus;
     var $paymentReqDate;
+    var $orderDate;
+    var $storeName;
+    var $cashback;
+    var $status;
+    var $userReferenceCode;
     
 
     /**
@@ -178,6 +185,129 @@ class UserDetailsPOJO {
 		$this->paymentReqDate = $paymentReqDate;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getOrderDate() {
+		return $this->orderDate;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $orderDate        	
+	 */
+	public function setOrderDate($orderDate) {
+		$this->orderDate = $orderDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getStoreName() {
+		return $this->storeName;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $storeName        	
+	 */
+	public function setStoreName($storeName) {
+		$this->storeName = $storeName;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getCashback() {
+		return $this->cashback;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $cashback        	
+	 */
+	public function setCashback($cashback) {
+		$this->cashback = $cashback;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getStatus() {
+		return $this->status;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $status        	
+	 */
+	public function setStatus($status) {
+		$this->status = $status;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getUserReferenceCode() {
+		return $this->userReferenceCode;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $userReferenceCode        	
+	 */
+	public function setUserReferenceCode($userReferenceCode) {
+		$this->userReferenceCode = $userReferenceCode;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getPendingBal() {
+		return $this->pendingBal;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $pendingBal        	
+	 */
+	public function setPendingBal($pendingBal) {
+		$this->pendingBal = $pendingBal;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getRedemptionMade() {
+		return $this->redemptionMade;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $redemptionMade        	
+	 */
+	public function setRedemptionMade($redemptionMade) {
+		$this->redemptionMade = $redemptionMade;
+		return $this;
+	}
+	
+
+	
+	
 	
 	
     

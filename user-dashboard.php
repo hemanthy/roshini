@@ -300,20 +300,20 @@ START SITE HERE
                             <div class="row tile_count">
                                 <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count no_left_border">
                                     <span class="count_top"><i class="fa fa-user"></i> Available Balance</span>
-                                    <div class="count green">2500</div>
+                                    <div class="count green">{{availableamount}}</div>
                                     <!--<span class="count_bottom"><i class="green">4% </i> From last Week</span>-->
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
                                     <span class="count_top"><i class="fa fa-user"></i> Pending Balance</span>
-                                    <div class="count blue">2500</div>
+                                    <div class="count blue">{{pendingBal}}</div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
                                     <span class="count_top"><i class="fa fa-user"></i> Redemption Made</span>
-                                    <div class="count light_green">2500</div>
+                                    <div class="count light_green">{{redemptionMade}}</div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
                                     <span class="count_top"><i class="fa fa-user"></i> Redemption Applied</span>
-                                    <div class="count">2500</div>
+                                    <div class="count">{{paymentRequestedAmount}}</div>
                                 </div>
                             </div><!-- end row -->
                         </div><!-- end coupon-wrapper -->

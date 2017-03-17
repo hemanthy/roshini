@@ -32,7 +32,7 @@ insert into store(store_name,description,category_name,store_url) values
 
 create table user_report_details (id bigint not null auto_increment,order_date TIMESTAMP,store_name varchar(20),cashback float,status varchar(20),user_reference_code long,affiliate_order_id varchar(20) unique ,user_id bigint,store_id bigint,primary key (id),foreign key (user_id) references user(id),foreign key (store_id) references store(id));
 select * from user_report_details;
--- Insert into user_report_details (order_date,store_name,cashback,status,user_reference_code,affiliate_order_id,user_id,store_id) values ('2026-10-23 00:36:03','Hi',32,'pending',32342,39152393,1,1);
+Insert into user_report_details (order_date,store_name,cashback,status,user_reference_code,affiliate_order_id,user_id,store_id) values ('2026-10-23 00:36:03','Hi',32,'pending',32342,39152393,1,1);
 
 create table user_store_order_details(id bigint NOT NULL AUTO_INCREMENT,category varchar(50),title varchar(100),productId varchar(20),quantity int,price int,sales_amount int,status_type varchar(20),affiliate_order_id varchar(20) UNIQUE,order_date TIMESTAMP,commission_rate float,tentative_commission_amount float,aff_ext_param1 int,aff_ext_param2 int,sales_channel varchar(20),customer_type varchar(20),created_date TIMESTAMP,primary key(id),store_id bigint,foreign key (store_id) references store(id));
 select * from user_store_order_details;

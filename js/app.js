@@ -56,7 +56,17 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
         }).then(function (response) {
           //  alert(JSON.stringify(response.data));
             var jsonData = JSON.stringify(response.data);
-            $scope.myData = response.data;
+            if(response.data!=null && response.data!=''){
+            	 $scope.myData = response.data.usrReportArray;
+            	 if(response.data.utds!=null && response.data.utds!=''){
+            		 $scope.availableamount = response.data.utds.availableamount;
+            		 $scope.pendingBal = response.data.utds.pendingBal;
+            		 $scope.redemptionMade = response.data.utds.redemptionMade;
+            		 $scope.paymentRequestedAmount = response.data.utds.paymentRequestedAmount;
+            		 
+            	 }
+            }
+           // $scope.myData = response.data;
         });
     }
         if(tabIndex==3){

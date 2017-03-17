@@ -38,7 +38,6 @@ $usrTransactionDetails = $stmt->fetchAll();
 //$q->setFetchMode(PDO::FETCH_ASSOC);
 
 try{
-    $userReportArray = array();
     foreach($usrTransactionDetails as $row) {
         $availableAmount = $row['available_amount'];
     }
@@ -48,10 +47,6 @@ catch(PDOException $e)
     echo "Error: " . $e->getMessage();
 }
 
-/* $userTransactionHistoryArray =  getUserTransactionHistory($conn);
-echo json_encode($userTransactionHistoryArray);
- */
-
 if($availableAmount >= $withdrawAmount){
     $stmt = $conn->prepare("update user_transaction_details set payment_requested_amount =:withdrawAmount where user_id =:user_id");
     $stmt->execute(array(':withdrawAmount' => $withdrawAmount,':user_id' => $user_id));
@@ -59,12 +54,7 @@ if($availableAmount >= $withdrawAmount){
     $stmt = $conn->prepare("update user_transaction_history set payment_request_status = 'cancel' where user_id =:user_id;");
     $stmt->execute(array(':user_id' => $user_id));
 
-    $stmt1 = $conn->prepare("insert into user_transaction_history (payment_requested_amount,payment_request_status,user_id,payment_approved_date) 
-    VALUES (:payment_requested_amount,:payment_request_status,:user_id,:payment_approved_date);");
-    $stmt1->execute(array(':payment_requested_amount' => $withdrawAmount,
-        ':payment_request_status' => 'pending',
-        ':user_id' => $user_id,
-        ':payment_approved_date' => null));
+    saveUserTransactionHistory($conn,$withdrawAmount);
 
     echo "Withdraw Request Updated !!!";
 

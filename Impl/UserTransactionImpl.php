@@ -14,19 +14,24 @@
     
 
 function getUserTransactionDetails($conn){
-	$user_id = '';
-	if (isset($_SESSION['usr_id'])) {
-		$user_id = $_SESSION['usr_id'];
-	}
-	$stmt2 = $conn->prepare("select * from user_transaction_details utd where user_id =:user_id order by payment_requested_date desc");
-	$stmt2->execute(array(':user_id' => $user_id));
+	$stmt2 = $conn->prepare("select * from user_transaction_details utd where user_id =:user_id order by payment_requested_date desc limit 0,1");
+	$stmt2->execute(array(':user_id' => $GLOBALS['user_id']));
 	$usrResult = $stmt2->fetchAll();
 	try {
 		
 		$userDetailsPojo = new UserDetailsPOJO();
 		foreach ($usrResult as $row) {
 			$availableAmount = $row['available_amount'];
+			$paymentRequestedAmount = $row['payment_requested_amount'];
+			$pending_amount = $row['pending_amount'];
+			$redemption_amount = $row['redemption_amount'];
+			$payment_request_status = $row['payment_request_status'];
+			$payment_requested_date = $row['payment_requested_date'];
+			$payment_approved_date = $row['payment_approved_date'];
 			$userDetailsPojo->setAvailableAmount($availableAmount);
+			$userDetailsPojo->setPaymentRequestedAmount($paymentRequestedAmount);
+			$userDetailsPojo->setPendingBal($pending_amount);
+			$userDetailsPojo->setRedemptionMade($redemption_amount);
 			if($availableAmount!=null){
 				break;
 			}
@@ -36,6 +41,15 @@ function getUserTransactionDetails($conn){
 	} catch (PDOException $e) {
 		echo "Error: " . $e->getMessage();
 	}
+}
+
+function saveUserTransactionHistory($conn,$withdrawAmount){
+	$stmt1 = $conn->prepare("insert into user_transaction_history (payment_requested_amount,payment_request_status,user_id,payment_approved_date)
+    VALUES (:payment_requested_amount,:payment_request_status,:user_id,:payment_approved_date);");
+	$stmt1->execute(array(':payment_requested_amount' => $withdrawAmount,
+			':payment_request_status' => 'pending',
+			':user_id' =>  $GLOBALS['user_id'],
+			':payment_approved_date' => null));
 }
 
 
