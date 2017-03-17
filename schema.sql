@@ -1,4 +1,4 @@
-drop database testdb;
+-- drop database testdb;
 create database testdb;
 use testdb;
 
@@ -19,7 +19,6 @@ Insert into user (name,email,password,user_reference_code,active) values ('Heman
 Insert into user (name,email,password,user_reference_code,active) values ('hemanthroshini','hemanthroshini@gmail.com','be70992f04a63bc7d731a0ba36b94c5e',435,true);
 Insert into user (id,name,email,password,user_reference_code,active) values (1000,'Hemanth','hemanth@gmail.com','be70992f04a63bc7d731a0ba36b94c5e',1000,true);
 
-select * from user;
 
 SELECT * from user;
 
@@ -39,7 +38,8 @@ create table user_store_order_details(id bigint NOT NULL AUTO_INCREMENT,category
 select * from user_store_order_details;
 
 create table user_transaction_details (id bigint not null auto_increment,payment_requested_amount float,available_amount float,pending_amount float,redemption_amount float,payment_request_status varchar(20),payment_requested_date TIMESTAMP,payment_approved_date TIMESTAMP,user_id bigint,primary key(id),foreign key (user_id) references user(id));
-insert into user_transaction_details (user_id,available_amount) VALUES (1,120);
+insert into user_transaction_details (user_id,available_amount) VALUES (1002,120);
+update user_transaction_details set available_amount = 100  where user_id = 1002;
 
 create table user_transaction_history (id bigint not null auto_increment,payment_requested_amount float,
   payment_request_status varchar(20),payment_requested_date TIMESTAMP,
@@ -50,7 +50,8 @@ create table user_transaction_history (id bigint not null auto_increment,payment
 
 select * from user_transaction_history order by payment_requested_date DESC;
 
-
+update user_transaction_history set payment_request_status = 'cancel' where user_id =1002;
+select * from user_payment_details upd where upd.user_id =1002 order by upd.updated_date desc limit 0,1;
 
 -- drop table user_store_feedback;
 create table user_store_feedback ( id bigint(8) NOT NULL AUTO_INCREMENT, feedback text,email varchar(30),PRIMARY KEY (id),user_id BIGINT, store_id bigint,foreign key (store_id) references store(id),foreign key (user_id) references user(id));
@@ -73,6 +74,8 @@ select * from user_transaction_history uth, user_payment_details upd,user_transa
 select * from user_payment_details upd,user_transaction_details utd where upd.user_id =utd.user_id and utd.user_id = 1;
 
 select * from user_payment_details where user_id=5; -- order by updated_date desc limit 1;
+select * from user_payment_details where user_id=1002 order by updated_date desc limit 0,1;
+select * from user_payment_details upd,user_transaction_details utd where upd.user_id =utd.user_id and upd.user_id =1002 order by upd.updated_date desc limit 0,1;
 
 select * from user_transaction_details order by payment_requested_date DESC;
 select * from user;
@@ -89,9 +92,9 @@ select * from user_transaction_history;
 
 select * from user where email ='hemanthroshini@gmail.com';
 
-update user_transaction_details set payment_requested_amount = 89 where user_id = 17;
-update user_transaction_details set available_amount = 100  where user_id = 1;
-select * from user_transaction_details where user_id = 17;
+update user_transaction_details set payment_requested_amount = 89 where user_id = 1002;
+
+select * from user_transaction_details where user_id = 1002;
 
 update user_store_order_details set aff_ext_param1 = 577 where id > 2;
 update user set password = 'be70992f04a63bc7d731a0ba36b94c5e' where email = 'adasddd@a.com';

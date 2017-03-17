@@ -323,14 +323,20 @@ START SITE HERE
                     </div>
                 </div>
                 <div class="sidebar col-md-8" ng-show="tabs.selectedTab == 3">
-                    <div class="coupon-tab post-wrapper nopadtop clearfix">dsffd
+                    <div class="coupon-tab post-wrapper nopadtop clearfix">
+                    <hr class="invis3">
+	                    <h3>Please Select your Payment Method</h3>
+	                    <input type="radio" ng-model="paymentdetails.ispaytmactive" value="0"> Bank
+	  					<input type="radio" ng-model="paymentdetails.ispaytmactive" value="1"> Paytm
                     </div>
+                    
+                     <hr class="invis3">
                     <div class="sidebar col-md-12">
                         <div class="widget clearfix">
-                            <div class="bankdetailsinfo"></div>
-                            <form id="submit" class="contact-form newsletter" ng-submit="savePaymentDetails()">
+                         <div class="bankdetailsinfo"></div>
+                           <form id="submit" class="contact-form newsletter" ng-submit="savePaymentDetails()">
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-12">
+                                    <div class="col-md-12 col-sm-12"  ng-show="paymentdetails.ispaytmactive == 0">
                                         <label class="control-label">Account Name</label>
                                         <input type="text" class="form-control" ng-model="paymentdetails.accountname" placeholder="Enter your account name">
 
@@ -352,6 +358,13 @@ START SITE HERE
                                         <hr class="invis3">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
+                                     <div class="col-md-12 col-sm-12" ng-show="paymentdetails.ispaytmactive == 1">
+                                      	<label class="control-label">Paytm Number</label>
+                                        <input type="text" class="form-control"  ng-model="paymentdetails.paytmnumber" placeholder="Enter Paytm Number">
+                                        
+                                          <hr class="invis3">
+                                          <button type="submit" class="btn btn-primary">Submit</button>
+                                     </div>
                                 </div>
                             </form>
                         </div><!-- end post-wrapper -->
@@ -375,7 +388,8 @@ START SITE HERE
 
                                     <div class="col-md-6 col-sm-6">
                                         <label class="control-label">Bank Details</label>
-                                        <input type="text"  class="form-control" value = "{{accountname}} - {{banknumber}}" disabled">
+                                        <input type="text"  class="form-control" value = "{{accountname}} - {{banknumber}}" disabled="disabled" ng-show="(ispaytmactive==0)">
+                                        <input type="text"  class="form-control" value = "paytm - {{paytmnumber}}" disabled="disabled" ng-show="(ispaytmactive==1)">
                                     </div>
                                     <hr class="invis3">
                                     <button type="submit" class="btn btn-primary">Submit</button>

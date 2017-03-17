@@ -416,7 +416,7 @@
 			   <div class="grid-coupons">
 				  <div class="col-md-3 col-sm-6 col-xs-12" style="border:2px dashed #00bcd4 !important;">
 					  <div class="col-md-6 col-sm-4">
-							<img src="uploads/store_01.jpg" alt="" class="img-responsive">
+							<img src="images/Free_tag.png" height="56" alt="" class="img-responsive">
 					  </div>
 					  <div class="col-md-6 col-sm-4">
 							<p style="display: table-cell;vertical-align: middle;text-align: center;">Join and Get Sign up Bonus</p>

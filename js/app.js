@@ -22,6 +22,8 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
   //   $scope.gridOptions.enableCellEditOnFocus = true;
   //  $scope.myData = [{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"186.48","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"217.68","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"292.475","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"1368","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"197.99","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"79.92","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"74.52","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"29.94","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"10","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"5","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"9.999","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"271.88","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":null,"status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"64.7","status":"processed","userReferenceCode":null}];
     $scope.initTabValue = function(){
+    	 //alert($scope.paymentdetails.ispaytmactive);
+  //  	$scope.paymentdetails.ispaytmactive = '0';
 	
 	 var tabIndex = 1;
     var url = window.location.href;
@@ -65,7 +67,13 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
                 dataType    : 'json'
             }).then(function (response) {
                 var jsonData = JSON.stringify(response.data);
-                $scope.paymentdetails = response.data;
+                if(response.data==''){
+                	$scope.paymentdetails = {};
+                    $scope.paymentdetails.ispaytmactive =0;
+                }else{
+                	 $scope.paymentdetails = response.data;
+                }
+                
             });
 
         }
@@ -109,6 +117,12 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
                 }
                 if(response.data.availableamount){
                     $scope.availableamount = response.data.availableamount;
+                }
+                if(response.data.ispaytmactive){
+                    $scope.ispaytmactive = response.data.ispaytmactive;
+                }
+                if(response.data.paytmnumber){
+                    $scope.paytmnumber = response.data.paytmnumber;
                 }
             }
             if(!$scope.banknumber){
@@ -160,7 +174,10 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             accountname: $scope.paymentdetails.accountname,
             bankname: $scope.paymentdetails.bankname,
             banknumber: $scope.paymentdetails.banknumber,
-            ifsccode: $scope.paymentdetails.ifsccode
+            ifsccode: $scope.paymentdetails.ifsccode,
+            paytmnumber: $scope.paymentdetails.paytmnumber,
+            ispaytmactive: $scope.paymentdetails.ispaytmactive,
+            paytmnumber: $scope.paymentdetails.paytmnumber
         };
     }
 
