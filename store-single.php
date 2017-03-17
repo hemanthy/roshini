@@ -192,7 +192,8 @@ START SITE HERE
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="post-media text-center">
-                                    <a href="coupon-single.php"><img src="http://www.afaqs.com/all/news/images/news_story_grfx/2015/05/44375/Flipkart's-brand-new-mobile-friendly-logo.jpg" alt="" class="img-responsive"></a>
+                                    <a href="coupon-single.php">
+                                    	<img src="images/logo/FlipkartL.png" alt="" class="img-responsive"></a>
                                     <small><a href="#">Flipkart.com</a></small>
                                 </div>
                                 <!-- end media -->
@@ -275,6 +276,7 @@ START SITE HERE
                         <!-- Tab panes -->
                     </div>
                     <hr class="invishalf">
+                    <div class="leavefeedback"></div>
                     <div class="post-wrapper mb20 clearfix">
                         <div class="widget-title">
                             <h4><span>Leave a Feedback</span></h4>
@@ -284,20 +286,20 @@ START SITE HERE
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
                                     <p>Your email is safe with us and we hate spam as much as you do.</p>
                             <?php } ?>
-                            <form method="POST" name="feedbackform" accept-charset="UTF-8" class="row" id="feedbackform">
+                            <!-- <form  method="POST"  html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8" id="feedbackform" class="row"> -->
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" value="<?php if (isset($_SESSION['usr_name'])) echo $_SESSION['usr_name']; ?>" placeholder="Enter your name..">
+                                    <input type="text" class="form-control" id="username" value="<?php if (isset($_SESSION['usr_name'])) echo $_SESSION['usr_name']; ?>" placeholder="Enter your name..">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="email" class="form-control" name="email_id" value="<?php if (isset($_SESSION['email_id'])) echo $_SESSION['email_id']; ?>" placeholder="Enter your email..">
-                                    <input type="hidden" value="1" name="store_id"/>
+                                    <input type="email" class="form-control" name="email_id" id="email_id" value="<?php if (isset($_SESSION['email_id'])) echo $_SESSION['email_id']; ?>" placeholder="Enter your email..">
+                                    <input type="hidden" value="1" id="store_id" name="store_id"/>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <textarea class="form-control" name="feedback" placeholder="Give us more details..."></textarea>
-                                    <button type="submit" name="feedbacksubmit"  id="submitFeedbackButton" class="btn btn-primary">Submit Feedback</button>
+                                    <textarea class="form-control" name="feedback" id="feedback" placeholder="Give us more details..."></textarea>
+                                    <button name="feedbacksubmit"  id="submitFeedbackButton" class="btn btn-primary">Submit Feedback</button>
                                 </div>
-                            </form>
+                            <!-- </form> -->
                         </div>
                     </div><!-- end widget -->
                 </div>
@@ -412,22 +414,48 @@ DEFAULT JAVASCRIPT FILES
         $("#footerId").load("footer.php");
     });
 
-    $('document').ready(function() {
+     $('document').ready(function() {
         $('#submitFeedbackButton').click( function() {
-            var data = $('#feedbackform').serialize();
+           
+
+            var username = $( "#username" ).val();
+            var email_id = $( "#email_id" ).val();
+            var feedback = $( "#feedback" ).val();
+            var store_id = $( "#store_id" ).val();
+
+           
+           // var data = $('#feedbackform').serialize();
             $.ajax({
                 url: 'userfeedback.php',
                 type: 'post',
                 dataType: 'json',
-                data: data,
+                data: {'username':username,'email_id':email_id,'feedback':feedback,'store_id':store_id},
                 success: function(data) {
                     console.log("success");
+                    feedbacksuccessmsg();
                 },
                 error: function (error) {
-                    error.preventDefault();
+                	 debugger;
+                    if(error.status = 200){
+                    	console.log("success");
+                    	feedbacksuccessmsg();
+                    }else{
+                    	error.preventDefault();
+                    }
+                	
+                    
                 },
             });
         });
+        function feedbacksuccessmsg(){
+        	$('.leavefeedback').addClass('alert alert-success').html('Thank For Your Valuable Feedback');
+        	setTimeout(function(){
+        		 $('.leavefeedback').addClass('alert alert-success').html('');
+                 $('.leavefeedback').removeClass('alert alert-success');
+            }, 10000);
+        }
+
+        
     });
 </script>
 

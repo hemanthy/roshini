@@ -386,9 +386,26 @@ START SITE HERE
                             </form>
                         </div>
 
-                        <div class="widget clearfix" ng-show="userHistory">
-                            <div class="coupon-tab post-wrapper nopadtop clearfix">
-                                <div ui-grid="userTransactionHistoryGridOptions" ui-grid-edit ui-grid-cellnav  class="grid"></div>
+                       <div class="widget clearfix" ng-show="userHistory" id="userHistory">
+                            <div class="coupon-tab nopadtop clearfix">
+							<table id="showcashbacktableid" class="table table-sm table-striped table-bordered table-hover table-responsive">
+								<thead class="thead-inverse">
+								<tr>
+									<th>Payment Request Amount</th>
+									<th>Status</th>
+									<th>Payment Request Date</th>
+								</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="x in userHistory">
+										<td>{{x.paymentRequestedAmount}}</td>
+										<td>{{x.paymentReqStatus}}</td>
+										<td>{{x.paymentReqDate}}</td>
+									</tr>
+								</tbody>
+							</table>
+						
+                               <!-- <div ui-grid="userTransactionHistoryGridOptions" ui-grid-edit ui-grid-cellnav  class="grid"></div> -->
                             </div>
                         </div>
 
@@ -536,6 +553,10 @@ DEFAULT JAVASCRIPT FILES
     .error {
         color : red;
     }
+	
+	#userHistory #showcashbacktableid td{
+	  font-weight: normal;
+	}
 
 
 </style>

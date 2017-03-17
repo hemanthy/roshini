@@ -22,8 +22,12 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
   //   $scope.gridOptions.enableCellEditOnFocus = true;
   //  $scope.myData = [{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"186.48","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"217.68","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"292.475","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"1368","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"197.99","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"79.92","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"74.52","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"29.94","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"10","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"5","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"9.999","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"271.88","status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":null,"status":"processed","userReferenceCode":null},{"orderDate":"2017-02-24 21:51:25","storeName":"hi","cashback":"64.7","status":"processed","userReferenceCode":null}];
     $scope.initTabValue = function(){
-        var tabIndex= 1;
-        var url = window.location.href;
+	
+	 var tabIndex = 1;
+    var url = window.location.href;
+		if(url.indexOf("#")!=-1){
+		url = url.replace('#', '');
+		}
 
         if(url.indexOf("?")!=-1){
             var splitUrl = url.split("?");
@@ -74,11 +78,11 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             $scope.userTransactionHistoryGridOptions.data = 'userHistory';
 
 
-            $scope.userTransactionHistoryGridOptions.columnDefs = [
+            /* $scope.userTransactionHistoryGridOptions.columnDefs = [
                 { name:'paymentRequestedAmount', displayName :'Payment Request Amount'},
                 { name:'paymentReqStatus', displayName :'Status'},
                 { name:'paymentReqDate', displayName :'Payment Request Date'}
-            ];
+            ]; */
             $scope.getUserAmountDetails();
            $scope.getUserTransactionHistory();
         }

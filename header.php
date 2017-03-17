@@ -22,6 +22,10 @@ get: function(name) { return private[name]; }
     .hover-item:hover {
         background-color: #FFFFFF;
     }
+	
+	#loginModal .sidebar .widget {
+		margin-bottom : 0px;
+	}
 
 </style>
 
@@ -168,78 +172,113 @@ get: function(name) { return private[name]; }
 
 <div class="modal fade login" id="loginModal">
     <div class="modal-dialog login animated">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="closebtn" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login with</h4>
-            </div>
-            <div class="modal-body">
-                <div class="box">
-                    <div class="content">
-                        <div class="social">
-                            <a class="circle github" href="#">
-                                <i class="fa fa-github fa-fw"></i>
-                            </a>
-                            <a id="google_login" class="circle google" href="#">
-                                <i class="fa fa-google-plus fa-fw"></i>
-                            </a>
-                            <a id="facebook_login" class="circle facebook" href="#">
-                                <i class="fa fa-facebook fa-fw"></i>
-                            </a>
-                        </div>
-                        <div class="division">
-                            <div class="line l"></div>
-                            <span>or</span>
-                            <div class="line r"></div>
-                        </div>
-                        <div class="error"></div>
-                        <div class="form loginBox">
-                            <form method="POST" action="" accept-charset="UTF-8" id="login-form">
-                                <input type="email" class="form-control" placeholder="Email address" name="email" id="email"  />
-                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                <input class="btn btn-default btn-login" type="submit" name="login" value="login" id="btn-login">
-                            </form>
-                            <span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="content registerBox" style="display:none;">
-                        <div class="form">
-                            <form method="post" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8" id="sign-form">
+        <div class="modal-content" style="width: 680px;">
+			 <div class="row">
+                                <div class="col-md-6 col-sm-6">
+								 <hr class="invis3">
+										<div class="sidebar">
+											<div class="widget clearfix">
+												<div>
+													<h4>Guidelines To Earn Cashback</h4>
+												</div>
 
-                                <input type="text" name="email" placeholder="Email" required class="form-control" />
-                                <span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
+												<div class="best-coupons">
+													<ul class="customlist">
+														<li>Get Cashback when you shop via usS</li>
+														<li>Login & Browse Retailers & Products</li>
+														<li>Choose the Store</li>
+														<li>Cashback gets added</li>
+														<li>Once gets Confirmed, Transfer to your Bank Account</li>
+													</ul>
+												</div>
+											</div>
+										</div>             
+								</div>
+								<div class="col-md-6 col-sm-6">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" id="closebtn" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">Login with</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="content">
+											<div class="social">
+												<a class="circle github" href="#">
+													<i class="fa fa-github fa-fw"></i>
+												</a>
+												<a id="google_login" class="circle google" href="#">
+													<i class="fa fa-google-plus fa-fw"></i>
+												</a>
+												<a id="facebook_login" class="circle facebook" href="#">
+													<i class="fa fa-facebook fa-fw"></i>
+												</a>
+											</div>
+											<div class="division">
+												<div class="line l"></div>
+												<span>or</span>
+												<div class="line r"></div>
+											</div>
+											<div class="error"></div>
+											<div class="form loginBox">
+												<form method="POST" action="" accept-charset="UTF-8" id="login-form">
+													<input type="email" class="form-control" placeholder="Email address" name="email" id="email"  />
+													<input id="password" class="form-control" type="password" placeholder="Password" name="password">
+													<input class="btn btn-default btn-login" type="submit" name="login" value="login" id="btn-login">
+												</form>
+												<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
+											</div>
+										</div>
+									</div>
+									<div class="box">
+										<div class="content registerBox" style="display:none;">
+											<div class="form">
+												<form method="post" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8" id="sign-form">
 
-                                <input type="text" name="name" placeholder="Enter Full Name" required class="form-control" />
-                                <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
+													<input type="text" name="email" placeholder="Email" required class="form-control" />
+													<span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
 
-                                <input type="password" name="password" placeholder="Password" required class="form-control" />
-                                <span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
+													<input type="text" name="name" placeholder="Enter Full Name" required class="form-control" />
+													<span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
 
-                                <input type="password" name="cpassword" placeholder="Confirm Password" required class="form-control" />
-                                <span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
+													<input type="password" name="password" placeholder="Password" required class="form-control" />
+													<span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
 
-                                <input class="btn btn-default btn-register" type="submit" value="Create account" name="signup">
-                            </form>
-                            <span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
-                            <span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="forgot login-footer">
-                            <span>Looking to
-                                 <a href="javascript: showRegisterForm();">create an account</a>
-                            ?</span>
-                </div>
-                <div class="forgot register-footer" style="display:none">
-                    <span>Already have an account?</span>
-                    <a href="javascript: showLoginForm();">Login</a>
-                </div>
-            </div>
-        </div>
+													<input type="password" name="cpassword" placeholder="Confirm Password" required class="form-control" />
+													<span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
+
+													<input class="btn btn-default btn-register" type="submit" value="Create account" name="signup">
+												</form>
+												<span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
+												<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<div class="forgot login-footer">
+												<span>Looking to
+													 <a href="javascript: showRegisterForm();"><b>create an account</b></a>
+												?</span>
+									</div>
+									<div class="forgot register-footer" style="display:none">
+										<span>Already have an account?</span>
+										<a href="javascript: showLoginForm();"><b>Login</b></a>
+									</div>
+								</div>
+			</div>
+			</div>
+				 <div class="row" id="withoutcb">
+					 <div class="col-md-12 col-sm-12">
+					 <div class="col-md-2 col-sm-2">
+					 &nbsp;
+					 </div>
+						 <div class="col-md-8 col-sm-8">
+								<a href="gotostore.php?ref=1" target="_blank" class="btn btn-default btn-block">Get Cashback</a>
+						 </div>
+					 </div>
+				 </div>
+			 <hr class="invis3">
+	 </div>
     </div>
 </div>
 

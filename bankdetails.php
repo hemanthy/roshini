@@ -19,8 +19,8 @@ $account_name = mysqli_real_escape_string($con, $_POST['accountname']);
 $bank_name = mysqli_real_escape_string($con, $_POST['bankname']);
 $bank_number = mysqli_real_escape_string($con, $_POST['banknumber']);
 $ifsc_code = mysqli_real_escape_string($con, $_POST['ifsccode']);
-$paytm_mobile_number = ""; //mysqli_real_escape_string($con, $_POST['paytmmobilenumber']);
-$is_paytm_active = "";//mysqli_real_escape_string($con, $_POST['ispaytmactive']);
+$paytm_mobile_number = "1"; //mysqli_real_escape_string($con, $_POST['paytmmobilenumber']);
+$is_paytm_active = "1";//mysqli_real_escape_string($con, $_POST['ispaytmactive']);
 if (isset($_SESSION['usr_id'])) {
     $user_id = $_SESSION['usr_id'];
 }

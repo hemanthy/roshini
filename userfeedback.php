@@ -12,6 +12,8 @@ if (isset($_POST['feedback'])) {
     $store_id = mysqli_real_escape_string($con, $_POST['store_id']);
     if (isset($_SESSION['usr_id'])) {
         $user_id = $_SESSION['usr_id'];
+    }else {
+    	$user_id = 1000;
     }
 
     $email_id = mysqli_real_escape_string($con, $_POST['email_id']);

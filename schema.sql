@@ -17,6 +17,7 @@ create table user (
 Insert into user (name,email,password,user_reference_code,active) values ('Hemanth','ad@a.com','a',435,true);
 Insert into user (name,email,password,user_reference_code,active) values ('Hemanth2','add@a.com','a',589,true);
 Insert into user (name,email,password,user_reference_code,active) values ('hemanthroshini','hemanthroshini@gmail.com','be70992f04a63bc7d731a0ba36b94c5e',435,true);
+Insert into user (id,name,email,password,user_reference_code,active) values (1000,'Hemanth','hemanth@gmail.com','be70992f04a63bc7d731a0ba36b94c5e',1000,true);
 
 select * from user;
 
@@ -38,7 +39,7 @@ create table user_store_order_details(id bigint NOT NULL AUTO_INCREMENT,category
 select * from user_store_order_details;
 
 create table user_transaction_details (id bigint not null auto_increment,payment_requested_amount float,available_amount float,pending_amount float,redemption_amount float,payment_request_status varchar(20),payment_requested_date TIMESTAMP,payment_approved_date TIMESTAMP,user_id bigint,primary key(id),foreign key (user_id) references user(id));
-insert into user_transaction_details (user_id,available_amount) VALUES (19,120);
+insert into user_transaction_details (user_id,available_amount) VALUES (1,120);
 
 create table user_transaction_history (id bigint not null auto_increment,payment_requested_amount float,
   payment_request_status varchar(20),payment_requested_date TIMESTAMP,
@@ -61,7 +62,7 @@ create table category ( id bigint(8) NOT NULL AUTO_INCREMENT,category_name text 
 
 insert into category (category_name, category_type, store_id, cashback_percent) VALUES ('hi','ecommerce',1,9.5);
 insert into category (category_name, category_type, store_id, cashback_percent) VALUES ('flipkart','ecommerc3',1,8.5);
-drop table user_payment_details;
+-- drop table user_payment_details;
 create table user_payment_details ( id bigint(8) NOT NULL AUTO_INCREMENT,  account_name varchar(30) NOT NULL, bank_name varchar(50), bank_number long not null, ifsc_code  varchar(15) not null, paytm_mobile_number bigint, is_paytm_active bool default false,updated_date TIMESTAMP, user_id bigint,foreign key (user_id) references user(id), PRIMARY KEY (id));
 
 
@@ -69,7 +70,7 @@ select * from store s, category c where s.id=1 and c.store_id =1;
 select * from user_payment_details where user_id=3 order by updated_date desc limit 1,1;
 select * from user_transaction_history uth, user_payment_details upd,user_transaction_details utd where uth.user_id = upd.user_id and upd.user_id = utd.user_id
                                                                            and uth.user_id = 17 order by uth.payment_requested_date desc;
-select * from user_payment_details upd,user_transaction_details utd where upd.user_id =utd.user_id and utd.user_id = 19;
+select * from user_payment_details upd,user_transaction_details utd where upd.user_id =utd.user_id and utd.user_id = 1;
 
 select * from user_payment_details where user_id=5; -- order by updated_date desc limit 1;
 
@@ -89,7 +90,7 @@ select * from user_transaction_history;
 select * from user where email ='hemanthroshini@gmail.com';
 
 update user_transaction_details set payment_requested_amount = 89 where user_id = 17;
-update user_transaction_details set available_amount = 100  where user_id = 19;
+update user_transaction_details set available_amount = 100  where user_id = 1;
 select * from user_transaction_details where user_id = 17;
 
 update user_store_order_details set aff_ext_param1 = 577 where id > 2;
