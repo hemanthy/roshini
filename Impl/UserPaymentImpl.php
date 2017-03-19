@@ -39,6 +39,11 @@ function getUserPaymentDetails($conn){
 			$userDetailsPojo -> setIfsccode($ifsc_code);
 			$userDetailsPojo -> setPaytmnumber($paytm_mobile_number);
 			$userDetailsPojo -> setIspaytmactive($is_paytm_active);
+			if($is_paytm_active){
+				$userDetailsPojo -> setPaymentMode('paytm');
+			}else{
+				$userDetailsPojo -> setPaymentMode('Bank');
+			}
 		
 		/* 
 			$bankNumber = $row['bank_number'];

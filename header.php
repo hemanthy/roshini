@@ -139,6 +139,7 @@ get: function(name) { return private[name]; }
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
                                 <li><a data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a></li>
                                 <li><a class="" title="" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a></li>
+                                <input type="hidden" value="headerpage" id="loginSource"/>
                             <?php } else { ?>
                                 <li style="font-size: 16px;margin-top: 6px;">Hi <?php echo $_SESSION['usr_name']; ?></li>
                                 <li><a href="logout.php">Log Out</a></li>
@@ -267,13 +268,15 @@ get: function(name) { return private[name]; }
 								</div>
 			</div>
 			</div>
+			
 				 <div class="row" id="withoutcb">
 					 <div class="col-md-12 col-sm-12">
 					 <div class="col-md-2 col-sm-2">
 					 &nbsp;
 					 </div>
 						 <div class="col-md-8 col-sm-8">
-								<a href="gotostore.php?ref=1" target="_blank" class="btn btn-default btn-block">Get Cashback</a>
+								<a target="_blank" class="btn btn-default btn-block" href="javascript:void(0)" 
+								onclick="withoutcb();">Else Continue Without Cashback</a>
 						 </div>
 					 </div>
 				 </div>
@@ -330,12 +333,12 @@ get: function(name) { return private[name]; }
                     if(response == "LOGIN_SUCCESS"){
                         // setTimeout(' window.location.href = "/index.php"; ',4000);
                          hideModal();
-                         var storeId = $( "#storeId" ).val();
-                        if(storeId){
-                            location.href = 'gotostore.php?ref=1';
-                        }else {
-                            location.href = window.location.href;
-                        }
+                         var userRef = $( "#usrRef" ).val();
+                         if(userRef =='storePage'){
+                             location.href = 'gotostore.php?ref=1';
+                         }else {
+                             location.href = window.location.href;
+                         }
                     }
                     else {
                             shakeModal(config.get(response));
@@ -381,11 +384,11 @@ get: function(name) { return private[name]; }
                     },
                     email: "Please enter a valid email address",
                 },
-            submitHandler: signupForm
+            submitHandler: loginForm
         });
 
         /* login submit */
-        function signupForm()
+        function loginForm()
         {
             var data = $("#sign-form").serialize();
             $.ajax({
@@ -400,12 +403,13 @@ get: function(name) { return private[name]; }
                 },
                 success :  function(response)
                 {
+                    debugger
                     if(response == 'INCORRECT_EMAIL_OR_PASSWORD' || response == 'PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH' || response =='INCORRECT_EMAIL_OR_PASSWORD' ||
                     response == 'EMAIL_ALREADY_EXISTS'){
                         shakeModal(config.get(response));
                     }else if(response == 'REGISTRATION_SUCCESSFUL' || response == 'LOGIN_SUCCESS'){
-                        var storeId = $( "#storeId" ).val();
-                        if(storeId){
+                        var userRef = $( "#usrRef" ).val();
+                        if(userRef =='storePage'){
                             location.href = 'gotostore.php?ref=1';
                         }else {
                             location.href = window.location.href;

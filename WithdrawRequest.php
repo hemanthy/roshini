@@ -6,7 +6,7 @@ include ('/pojo/UserReportPOJO.php');
 
 include ('/pojo/UserDetailsPOJO.php');
 include ('/Impl/UserTransactionImpl.php');
-
+include ('/Impl/UserPaymentImpl.php');
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 
@@ -53,11 +53,10 @@ if($availableAmount >= $withdrawAmount){
     
     $stmt = $conn->prepare("update user_transaction_history set payment_request_status = 'cancel' where user_id =:user_id;");
     $stmt->execute(array(':user_id' => $user_id));
-
-    saveUserTransactionHistory($conn,$withdrawAmount);
-
+    $userDetailsPojo = getUserPaymentDetails($conn);
+    $userDetailsPojo -> setPaymentRequestedAmount($withdrawAmount);
+    saveUserTransactionHistory($conn,$userDetailsPojo);
     echo "Withdraw Request Updated !!!";
-
 }else{
     echo "Withdraw Amount is lesser than Available amount";
 }

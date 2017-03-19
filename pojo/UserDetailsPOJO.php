@@ -2,6 +2,7 @@
 
 class UserDetailsPOJO {
 
+	var $usrId;
     var $accountname;
     var $bankname;
     var $banknumber;
@@ -19,6 +20,25 @@ class UserDetailsPOJO {
     var $cashback;
     var $status;
     var $userReferenceCode;
+    var $paymentMode;
+    
+    /**
+     *
+     * @return the unknown_type
+     */
+    public function getUsrId() {
+    	return $this->usrId;
+    }
+    
+    /**
+     *
+     * @param unknown_type $usrId
+     */
+    public function setUsrId($usrId) {
+    	$this->usrId = $usrId;
+    	return $this;
+    }
+    
     
 
     /**
@@ -305,15 +325,22 @@ class UserDetailsPOJO {
 		return $this;
 	}
 	
-
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getPaymentMode() {
+		return $this->paymentMode;
+	}
 	
-	
-	
-	
-    
-	
-	
-
+	/**
+	 *
+	 * @param unknown_type $paymentMode        	
+	 */
+	public function setPaymentMode($paymentMode) {
+		$this->paymentMode = $paymentMode;
+		return $this;
+	}
     
 }
 ?>

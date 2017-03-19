@@ -207,10 +207,12 @@ START SITE HERE
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-xs-12">
                                         <?php if (!isset($_SESSION['usr_id'])) { ?>
-                                            <input type="hidden" value="1" id="storeId"/>
-                                            <a data-toggle="modal" href="javascript:void(0)" class="gp-button btn btn-primary btn1" onclick="openLoginModal();">Get Cashback</a>
+                                            <input type="hidden" value="storePage" id="usrRef"/>
+                                            <a data-toggle="modal" href="javascript:void(0)" class="gp-button btn btn-primary btn1" onclick="openLoginModalStore();">Get Cashback</a>
+                                            <input type="hidden" id="storeId" value="1"/>
                                         <?php } else { ?>
                                             <a href="gotostore.php?ref=1" target="_blank" class="gp-button btn btn-primary btn1">Get Cashback</a>
+                                             <!-- <a data-toggle="modal" href="javascript:void(0)" class="gp-button btn btn-primary btn1" onclick="redirectUrl();">Get Cashback22</a> -->
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -256,9 +258,10 @@ START SITE HERE
                                     <tr>
                                         <td><?php echo $categoryName;?></td>
                                         <td><?php echo $percent;?>%</td>
-                                        <td>
+                                        <td">
                                             <?php if (!isset($_SESSION['usr_id'])) { ?>
-                                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-default btn-block" onclick="openLoginModal();">Get Cashback</a>
+                                				<input type="hidden" value="storepage" id="loginSource"/>
+                                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-default btn-block" onclick="openLoginModalStore();">Get Cashback</a>
                                             <?php } else { ?>
                                                 <a href="gotostore.php?ref=1" target="_blank" class="btn btn-default btn-block">Get Cashback</a>
                                             <?php } ?>
@@ -300,6 +303,7 @@ START SITE HERE
                                     <button name="feedbacksubmit"  id="submitFeedbackButton" class="btn btn-primary">Submit Feedback</button>
                                 </div>
                             <!-- </form> -->
+                            
                         </div>
                     </div><!-- end widget -->
                 </div>
@@ -435,7 +439,6 @@ DEFAULT JAVASCRIPT FILES
                     feedbacksuccessmsg();
                 },
                 error: function (error) {
-                	 debugger;
                     if(error.status = 200){
                     	console.log("success");
                     	feedbacksuccessmsg();

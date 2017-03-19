@@ -11,6 +11,8 @@ include_once('../proxy.php');
 
 include_once '../pojo/FlipkartOrderDetailsPOJO.php';
 
+include '../pojo/UserDetailsPOJO.php';
+
 // include_once ('');
 
 
@@ -19,8 +21,9 @@ include_once '../pojo/FlipkartOrderDetailsPOJO.php';
 //$mydata = json_decode($result,true);
 
 
-  //  $json2 = '{"orderList": [  {    "price": 999,    "category": "Personal Care Appliances",    "title": "Philips QT4000 /15 Pro Skin Advanced Trimmer For Men",    "productId": "SHVDPGXHU2XNTYHC",    "quantity": 1,    "sales": {      "amount": 999,      "currency": "INR"    },    "status": "processed",    "affiliateOrderItemId": "39152399",    "orderDate": "26-10-2016 00:36:35",    "commissionRate": 8,    "tentativeCommission": {      "amount": 79.92,      "currency": "INR"    },    "affExtParam1": "435",    "affExtParam2": "",    "salesChannel": "APP",    "customerType": "EXISTING"  },{    "price": 999,    "category": "Personal Care Appliances",    "title": "Philips QT4000 /15 Pro Skin Advanced Trimmer For Men",    "productId": "SHVDPGXHU2XNTYHC",    "quantity": 1,    "sales": {      "amount": 999,      "currency": "INR"    },    "status": "Disapproved",    "affiliateOrderItemId": "39152378",    "orderDate": "26-10-2016 00:36:35",    "commissionRate": 8,    "tentativeCommission": {      "amount": 453543,      "currency": "INR"    },    "affExtParam1": "435",    "affExtParam2": "",    "salesChannel": "APP",    "customerType": "EXISTING"  },{    "price": 999,    "category": "Personal Care Appliances",    "title": "Philips QT4000 /15 Pro Skin Advanced Trimmer For Men",    "productId": "SHVDPGXHU2XNTYHC",    "quantity": 1,    "sales": {      "amount": 256,      "currency": "INR"    },    "status": "processed",    "affiliateOrderItemId": "391523933",    "orderDate": "26-10-23 00:36:3",    "commissionRate": 8,    "tentativeCommission": {      "amount": 32,      "currency": "INR"    },    "affExtParam1": "589",    "affExtParam2": "23",    "salesChannel": "APP",    "customerType": "EXISTING"  },{    "price": 999,    "category": "Personal Care Appliances",    "title": "Philips QT4000 /15 Pro Skin Advanced Trimmer For Men",    "productId": "SHVDPGXHU2XNTYHC",    "quantity": 1,    "sales": {      "amount": 256,      "currency": "INR"    },    "status": "processed",    "affiliateOrderItemId": "3915239332",    "orderDate": "26-10-23 00:36:3",    "commissionRate": 8,    "tentativeCommission": {      "amount": 765,      "currency": "INR"    },    "affExtParam1": "577",    "affExtParam2": "23",    "salesChannel": "APP",    "customerType": "EXISTING"  },{    "price": 999,    "category": "Personal Care Appliances",    "title": "Philips QT4000 /15 Pro Skin Advanced Trimmer For Men",    "productId": "SHVDPGXHU2XNTYHC",    "quantity": 1,    "sales": {      "amount": 256,      "currency": "INR"    },    "status": "processed",    "affiliateOrderItemId": "391523933232",    "orderDate": "26-10-23 00:36:3",    "commissionRate": 8,    "tentativeCommission": {      "amount": 4343,      "currency": "INR"    },    "affExtParam1": "547",    "affExtParam2": "23",    "salesChannel": "APP",    "customerType": "EXISTING"  }],"previous": "","next": "","first": "dfsafdsa","last": "fdsafdsa"}';
+   //$json2 = '{"orderList":[{"price":999,"category":"Personal Care Appliances","title":"Philips QT4000 /15 Pro Skin Advanced Trimmer For Men","productId":"SHVDPGXHU2XNTYHC","quantity":1,"sales":{"amount":999,"currency":"INR"},"status":"processed","affiliateOrderItemId":"391523993","orderDate":"26-10-2016 00:36:35","commissionRate":8,"tentativeCommission":{"amount":3424.92,"currency":"INR"},"affExtParam1":"ACB31467","affExtParam2":"","salesChannel":"APP","customerType":"EXISTING"},{"price":999,"category":"Personal Care Appliances","title":"Philips QT4000 /15 Pro Skin Advanced Trimmer For Men","productId":"SHVDPGXHU2XNTYHC","quantity":1,"sales":{"amount":999,"currency":"INR"},"status":"processed","affiliateOrderItemId":"391523399","orderDate":"26-10-2016 00:36:35","commissionRate":8,"tentativeCommission":{"amount":190.92,"currency":"INR"},"affExtParam1":"ACB31467","affExtParam2":"","salesChannel":"APP","customerType":"EXISTING"},{"price":999,"category":"Personal Care Appliances","title":"Philips QT4000 /15 Pro Skin Advanced Trimmer For Men","productId":"SHVDPGXHU2XNTYHC","quantity":1,"sales":{"amount":256,"currency":"INR"},"status":"pending","affiliateOrderItemId":"39152393342","orderDate":"26-10-23 00:36:3","commissionRate":8,"tentativeCommission":{"amount":765,"currency":"INR"},"affExtParam1":"ACB31467","affExtParam2":"","salesChannel":"APP","customerType":"EXISTING"},{"price":999,"category":"Personal Care Appliances","title":"Philips QT4000 /15 Pro Skin Advanced Trimmer For Men","productId":"SHVDPGXHU2XNTYHC","quantity":1,"sales":{"amount":100,"currency":"INR"},"status":"pending","affiliateOrderItemId":"3915239332","orderDate":"26-10-23 00:36:3","commissionRate":8,"tentativeCommission":{"amount":765,"currency":"INR"},"affExtParam1":"ACB31467","affExtParam2":"","salesChannel":"APP","customerType":"EXISTING"},{"price":999,"category":"Personal Care Appliances","title":"Philips QT4000 /15 Pro Skin Advanced Trimmer For Men","productId":"SHVDPGXHU2XNTYHC","quantity":1,"sales":{"amount":256,"currency":"INR"},"status":"pending","affiliateOrderItemId":"391523933232","orderDate":"26-10-23 00:36:3","commissionRate":8,"tentativeCommission":{"amount":4343,"currency":"INR"},"affExtParam1":"ACB1000","affExtParam2":"","salesChannel":"APP","customerType":"EXISTING"}],"previous":"","next":"","first":"dfsafdsa","last":"fdsafdsa"}';
 
+//$result = $json2;
     $mydata = json_decode($result,true);
 
     $jsonObj = json_decode($result);
@@ -113,8 +116,8 @@ include_once '../pojo/FlipkartOrderDetailsPOJO.php';
             $stmt->bindParam(':commission_rate', $obj -> commissionRate, PDO::PARAM_STR);
             $stmt->bindParam(':tentative_commission_amount', $obj -> tentativeCommission, PDO::PARAM_STR);
        //     $stmt->bindParam(':aff_ext_param1', $obj -> affExtParam1, PDO::PARAM_INT);
-            $affId= 435;
-            $stmt->bindParam(':aff_ext_param1', $affId);
+            //$affId= 435;
+            $stmt->bindParam(':aff_ext_param1', $obj -> affExtParam1, PDO::PARAM_INT);
             $stmt->bindParam(':aff_ext_param2', $obj -> affExtParam2, PDO::PARAM_INT);
             $stmt->bindParam(':sales_channel', $obj -> salesChannel, PDO::PARAM_STR);
             $stmt->bindParam(':customer_type', $obj -> customerType, PDO::PARAM_STR);
@@ -128,7 +131,7 @@ include_once '../pojo/FlipkartOrderDetailsPOJO.php';
         }
     }
 
-    $d = array();
+   /*  $d = array();
 
     // This appends a new element to $d, in this case the value is another array
     $d[] = array('item' => "dfas" ,'rate' => "dfas");
@@ -143,13 +146,12 @@ include_once '../pojo/FlipkartOrderDetailsPOJO.php';
         foreach($result as $row){
             echo $row['user_id'];
             echo $row['status'];
-
         }
     }
     catch(PDOException $e)
     {
         echo "Error: " . $e->getMessage();
-    }
+    } */
 
 
     //mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")

@@ -77,7 +77,7 @@ session_start();
 
 
 </head>
-<body ng-app="app">
+<body ng-app="app"  ng-controller="MainCtrl">
 
 <!-- ADD Switcher -->
 <div class="demo_changer">
@@ -180,14 +180,14 @@ START SITE HERE
                 <div class="bread">
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
-                        <li class="active">Dashboard</li>
+                        <li class="active">{{selectedtabname}}</li>
                     </ol>
                 </div><!-- end bread -->
             </div><!-- /.pull-right -->
         </div>
     </section><!-- end section -->
 
-    <div class="section"  ng-controller="MainCtrl" ng-init="initTabValue()">
+    <div class="section" ng-init="initTabValue()">
         <div class="container">
             <div class="row">
                 <div class="sidebar col-md-4">
@@ -304,7 +304,7 @@ START SITE HERE
                                     <!--<span class="count_bottom"><i class="green">4% </i> From last Week</span>-->
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-                                    <span class="count_top"><i class="fa fa-user"></i> Pending Balance</span>
+                                    <span class="count_top"><i class="fa fa-user"></i> Pending Balance</span><!-- (availableamount > 100) -->
                                     <div class="count blue">{{pendingBal}}</div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
@@ -408,6 +408,8 @@ START SITE HERE
 									<th>Payment Request Amount</th>
 									<th>Status</th>
 									<th>Payment Request Date</th>
+									<!-- <th>Payment Reference</th> -->
+									<th>Payment Mode</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -415,6 +417,8 @@ START SITE HERE
 										<td>{{x.paymentRequestedAmount}}</td>
 										<td>{{x.paymentReqStatus}}</td>
 										<td>{{x.paymentReqDate}}</td>
+										<!-- <td>{{x.paymentMode}}</td> -->
+										<td>{{x.paymentMode}}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -570,6 +574,10 @@ DEFAULT JAVASCRIPT FILES
 	
 	#userHistory #showcashbacktableid td{
 	  font-weight: normal;
+	}
+	
+	#showcashbacktableid {
+		
 	}
 
 

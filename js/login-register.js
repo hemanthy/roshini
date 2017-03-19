@@ -50,18 +50,39 @@ function showLoginFormPlus(){
     $('.alert').removeClass('alert-danger').html('');*/
 }
 
+function withoutcb(){
+	
+	 location.href = 'gotostore1.php?ref=1';
+	//var url = window.location.hostname+'gotostore.php?ref=1'
+	//console.log(url)
+	// window.open(url);
+}
 
+function openLoginModalStore(){
+	 $('#withoutcb').show();
+	 showLoginForm();
+	    setTimeout(function(){
+	        $('#loginModal').modal('show');    
+	    }, 230);
+}
 
-
+function redirectUrl(){
+	
+//	http://dl.flipkart.com/dl/?affid=ravitejyad&amp;affExtParam1=102669b190228006c48
+	
+	window.location.href = 'http://dl.flipkart.com/dl/?affid=allgadget&affExtParam1=ACB1000';
+}
 
 function openLoginModal(){
+	 $('#withoutcb').hide();
     showLoginForm();
     setTimeout(function(){
         $('#loginModal').modal('show');    
     }, 230);
-    
 }
+
 function openRegisterModal(){
+	 $('#withoutcb').hide();
     showRegisterForm();
     setTimeout(function(){
         $('#loginModal').modal('show');    

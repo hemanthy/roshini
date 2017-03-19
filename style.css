@@ -2641,6 +2641,13 @@ small {
     font-weight: bold;
 }
 
+#showcashbacktableid {
+	   background: url(/images/table_bg.jpg) repeat;
+   	   font-size: 12px;
+   	   font-weight: bold;
+       color: #333; 
+}
+
 hr.invishalf {
 	border: 0;
     margin: 45px 0;

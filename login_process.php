@@ -77,20 +77,8 @@ if (isset($_POST['signup'])) {
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
 
-    //name can contain only alpha characters and space
-    /*if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
-        $error = true;
-        $name_error = "Name must contain only alphabets and space";
-    }
-    if(!filter_var($email,FILTER_VALIDATE_EMAIL)) {
-        $error = true;
-        $email_error = "Please Enter Valid Email ID";
-    }
-    if(strlen($password) < 6) {
-        $error = true;
-        $password_error = "Password must be minimum of 6 characters";
-    }*/
-    $refNo = mt_rand(10000,99999);
+    $refNo = generateUsrRefNo ($conn);
+    
     if($password != $cpassword) {
         $error = true;
         $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
@@ -101,7 +89,7 @@ if (isset($_POST['signup'])) {
         if (mysqli_num_rows($result) > 0) {
             $msg = Constants::EMAIL_ALREADY_EXISTS;
         //    echo "Email ID already exists";
-        }else if(mysqli_query($con, "INSERT INTO user(name,email,password,user_reference_code) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "',$refNo )")) {
+        }else if(mysqli_query($con, "INSERT INTO user(name,email,password,user_reference_code) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "','".$refNo."')")) {
         //}else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
             $msg = Constants::REGISTRATION_SUCCESSFUL;
             //$successmsg = "Successfully Registered";
@@ -117,5 +105,45 @@ if (isset($_POST['signup'])) {
 
 echo $msg;
 
+
+
+/**
+ * 
+ */
+
+function getUsrInfoByUsrRefNo($conn,$refNo) {
+	$stmt2 = $conn->prepare("select * from user where user_reference_code =:user_reference_code");
+    $stmt2->execute(array(':user_reference_code' => $refNo));
+    $usrObj = $stmt2->fetchAll();
+	return $usrObj;
+}
+
+
+/**
+ * 
+ */
+
+function generateUsrRefNo($conn) {
+	//name can contain only alpha characters and space
+    /*if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
+        $error = true;
+        $name_error = "Name must contain only alphabets and space";
+    }
+    if(!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+        $error = true;
+        $email_error = "Please Enter Valid Email ID";
+    }
+    if(strlen($password) < 6) {
+        $error = true;
+        $password_error = "Password must be minimum of 6 characters";
+    }*/
+    $refNo = mt_rand(10000,99999);
+    $refNo = 'ACB'.$refNo;
+    $usrObj = getUsrInfoByUsrRefNo ($conn,$refNo);
+    if(count($usrObj) > 0){
+    	return generateUsrRefNo($conn);
+    }
+	return $refNo;
+}
 
 ?>

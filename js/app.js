@@ -6,7 +6,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
     $scope.tabs = {selectedTab:-1};
     $scope.gridOptions = {};
     $scope.gridOptions.data = 'myData';
-
+    
     $scope.userHistory = null;
     $scope.availableamount = 0;
 
@@ -46,10 +46,13 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
         }
         $scope.tabChanged(tabIndex);
     }
-
     $scope.tabChanged = function(tabIndex){
         $scope.tabs.selectedTab = tabIndex;
+        if(tabIndex==1){
+        	$scope.selectedtabname='Dashboard';
+        }
     if(tabIndex==2){
+    	$scope.selectedtabname='My Wallet';
         $http({
             method : "GET",
             url : "userdashboardimpl.php"
@@ -59,10 +62,32 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             if(response.data!=null && response.data!=''){
             	 $scope.myData = response.data.usrReportArray;
             	 if(response.data.utds!=null && response.data.utds!=''){
-            		 $scope.availableamount = response.data.utds.availableamount;
-            		 $scope.pendingBal = response.data.utds.pendingBal;
-            		 $scope.redemptionMade = response.data.utds.redemptionMade;
-            		 $scope.paymentRequestedAmount = response.data.utds.paymentRequestedAmount;
+            		 
+            		 if(response.data.utds.availableamount==null){
+            			 $scope.availableamount = 0;
+            		 }else{
+            			 $scope.availableamount = response.data.utds.availableamount;
+            		 }
+            		 
+            		 if(response.data.utds.pendingBal==null){
+            			 $scope.pendingBal = 0;
+            		 }else{
+            			 $scope.pendingBal = response.data.utds.pendingBal;
+            		 }
+            		 
+            		 if(response.data.utds.redemptionMade==null){
+            			 $scope.redemptionMade = 0;
+            		 }else{
+            			 $scope.redemptionMade = response.data.utds.redemptionMade;
+            		 }
+            		 
+            		 
+            		 if(response.data.utds.paymentRequestedAmount==null){
+            			 $scope.paymentRequestedAmount = 0;
+            		 }else{
+            			 $scope.paymentRequestedAmount = response.data.utds.paymentRequestedAmount;
+            		 }
+            		 
             		 
             	 }
             }
@@ -70,6 +95,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
         });
     }
         if(tabIndex==3){
+        	$scope.selectedtabname='Bank Details';
         $http({
                 method : "get",
                 url : "bankdetails.php",
@@ -77,10 +103,10 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
                 dataType    : 'json'
             }).then(function (response) {
                 var jsonData = JSON.stringify(response.data);
-                if(response.data==''){
+                if(response.data=='' || response.data.ispaytmactive == null){
                 	$scope.paymentdetails = {};
                     $scope.paymentdetails.ispaytmactive =0;
-                }else{
+                }else {
                 	 $scope.paymentdetails = response.data;
                 }
                 
@@ -89,6 +115,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
         }
 
         if(tabIndex==4){
+        	$scope.selectedtabname='Withdraw';
             $scope.withdrawAmount = '';
             $scope.today = new Date();
             //alert(window.location.href);
