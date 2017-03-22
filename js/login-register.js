@@ -52,7 +52,7 @@ function showLoginFormPlus(){
 
 function withoutcb(){
 	
-	 location.href = 'gotostore1.php?ref=1';
+	 location.href = 'gotostore.php?ref=1';
 	//var url = window.location.hostname+'gotostore.php?ref=1'
 	//console.log(url)
 	// window.open(url);

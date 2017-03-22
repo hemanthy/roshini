@@ -52,8 +52,19 @@ where sod.aff_ext_param1=:aff_ext_param1 and u.user_reference_code=:user_referen
 
             $stmt1->bindParam(':order_date', $row['order_date'], PDO::PARAM_STR);
             $stmt1->bindParam(':store_name', $row['store_name'], PDO::PARAM_STR);
-            $stmt1->bindParam(':cashback', $row['tentative_commission_amount'], PDO::PARAM_STR);
-            if($row['status_type']=='pending' || $row['status_type']=='tentative'){
+            
+            $tentativeCommissionAmount = $row['tentative_commission_amount'];
+            if($tentativeCommissionAmount!=null && $tentativeCommissionAmount > 0){
+            $affiliateTaxPercent	= $row['affiliate_tax'];
+            $referralCommissionPercent	= $row['referral_commission'];
+            $companyCommissionPercent	= $row['company_commission'];
+            $totalCommissionPercent =  (($affiliateTaxPercent + $referralCommissionPercent + $companyCommissionPercent)/100);
+            $finalTentativeCommissionAmount = $tentativeCommissionAmount - ($totalCommissionPercent * $tentativeCommissionAmount);
+            $stmt1->bindParam(':cashback', $finalTentativeCommissionAmount, PDO::PARAM_STR);
+            }else{
+            	$stmt1->bindParam(':cashback', $row['tentative_commission_amount'], PDO::PARAM_STR);
+            }
+            if($row['status_type']=='pending' || $row['status_type']=='tentative' ||  $row['status_type']=='failed' ){
             	$status = 'pending';
 	            $stmt1->bindParam(':status', $status, PDO::PARAM_STR);
             }else if($row['status_type']=='processed'){

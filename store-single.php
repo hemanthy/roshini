@@ -253,12 +253,18 @@ START SITE HERE
                             try{
                                 foreach($storeResult as $row){
                                     $categoryName = $row['category_name'];
-                                    $percent = $row['cashback_percent'];
+                                    $cashbackPercent = $row['cashback_percent'];
+                                    $affiliateTaxPercent	= $row['affiliate_tax'];
+                                    $referralCommissionPercent	= $row['referral_commission'];
+                                    $companyCommissionPercent	= $row['company_commission'];
+                                    $totalCommissionPercent =  ($cashbackPercent * (($affiliateTaxPercent + $referralCommissionPercent + $companyCommissionPercent)/100));
+                                    $finalCommissionPercent = $cashbackPercent - $totalCommissionPercent;
                                     ?>
                                     <tr>
+                                    
                                         <td><?php echo $categoryName;?></td>
-                                        <td><?php echo $percent;?>%</td>
-                                        <td">
+                                        <td><?php echo $finalCommissionPercent;?>%</td>
+                                        <td>
                                             <?php if (!isset($_SESSION['usr_id'])) { ?>
                                 				<input type="hidden" value="storepage" id="loginSource"/>
                                                 <a data-toggle="modal" href="javascript:void(0)" class="btn btn-default btn-block" onclick="openLoginModalStore();">Get Cashback</a>
@@ -451,7 +457,7 @@ DEFAULT JAVASCRIPT FILES
             });
         });
         function feedbacksuccessmsg(){
-        	$('.leavefeedback').addClass('alert alert-success').html('Thank For Your Valuable Feedback');
+        	$('.leavefeedback').addClass('alert alert-success').html('Thanks For Your Valuable Feedback');
         	setTimeout(function(){
         		 $('.leavefeedback').addClass('alert alert-success').html('');
                  $('.leavefeedback').removeClass('alert alert-success');

@@ -2641,11 +2641,12 @@ small {
     font-weight: bold;
 }
 
-#showcashbacktableid {
-	   background: url(/images/table_bg.jpg) repeat;
+.coupon-tab  table thead {
+	   background: url(images/table_bg.jpg) repeat;
    	   font-size: 12px;
    	   font-weight: bold;
        color: #333; 
+        /* background-repeat: repeat-x; */
 }
 
 hr.invishalf {
@@ -2694,3 +2695,4 @@ hr.invishalf {
 .no_left_border {
     border-left: none;
 }
+

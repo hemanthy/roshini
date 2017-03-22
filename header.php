@@ -173,9 +173,9 @@ get: function(name) { return private[name]; }
 
 <div class="modal fade login" id="loginModal">
     <div class="modal-dialog login animated">
-        <div class="modal-content" style="width: 680px;">
+        <div class="modal-content" id="modal-content-id">
 			 <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-12 col-xs-12" id="hide-for-small-devices">
 								 <hr class="invis3">
 										<div class="sidebar">
 											<div class="widget clearfix">
@@ -195,7 +195,7 @@ get: function(name) { return private[name]; }
 											</div>
 										</div>             
 								</div>
-								<div class="col-md-6 col-sm-6">
+								<div class="col-md-6 col-sm-12 col-xs-12">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" id="closebtn" aria-hidden="true">&times;</button>
 									<h4 class="modal-title">Login with</h4>

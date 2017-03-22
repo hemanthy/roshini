@@ -23,10 +23,10 @@ Insert into user (name,email,password,user_reference_code,active) values ('Roshi
 
 SELECT * from user;
 
-create table store ( id bigint(8) NOT NULL AUTO_INCREMENT,store_name varchar(30) NOT NULL,description text,category_name varchar(25),store_url text, store_img text,max_cashback float,PRIMARY KEY (id));
+create table store ( id bigint(8) NOT NULL AUTO_INCREMENT,store_name varchar(30) NOT NULL,description text,category_name varchar(25),store_url text, store_img text,max_cashback float, affiliate_tax float,referral_commission float,company_commission float,PRIMARY KEY (id));
 
-insert into store(store_name,description,category_name,store_url) values
-  ('hi','You can add store description goes here.','free','http://dl.flipkart.com/dl/?affid=affname&affExtParam1=userreferencecode');
+insert into store(store_name,description,category_name,store_url,affiliate_tax,referral_commission,company_commission) values
+  ('hi','You can add store description goes here.','free','http://dl.flipkart.com/dl/?affid=affname&affExtParam1=userreferencecode',5,10,0);
 
 
 -- drop table user_orders_history;

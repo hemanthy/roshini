@@ -206,6 +206,23 @@
     }
 }
 
+#modal-content-id {
+     width: 680px;
+}
+
+@media (max-width: 768px) {
+	#hide-for-small-devices {
+    	display: none;
+    	visibility: hidden;
+    }
+    #modal-content-id {
+     	width: inherit;
+    }
+    .login .modal-dialog{
+     	width: auto;
+	}
+}
+
 .big-login, .big-register{
     background-color: #00bbff;
     color: #FFFFFF;
