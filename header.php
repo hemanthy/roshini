@@ -144,7 +144,7 @@ get: function(name) { return private[name]; }
                                 <li style="font-size: 16px;margin-top: 6px;">Hi <?php echo $_SESSION['usr_name']; ?></li>
                                 <li><a href="logout.php">Log Out</a></li>
                                 <li class="dropdown hasmenu userpanel">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="uploads/testi_03.png" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php if (isset($_SESSION['user_img'])) echo $_SESSION['user_img']; ?>" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
                                     <ul class="dropdown-menu start-right" role="menu">
                                         <li><a href="user-dashboard.php?1"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                                         <li><a href="user-dashboard.php?2"><i class="fa fa-heart-o"></i> My Wallet</a></li>

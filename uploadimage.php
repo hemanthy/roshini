@@ -2,14 +2,22 @@
 
 session_start();
 include_once 'dbconnect.php';
+//DEFINE('DS', DIRECTORY_SEPARATOR);
 
 $imgfile = '';
 if (isset($_SESSION['user_reference_code'])) {
     $imgfile = $_SESSION['user_reference_code'];
 }
 
-$target_dir = "c:/uploads/userimages/";
-$target_file = $target_dir . $imgfile.".jpg";// basename($_FILES["fileToUpload"]["name"]);
+$target_dir = "/storage/h10/172/id1145172/public_html/userpics/";
+$target_file = getcwd().DIRECTORY_SEPARATOR . "userpics/" . $imgfile.".jpg";
+$fileName =  $imgfile.".jpg";
+//$save_file_dir = "user_db/"  . $imgfile.".jpg";
+$save_file_dir = join(DIRECTORY_SEPARATOR, array('userpics',$fileName));
+$target_file = join(DIRECTORY_SEPARATOR, array(getcwd().DIRECTORY_SEPARATOR .'userpics' ,$fileName));
+//$target_file = $target_dir . $imgfile.".jpg";
+
+// basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -53,7 +61,7 @@ if ($uploadOk == 0) {
   //  mkdir($target_dir);
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        updateUserImgPath($conn, $target_file);
+        updateUserImgPath($conn, $save_file_dir);
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
@@ -67,6 +75,7 @@ if ($uploadOk == 0) {
 function updateUserImgPath($conn, $target_file)
 {
     try {
+    	$_SESSION['user_img'] = $target_file;
         $stmt1 = $conn->prepare("update user set user_img=:user_img where id =:user_id;");
         $stmt1->bindValue(':user_img', $target_file, PDO::PARAM_STR);
         $stmt1->bindValue(':user_id', $_SESSION['usr_id'], PDO::PARAM_STR);
