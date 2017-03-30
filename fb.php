@@ -1,13 +1,17 @@
 <?php
-session_start();
+//session_start();
 
-include_once '../dbconnect.php';
-include_once 'login_process.php';
 //include('../Constants.php');
+
+include ('login_process.php');
+include ('dbconnect.php');
+//include ('/fb/src/Facebook/autoload.php');
 
 $msg = '';
 
-require_once __DIR__ . '/src/Facebook/autoload.php';
+require_once __DIR__ . '/dbconnect.php';
+require_once __DIR__ . '/login_process.php';
+require_once __DIR__ . '/fb/src/Facebook/autoload.php';
 
 $fb = new Facebook\Facebook([
 		'app_id' => '1887757664841968',
@@ -80,40 +84,33 @@ if (isset($accessToken)) {
 
 	// printing $profile array on the screen which holds the basic info about user
 	print_r($profile);
-	
+
 	//$profile_pic =  "http://graph.facebook.com/".$uid."/picture";
-//	$jsonObj = json_decode($profile,true);
+	//	$jsonObj = json_decode($profile,true);
+	$firstName ='';
+	$lastName = '';
+	$name ='';
+	$email ='';
+	$fid= null;
 	foreach ($profile as $key => $value) {
-		echo $key;
-		$firstName ='';
-		$lastName = '';
-		$name ='';
-		$email ='';
-		$fid= null;
 		if($key=='first_name'){
-				$firstName = $value;
+			$firstName = $value;
 		}
 		if($key=='last_name'){
-				$lastName = $value;
+			$lastName = $value;
 		}
 		if($key=='name'){
-				$name = $value;
+			$name = $value;
 		}
 		if($key=='email'){
-				$email = $value;
+			$email = $value;
 		}
 		if($key=='id'){
 			$fid = $value;
-			$profile_pic =  "http://graph.facebook.com/".$value."/picture?redirect=true&height=200&width=200";
-			echo "<img src=\"" . $profile_pic . "\" />";
-			$imgfile = 'ACB10002';
-			$fileName =  $imgfile.".jpg";
-			copy($profile_pic, "image.jpg");
-			rename('image.jpg', '../userpics/'.$fileName);
 		}
 		echo $value;
 	}
-	
+
 	if($fid!=null){
 		$sql = getUserByEmailId ( $email );
 		$result = mysqli_query($con, $sql);
@@ -126,7 +123,22 @@ if (isset($accessToken)) {
 			}
 		}else{
 			$isUserImgExists = true;
-			$saveFBUser =	saveFBUser($name, $email,$isUserImgExists, $conn);
+			$refNo = generateUsrRefNo ($conn);
+			$profile_pic =  "http://graph.facebook.com/".$fid."/picture?redirect=true&height=200&width=200";
+			// echo "<img src=\"" . $profile_pic . "\" />";
+			$fileName =  $refNo.".jpg";
+			$imgUrl = getcwd().DIRECTORY_SEPARATOR . $refNo.".jpg";
+			echo $imgUrl;
+			
+			/* if (file_exists($imgUrl)) {
+				unlink($imgUrl);
+			} */
+			copy($profile_pic, "image.jpg");
+			rename('image.jpg', getcwd().DIRECTORY_SEPARATOR.'/userpics/'.$fileName);
+			
+			echo  $fileName;
+			$saveFBUser =	saveFBUser($name, $email,$refNo,$isUserImgExists, $conn);
+			
 			if(mysqli_query($con, $saveFBUser)) {
 				$loginMsg = autoLogin($email, $con);
 				if($loginMsg=='LOGIN_SUCCESS'){
@@ -137,12 +149,12 @@ if (isset($accessToken)) {
 			}
 		}
 	}
-	
-	
+
+
 	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
 	// replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
 	//$loginUrl = $helper->getLoginUrl('https://specialcashback.000webhostapp.com/fb/index.php', $permissions);
-	$loginUrl = $helper->getLoginUrl('https://specialcashback.000webhostapp.com/fb/index.php', $permissions);
+	$loginUrl = $helper->getLoginUrl('https://specialcashback.000webhostapp.com/fb.php', $permissions);
 	echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
 }

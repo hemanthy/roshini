@@ -45,6 +45,21 @@ function userLogin($con)
     }
 }
 
+
+function autoLogin($email,$con)
+{
+  	$result = mysqli_query($con, "SELECT * FROM user WHERE email = '" . $email . "' and password = '" . md5('shh@3$%*') . "'");
+
+	if ($row = mysqli_fetch_array($result)) {
+		$_SESSION['usr_id'] = $row['id'];
+		$_SESSION['usr_name'] = $row['name'];
+		$_SESSION['email_id'] = $row['email'];
+		$_SESSION['user_img'] = $row['user_img'];
+		$_SESSION['user_reference_code'] = $row['user_reference_code'];
+		return Constants::LOGIN_SUCCESS;
+	}
+}
+
 if (isset($_POST['login'])) {
 
     $msg = userLogin($con);
@@ -84,12 +99,12 @@ if (isset($_POST['signup'])) {
         $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
       //  $cpassword_error = "Password and Confirm Password doesn't match";
     }else{
-        $sql = "SELECT * FROM user WHERE email = '" . $email. "'";
+        $sql = getUserByEmailId ( $email );
         $result = mysqli_query($con, $sql);
         if (mysqli_num_rows($result) > 0) {
             $msg = Constants::EMAIL_ALREADY_EXISTS;
-        //    echo "Email ID already exists";
-        }else if(mysqli_query($con, "INSERT INTO user(name,email,password,user_reference_code) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "','".$refNo."')")) {
+            $saveUser =   saveUser ( $name, $email, $password, $refNo );
+        }else if(mysqli_query($con, $saveUser)) {
         //}else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
             $msg = Constants::REGISTRATION_SUCCESSFUL;
             //$successmsg = "Successfully Registered";
@@ -145,5 +160,40 @@ function generateUsrRefNo($conn) {
     }
 	return $refNo;
 }
+
+
+/**
+ * @param email
+ */
+
+function getUserByEmailId($email) {
+	$sql = "SELECT * FROM user WHERE email = '" . $email. "'";
+	return $sql;
+}
+
+
+/**
+ * @param name
+ * @param email
+ * @param password
+ * @param refNo
+ */
+
+function saveUser($name, $email, $password, $refNo) {
+	//    echo "Email ID already exists";
+	$saveUser = "INSERT INTO user(name,email,password,user_reference_code) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "','".$refNo."')";
+	return $saveUser;
+}
+
+
+function saveFBUser($name, $email,$refNo,$isUserImgExists,$conn) {
+	$userImg = null;
+	if($isUserImgExists){
+		$userImg = 'userpics/'.$refNo.'.jpg';
+	}
+	$saveFBUser = "INSERT INTO user(name,email,password,user_reference_code,user_img) VALUES('" . $name . "', '" . $email . "', '" . md5('shh@3$%*') . "','".$refNo."','".$userImg."')";
+	return $saveFBUser;
+}
+
 
 ?>
