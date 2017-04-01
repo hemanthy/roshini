@@ -64,6 +64,8 @@ if ($uploadOk == 0) {
         updateUserImgPath($conn, $save_file_dir);
     } else {
         echo "Sorry, there was an error uploading your file.";
+        error_log("Sorry, there was an error uploading your file");
+        //error_log("Error while updating user_img path : ","3","C:\xampp\php\logs\error.log");
     }
 }
 
@@ -81,7 +83,8 @@ function updateUserImgPath($conn, $target_file)
         $stmt1->bindValue(':user_id', $_SESSION['usr_id'], PDO::PARAM_STR);
         $stmt1->execute();
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+    	error_log("Error while updating user_img path : ". $_SESSION['usr_id'] ." ".$e->getMessage(),ERROR_LOG_PATH);
+        //echo "Error: " . $e->getMessage();
     }
 }
 

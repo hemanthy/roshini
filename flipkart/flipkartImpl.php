@@ -6,12 +6,14 @@
  * Time: 4:57 PM
  */
 
-include_once('../proxy.php');
 
-
+include('../proxy.php');
+    
 include_once '../pojo/FlipkartOrderDetailsPOJO.php';
 
+
 include '../pojo/UserDetailsPOJO.php';
+
 
 // include_once ('');
 
@@ -127,6 +129,8 @@ include '../pojo/UserDetailsPOJO.php';
         }
         catch(PDOException $e)
         {
+        	// $cronlog -> error("Unexpected Error : ". $e->getMessage());
+        	error_log("Unexpected Error : ". $e->getMessage());
             echo "Error: " . $e->getMessage();
         }
     }

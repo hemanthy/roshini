@@ -7,6 +7,8 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
     $scope.gridOptions = {};
     $scope.gridOptions.data = 'myData';
     
+    $scope.myData = null;
+    
     $scope.userHistory = null;
     $scope.availableamount = 0;
 

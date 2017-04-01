@@ -18,7 +18,6 @@ function getUserTransactionDetails($conn){
 	$stmt2->execute(array(':user_id' => $GLOBALS['user_id']));
 	$usrResult = $stmt2->fetchAll();
 	try {
-		
 		$userDetailsPojo = new UserDetailsPOJO();
 		foreach ($usrResult as $row) {
 			$availableAmount = $row['available_amount'];
@@ -39,11 +38,13 @@ function getUserTransactionDetails($conn){
 		}
 		return $userDetailsPojo;
 	} catch (PDOException $e) {
-		echo "Error: " . $e->getMessage();
+		// echo "Error: " . $e->getMessage();
+		error_log("Error occur while getting user_transaction_details ".$e->getMessage().$GLOBALS['user_id']);
 	}
 }
 
 function saveUserTransactionHistory($conn,$userDetailsPojo){
+	try {
 	$stmt1 = $conn->prepare("insert into user_transaction_history (payment_requested_amount,payment_mode,payment_request_status,user_id,payment_approved_date)
     VALUES (:payment_requested_amount,:payment_mode,:payment_request_status,:user_id,:payment_approved_date);");
 	$stmt1->execute(array(':payment_requested_amount' => $userDetailsPojo -> getPaymentRequestedAmount(),
@@ -51,6 +52,10 @@ function saveUserTransactionHistory($conn,$userDetailsPojo){
 			':payment_request_status' => 'pending',
 			':user_id' =>  $GLOBALS['user_id'],
 			':payment_approved_date' => null));
+	} catch (PDOException $e) {
+		// echo "Error: " . $e->getMessage();
+		error_log("Error occur while saving user_transaction_history ".$e->getMessage().$GLOBALS['user_id']);
+	}
 }
 
 
@@ -77,7 +82,8 @@ function getUserTransactionHistory($conn) {
 		}
 		return $userTransactionHistoryArray;
 	} catch (PDOException $e) {
-		echo "Error: " . $e->getMessage();
+	//	echo "Error: " . $e->getMessage();
+		error_log("Error occur while getting user_transaction_history ".$e->getMessage().$GLOBALS['user_id']);
 	}
 }
 

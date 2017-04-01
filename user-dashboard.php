@@ -414,8 +414,8 @@ START SITE HERE
 							<!-- end coupon-wrapper -->
 						</div>
 						<!-- end coupon list -->
-						<div class="coupon-tab post-wrapper nopadtop clearfix">
-								<div class="widget clearfix" ng-show="userHistory"	id="userHistory">
+						<div class="coupon-tab post-wrapper nopadtop clearfix"  ng-show="myData">
+								<div class="widget clearfix"	id="userHistory">
 								<div class="coupon-tab nopadtop clearfix">
 									<table id="showcashbacktableid"
 										class="table table-sm table-striped table-bordered table-hover table-responsive">
@@ -688,7 +688,7 @@ DEFAULT JAVASCRIPT FILES
                 processData:false,        // To send DOMDocument or non processed data file it is set to false
                 success: function(data)   // A function to be called if request succeeds
                 {
-                    alert("success::"+data);
+                    alert(data);
                     //	$('#loading').hide();
                     //	$("#message").html(data);
                 }

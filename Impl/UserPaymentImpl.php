@@ -66,7 +66,8 @@ function getUserPaymentDetails($conn){
 		}
 		return $userDetailsPojo;
 	} catch (PDOException $e) {
-		echo "Error: " . $e->getMessage();
+		//echo "Error: " . $e->getMessage();
+		error_log("Error occur while getting user_payment_details details ".$e->getMessage().$user_id);
 	}
 }
 
@@ -86,7 +87,7 @@ VALUES(:account_name,:bank_name,:bank_number,:ifsc_code,:paytm_mobile_number,:is
 	}
 	catch(PDOException $e)
 	{
-		echo "Error: " . $e->getMessage();
+		error_log("Error occur while saving user_payment_details ".$e->getMessage().$GLOBALS['user_id']);
 	}
 }
 
