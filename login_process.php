@@ -8,7 +8,11 @@ session_start();
 
 include_once 'dbconnect.php';
 
-include_once 'mylogger.php';
+include_once 'pojo/UserDetailsPOJO.php';
+
+include_once 'phpmailer/mail.php';
+
+//include_once 'mylogger.php';
 
 include('Constants.php');
 
@@ -25,13 +29,19 @@ $msg = '';
  * @param $result
  * @param $msg
  */
-function userLogin($con)
+function userLogin(UserDetailsPOJO $udp)
 {
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
-    $result = mysqli_query($con, "SELECT * FROM user WHERE email = '" . $email . "' and password = '" . md5($password) . "'");
+	$conn = $udp -> getPdoconn();
+    $stmt = $conn->prepare('SELECT * FROM user WHERE email =:email and password =:password ');
+    $stmt->execute(array(
+    		':email' => $udp -> getEmailId() ,
+    		':password' => md5($udp->getPassword())
+    ));
+    
+    $usrObj = $stmt->fetchAll();
 
-    if ($row = mysqli_fetch_array($result)) {
+    if (count($usrObj) > 0) {
+    foreach($usrObj as $row){
         $_SESSION['usr_id'] = $row['id'];
         $_SESSION['usr_name'] = $row['name'];
         $_SESSION['email_id'] = $row['email'];
@@ -41,6 +51,7 @@ function userLogin($con)
         return Constants::LOGIN_SUCCESS;
         // echo $errormsg;
         //header("Location: index.php");
+    }
     } else {
         return Constants::INCORRECT_EMAIL_OR_PASSWORD;
         // echo $errormsg;
@@ -64,7 +75,16 @@ function autoLogin($email,$con)
 
 if (isset($_POST['login'])) {
 
-    $msg = userLogin($con);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+    
+    $udp = new UserDetailsPOJO();
+    
+    $udp -> setPassword($password);
+    $udp -> setEmailId($email);
+    $udp -> setPdoconn($conn);
+    
+    $msg = userLogin($udp);
 }
 
 //set validation error flag as false
@@ -93,26 +113,32 @@ if (isset($_POST['signup'])) {
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
-
+    
     $refNo = generateUsrRefNo ($conn);
+    
+    $udp = new UserDetailsPOJO();
+    
+    $udp -> setPassword($password);
+    $udp -> setEmailId($email);
+    $udp ->	setCpassword($cpassword);
+    $udp -> setName($name);
+    $udp -> setRefno($refNo);
+    $udp -> setPdoconn($conn);
+
+    
     
     if($password != $cpassword) {
         $error = true;
         $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
       //  $cpassword_error = "Password and Confirm Password doesn't match";
     }else{
-        $sql = getUserByEmailId ( $email );
-        $result = mysqli_query($con, $sql);
-        if (mysqli_num_rows($result) > 0) {
+    	$usrObj = getUserByEmailId ($udp);
+        if ($usrObj!=null && count($usrObj) > 0) {
             $msg = Constants::EMAIL_ALREADY_EXISTS;
-            $saveUser =   saveUser ( $name, $email, $password, $refNo );
-        }else if(mysqli_query($con, $saveUser)) {
-        //}else if(mysqli_query($con, "INSERT INTO users(name,email,password) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "')")) {
+        }else if(saveUser ($udp) == true) {
             $msg = Constants::REGISTRATION_SUCCESSFUL;
-            //$successmsg = "Successfully Registered";
-            //echo $successmsg;
-
-           $msg = userLogin($con);
+            // login
+           $msg = userLogin($udp);
         } else {
             $msg = "Error in registering...Please try again later!";
         }
@@ -122,6 +148,37 @@ if (isset($_POST['signup'])) {
 
 echo $msg;
 
+
+function sendMail(UserDetailsPOJO $udp){
+	//send email
+	
+	$name = "Specialcashback";
+	$to = $udp -> getEmailId();
+	$refNo = $udp -> getRefno();
+	$userName = $udp -> getName();
+	$activationCode = $udp -> getActivationcode();
+	$subject = "Registration Confirmation";
+	$body = "<p>Hi $userName </p>
+			<p>Thank you for registering at specialcashback site.</p>
+			<p>To activate your account, please click on this link: <a href='".DIR."activate.php?x=$refNo&y=$activationCode'>".DIR."activate.php?x=$refNo&y=$activationCode</a></p>
+				<p>Regards,</p>
+				<p>Specialcashback Team</p>";
+	$headers = "From: $name "."<noreply@specialcashback.com>\r\n";
+	$headers .= 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	mail($to, $subject, $body, $headers);
+	/* try{
+		$mail = new Mail();
+		$mail->setFrom(SITEEMAIL);
+		$mail->addAddress($to);
+		$mail->subject($subject);
+		$mail->body($body);
+		$mail->send();
+	}catch (Exception $ex){
+		
+	} */
+	
+}
 
 
 /**
@@ -168,9 +225,14 @@ function generateUsrRefNo($conn) {
  * @param email
  */
 
-function getUserByEmailId($email) {
-	$sql = "SELECT * FROM user WHERE email = '" . $email. "'";
-	return $sql;
+function getUserByEmailId(UserDetailsPOJO $udp) {
+	$conn =	$udp -> getPdoconn();
+	$stmt = $conn->prepare('SELECT * FROM user WHERE email =:email ');
+	$stmt->execute(array(
+			':email' => $udp -> getEmailId()
+	));
+	$usrObj = $stmt->fetchAll();
+	return $usrObj;
 }
 
 
@@ -181,10 +243,35 @@ function getUserByEmailId($email) {
  * @param refNo
  */
 
-function saveUser($name, $email, $password, $refNo) {
+function saveUser(UserDetailsPOJO $udp) {
 	//    echo "Email ID already exists";
-	$saveUser = "INSERT INTO user(name,email,password,user_reference_code) VALUES('" . $name . "', '" . $email . "', '" . md5($password) . "','".$refNo."')";
-	return $saveUser;
+	
+	//create the activation code
+	$activasion = md5(uniqid(rand(),true));
+	
+	$conn = $udp -> getPdoconn();
+	$udp -> setActivationcode($activasion);
+	
+	$stmt = $conn->prepare('INSERT INTO user (name,email,password,user_reference_code,user_img,active) VALUES (:name, :email, :password, :user_reference_code,:user_img,:active)');
+	$rows = $stmt->execute(array(
+			':name' => $udp -> getName(),
+			':password' => md5($udp->getPassword()),
+			':email' => $udp -> getEmailId(),
+			':user_reference_code' => $udp -> getRefno(),
+			':user_img' => "uploads/female.png",
+			':active' => $activasion
+	));
+	if($rows != null && $rows==true){
+		$id = $conn->lastInsertId('id');
+		$udp -> setUsrId($id);
+		error_log("user has been created successfully :: ".$id);
+	}
+	
+//	error_log("user created successfully", 3, require_once __DIR__ ."/php_error.log");
+	
+	sendMail($udp);
+//	$id = $db->lastInsertId('memberID');
+	return $rows;
 }
 
 

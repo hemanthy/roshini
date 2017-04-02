@@ -26,9 +26,17 @@ class Constants
 
     // Email ID already exists
     const EMAIL_ALREADY_EXISTS = 'EMAIL_ALREADY_EXISTS';
+    
+    const ERROR_LOG_PATH = 'C:\xampp\php\logs\error.logs';
+    
+    
 
     function showConstant() {
         echo  self::CONSTANT . "\n";
     }
 
 }
+
+define('DIR','http://specialcashback.000webhostapp.com/');
+define('SITEEMAIL','noreply@specialcashback.000webhostapp.com');
+define ('ERROR_LOG_PATH', 'C:\xampp\php\logs\error.logs');

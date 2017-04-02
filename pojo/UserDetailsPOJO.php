@@ -3,6 +3,13 @@
 class UserDetailsPOJO {
 
 	var $usrId;
+	var $name;
+	var $emailId;
+	var $password;
+	var $cpassword;
+	var $refno;
+	var $activationcode;
+	var $userimg;
     var $accountname;
     var $bankname;
     var $banknumber;
@@ -21,6 +28,8 @@ class UserDetailsPOJO {
     var $status;
     var $userReferenceCode;
     var $paymentMode;
+    var $pdoconn;
+    var $conn;
     
     /**
      *
@@ -38,7 +47,6 @@ class UserDetailsPOJO {
     	$this->usrId = $usrId;
     	return $this;
     }
-    
     
 
     /**
@@ -341,6 +349,75 @@ class UserDetailsPOJO {
 		$this->paymentMode = $paymentMode;
 		return $this;
 	}
+	public function getEmailId() {
+		return $this->emailId;
+	}
+	public function setEmailId($emailId) {
+		$this->emailId = $emailId;
+		return $this;
+	}
+	public function getPassword() {
+		return $this->password;
+	}
+	public function setPassword($password) {
+		$this->password = $password;
+		return $this;
+	}
+	public function getCpassword() {
+		return $this->cpassword;
+	}
+	public function setCpassword($cpassword) {
+		$this->cpassword = $cpassword;
+		return $this;
+	}
+	public function getName() {
+		return $this->name;
+	}
+	public function setName($name) {
+		$this->name = $name;
+		return $this;
+	}
+	public function getRefno() {
+		return $this->refno;
+	}
+	public function setRefno($refcode) {
+		$this->refno = $refcode;
+		return $this;
+	}
+	public function getPdoconn() {
+		return $this->pdoconn;
+	}
+	public function setPdoconn($pdoconn) {
+		$this->pdoconn = $pdoconn;
+		return $this;
+	}
+	public function getConn() {
+		return $this->conn;
+	}
+	public function setConn($conn) {
+		$this->conn = $conn;
+		return $this;
+	}
+	public function getActivationcode() {
+		return $this->activationcode;
+	}
+	public function setActivationcode($activationcode) {
+		$this->activationcode = $activationcode;
+		return $this;
+	}
+	public function getUserimg() {
+		return $this->userimg;
+	}
+	public function setUserimg($userimg) {
+		$this->userimg = $userimg;
+		return $this;
+	}
+	
+	
+	
+	
+	
+	
     
 }
 ?>

@@ -31,7 +31,7 @@ get: function(name) { return private[name]; }
 
 <link href="css/login-register.css" rel="stylesheet" />
 <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <script src="js/login-register.js" type="text/javascript"></script>
 <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js" type="text/javascript"></script>-->
 <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
@@ -403,7 +403,6 @@ get: function(name) { return private[name]; }
                 },
                 success :  function(response)
                 {
-                    debugger
                     if(response == 'INCORRECT_EMAIL_OR_PASSWORD' || response == 'PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH' || response =='INCORRECT_EMAIL_OR_PASSWORD' ||
                     response == 'EMAIL_ALREADY_EXISTS'){
                         shakeModal(config.get(response));

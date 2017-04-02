@@ -1,5 +1,40 @@
 <?php
 
+//session_start();
+include_once 'dbconnect.php';
+include_once 'login_process.php';
+//include('Constants.php');
+/* 
+$imgfile = 'ACB10001';
+$fileName =  $imgfile.".jpg";
+$target_file = join(DIRECTORY_SEPARATOR, array(getcwd().DIRECTORY_SEPARATOR .'userpics' ,$fileName));
+$fid = '32432432423';
+$email = 'hem@gmail.com';
+$name = 'Hi';
+if($fid!=null){
+	$sql = getUserByEmailId ( $email );
+	$result = mysqli_query($con, $sql);
+	if (mysqli_num_rows($result) > 0) {
+	//	$msg = Constants::EMAIL_ALREADY_EXISTS;
+		// auto login
+		$loginMsg = autoLogin($email, $con);
+		if($loginMsg=='LOGIN_SUCCESS'){
+			return;
+		}
+	}else{
+		$isUserImgExists = true;
+		$saveFBUser =	saveFBUser($name, $email,$isUserImgExists, $conn);
+		if(mysqli_query($con, $saveFBUser)) {
+			$loginMsg = autoLogin($email, $con);
+			if($loginMsg=='LOGIN_SUCCESS'){
+				return;
+			}
+		}else{
+				$msg = "Error in registering...Please try again later!";
+		}
+	}
+}
+ */
 ?>
 <!DOCTYPE html>
 <html lang="en">
