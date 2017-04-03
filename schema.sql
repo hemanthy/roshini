@@ -1,17 +1,24 @@
-drop database testdb;
-create database testdb;
-use testdb;
+ drop database testdb;
+ create database testdb;
+ use testdb;
 
+ -- drop database id1145172_testdb;
+ -- create database id1145172_testdb;
+ -- use id1145172_testdb;
 
+-- DROP TABLE user;
 
 create table user (
   id bigint(8) NOT NULL AUTO_INCREMENT,
   name varchar(30) NOT NULL,
   email varchar(60) NOT NULL UNIQUE,
   password varchar(40) NOT NULL,
+  active varchar(255) NOT NULL,
+  resetToken varchar(255) DEFAULT NULL,
+  resetComplete varchar(3) DEFAULT 'No',
   user_img TEXT,
   user_reference_code varchar(10),
-  active bool default false,
+ -- active bool default false,
   PRIMARY KEY (id));
 
 -- Insert into user (name,email,password,user_reference_code,active) values ('Hemanth','ad@a.com','a','ACB43534',true);
@@ -40,7 +47,7 @@ select * from user_store_order_details;
 
 -- drop table user_transaction_details;
 create table user_transaction_details (id bigint not null auto_increment,payment_requested_amount float,available_amount float,pending_amount float,redemption_amount float,payment_request_status varchar(20),payment_mode varchar(10),payment_requested_date TIMESTAMP,payment_approved_date TIMESTAMP,user_id bigint,primary key(id),foreign key (user_id) references user(id));
--- insert into user_transaction_details (user_id,available_amount) VALUES (1000,120);
+ insert into user_transaction_details (user_id,available_amount) VALUES (1,120);
 -- update user_transaction_details set available_amount = 100  where user_id = 1002;
 -- drop table user_transaction_history;
 create table user_transaction_history (id bigint not null auto_increment,payment_requested_amount float,
@@ -64,7 +71,7 @@ create table category ( id bigint(8) NOT NULL AUTO_INCREMENT,category_name text 
 insert into category (category_name, category_type, store_id, cashback_percent) VALUES ('hi','ecommerce',1,9.5);
 insert into category (category_name, category_type, store_id, cashback_percent) VALUES ('flipkart','ecommerc3',1,8.5);
 
-create table user_payment_details ( id bigint(8) NOT NULL AUTO_INCREMENT,  account_name varchar(30) NOT NULL, bank_name varchar(50), bank_number long not null, ifsc_code  varchar(15) not null, paytm_mobile_number bigint, is_paytm_active bool default false,updated_date TIMESTAMP, user_id bigint,foreign key (user_id) references user(id), PRIMARY KEY (id));
+create table user_payment_details ( id bigint(8) NOT NULL AUTO_INCREMENT,  account_name varchar(30) NULL, bank_name varchar(50), bank_number long null, ifsc_code  varchar(15) null, paytm_mobile_number bigint, is_paytm_active bool default false,updated_date TIMESTAMP, user_id bigint,foreign key (user_id) references user(id), PRIMARY KEY (id));
 select * from user_payment_details upd where upd.user_id =1002 order by upd.updated_date desc limit 0,1;
 
 

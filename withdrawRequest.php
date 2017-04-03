@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-include_once ('dbconnect.php');
-include ('/pojo/UserReportPOJO.php');
+include_once 'dbconnect.php';
+include_once 'pojo/UserReportPOJO.php';
+include_once 'pojo/UserDetailsPOJO.php';
+include_once 'Impl/UserPaymentImpl.php';
+include_once 'Impl/UserTransactionImpl.php';
 
-include ('/pojo/UserDetailsPOJO.php');
-include ('/Impl/UserTransactionImpl.php');
-include ('/Impl/UserPaymentImpl.php');
+
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 

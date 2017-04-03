@@ -1,16 +1,11 @@
 <?php
 session_start();
 
-// include_once ('OrderDetailsPOJO.php');
-include_once ('dbconnect.php');
-include ('/pojo/UserDetailsPOJO.php');
-include ('/Impl/UserReportImpl.php');
-include ('/Impl/UserTransactionImpl.php');
+include_once 'dbconnect.php';
+include_once 'pojo/UserDetailsPOJO.php';
+include_once 'Impl/UserReportImpl.php';
+include_once 'Impl/UserTransactionImpl.php';
 
-$user_id = '';
-if(isset($_SESSION['usr_id'])!="") {
-    $user_id = $_SESSION['usr_id'];
-}
 
 if (isset($_SESSION['usr_id'])) {
 	$GLOBALS['user_id'] =   $_SESSION['usr_id'];

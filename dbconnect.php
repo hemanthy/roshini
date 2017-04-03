@@ -14,7 +14,7 @@ try{
 catch(PDOException $e)
 {
 	echo "Error: " . $e->getMessage();
-	error_log("Failed to connect to database!". $e->getMessage(), 0);
+	//error_log("Failed to connect to database!". $e->getMessage(), 0);
 	//$cronlog -> error($e->getMessage());
 	//$elog -> error($e->getMessage());
 }

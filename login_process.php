@@ -264,7 +264,7 @@ function saveUser(UserDetailsPOJO $udp) {
 	if($rows != null && $rows==true){
 		$id = $conn->lastInsertId('id');
 		$udp -> setUsrId($id);
-		error_log("user has been created successfully :: ".$id);
+	//	error_log("user has been created successfully :: ".$id);
 	}
 	
 //	error_log("user created successfully", 3, require_once __DIR__ ."/php_error.log");

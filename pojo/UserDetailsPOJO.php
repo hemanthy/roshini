@@ -413,11 +413,5 @@ class UserDetailsPOJO {
 		return $this;
 	}
 	
-	
-	
-	
-	
-	
-    
 }
 ?>
