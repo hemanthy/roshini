@@ -38,6 +38,7 @@ function getUserTransactionDetails($conn){
 		}
 		return $userDetailsPojo;
 	} catch (PDOException $e) {
+		write_mysql_log($e->getMessage(), $conn);
 		// echo "Error: " . $e->getMessage();
 		//error_log("Error occur while getting user_transaction_details ".$e->getMessage().$GLOBALS['user_id']);
 	}
@@ -53,6 +54,7 @@ function saveUserTransactionHistory($conn,$userDetailsPojo){
 			':user_id' =>  $GLOBALS['user_id'],
 			':payment_approved_date' => null));
 	} catch (PDOException $e) {
+		write_mysql_log($e->getMessage(), $conn);
 		// echo "Error: " . $e->getMessage();
 		//error_log("Error occur while saving user_transaction_history ".$e->getMessage().$GLOBALS['user_id']);
 	}
@@ -82,6 +84,7 @@ function getUserTransactionHistory($conn) {
 		}
 		return $userTransactionHistoryArray;
 	} catch (PDOException $e) {
+		write_mysql_log($e->getMessage(), $conn);
 	//	echo "Error: " . $e->getMessage();
 		//error_log("Error occur while getting user_transaction_history ".$e->getMessage().$GLOBALS['user_id']);
 	}

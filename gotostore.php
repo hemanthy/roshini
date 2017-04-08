@@ -2,16 +2,19 @@
 session_start();
 
 include_once ('dbconnect.php');
+include_once 'writemysqllog.php';
 
 $storeResult = '';
 $userRefCode = '';
 $userId = '1';
 $GLOBALS['user_id'] = 1;
 
+try {
+
 if (isset($_SESSION['user_reference_code'])) {
     $userRefCode = $_SESSION['user_reference_code'];
 }else{
-    $userRefCode =   ACB1000;
+    $userRefCode =   'ACB1000';
 }
 
 if (isset($_SESSION['usr_id'])) {
@@ -66,7 +69,7 @@ echo "your directing...";
 	}
 catch(PDOException $e)
     {
-    echo "Error: " . $e->getMessage();
+    	write_mysql_log($e->getMessage(),$conn);
     }
 	echo $redirectUrl;
 	
@@ -83,7 +86,6 @@ catch(PDOException $e)
 		foreach($cookies as $cookie) {
 			$parts = explode('=', $cookie);
 			$name = trim($parts[0]);
-			echo '/////////////';
 			echo $name;
 			//	setcookie($name, '', time()-1000);
 			//	setcookie($name, '', time()-1000, '/');
@@ -117,4 +119,10 @@ var explode = function(){
 	window.location.href = document.getElementById("hurl").value;
 	};
 </script>
+<?php 
 
+
+} catch (Exception $e) {
+	write_mysql_log($e->getMessage(),$conn);
+}
+?>

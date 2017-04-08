@@ -9,6 +9,7 @@
 //session_start();
     
 include_once ('dbconnect.php');
+include_once 'writemysqllog.php';
 
 //include ('../pojo/UserDetailsPOJO.php');
     
@@ -50,6 +51,7 @@ function getUserPaymentDetails($conn){
 		}
 		return $userDetailsPojo;
 	} catch (PDOException $e) {
+		write_mysql_log($e->getMessage(),$conn);
 		//echo "Error: " . $e->getMessage();
 		//error_log("Error occur while getting user_payment_details details ".$e->getMessage().$user_id);
 	}
@@ -73,7 +75,8 @@ VALUES(:account_name,:bank_name,:bank_number,:ifsc_code,:paytm_mobile_number,:is
 	}
 	catch(PDOException $e)
 	{
-		error_log("Error occur while saving user_payment_details ".$e->getMessage().$GLOBALS['user_id']);
+		//error_log("Error occur while saving user_payment_details ".$e->getMessage().$GLOBALS['user_id']);
+		write_mysql_log("Error occur while saving user_payment_details ".$e->getMessage().$GLOBALS['user_id'],$conn);
 	}
 }
 

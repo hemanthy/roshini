@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+try {
 session_start();
 include_once ('dbconnect.php');
 
-$stmt = $conn->prepare("select * from store s, category c where s.id=:storeId and c.store_id =:storeId;");
-$stmt->execute(array(':storeId' => 1));
-$storeResult = $stmt->fetchAll();
+include_once 'writemysqllog.php';
+
+try {
+	$stmt = $conn->prepare("select * from store s, category c where s.id=:storeId and c.store_id =:storeId;");
+	$stmt->execute(array(':storeId' => 1));
+	$storeResult = $stmt->fetchAll();
+} catch (Exception $e) {
+	write_mysql_log($e->getMessage(), $conn);
+}
+
 
 
 ?>
@@ -277,7 +285,7 @@ START SITE HERE
                                 }
                             }catch(PDOException $e)
                             {
-                                echo "Error: " . $e->getMessage();
+                            	write_mysql_log($e->getMessage(),$conn);
                             }
                             ?>
                             </tbody>
@@ -470,3 +478,8 @@ DEFAULT JAVASCRIPT FILES
 
 </body>
 </html>
+<?php 	
+
+} catch (Exception $e) {
+	write_mysql_log($e->getMessage(),$conn);
+}?>

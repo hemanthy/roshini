@@ -228,12 +228,23 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             data        : $scope.paymentdetails,
             dataType    : 'json'
         }).then(function (response) {
+        	$scope.responsedata(response);
           //  var jsonData = JSON.stringify(response.data);
             //$scope.myData = response.data;
+        	$scope.responsedata(response);
             $('.bankdetailsinfo').addClass('alert alert-success').html('Payment Details Got Updated Successfully!!!');
         });
 
       bindPaymentDetails();
     }
-
+    
+    $scope.responsedata = function(response){
+    	if(response !=null && response.data!=null){
+    		var response = response.data;
+    		if(response.indexOf("Please try later") != -1){
+    			
+    		}
+    	}
+    }
+    
 }]);

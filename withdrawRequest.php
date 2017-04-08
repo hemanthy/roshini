@@ -6,6 +6,7 @@ include_once 'pojo/UserReportPOJO.php';
 include_once 'pojo/UserDetailsPOJO.php';
 include_once 'Impl/UserPaymentImpl.php';
 include_once 'Impl/UserTransactionImpl.php';
+include_once 'writemysqllog.php';
 
 
 
@@ -45,7 +46,7 @@ try{
 }
 catch(PDOException $e)
 {
-    echo "Error: " . $e->getMessage();
+	write_mysql_log($e->getMessage(), $conn);
 }
 
 if($availableAmount >= $withdrawAmount){

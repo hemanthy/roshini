@@ -75,6 +75,8 @@ function redirectUrl(){
 
 function openLoginModal(){
 	 $('#withoutcb').hide();
+	 $('#usrRef').val('headerpage');
+	 
     showLoginForm();
     setTimeout(function(){
         $('#loginModal').modal('show');    
@@ -83,6 +85,7 @@ function openLoginModal(){
 
 function openRegisterModal(){
 	 $('#withoutcb').hide();
+	 $('#usrRef').val('headerpage');
     showRegisterForm();
     setTimeout(function(){
         $('#loginModal').modal('show');    

@@ -3,6 +3,7 @@ session_start();
 
 include_once 'dbconnect.php';
 include('Constants.php');
+include_once 'writemysqllog.php';
 
 try{
 
@@ -32,6 +33,6 @@ if (isset($_POST['changepassword'])) {
 }
 catch(PDOException $e)
 {
-    echo "Error: " . $e->getMessage();
+	write_mysql_log($e->getMessage(),$conn);
 }
 ?>

@@ -10,8 +10,6 @@
 include('../proxy.php');
     
 include_once '../pojo/FlipkartOrderDetailsPOJO.php';
-
-
 include '../pojo/UserDetailsPOJO.php';
 
 
@@ -130,7 +128,8 @@ include '../pojo/UserDetailsPOJO.php';
         catch(PDOException $e)
         {
         	// $cronlog -> error("Unexpected Error : ". $e->getMessage());
-        	error_log("Unexpected Error : ". $e->getMessage());
+        	//error_log("Unexpected Error : ". $e->getMessage());
+			write_mysql_log($e->getMessage(),$conn);
             echo "Error: " . $e->getMessage();
         }
     }

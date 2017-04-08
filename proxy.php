@@ -1,6 +1,7 @@
 <?php
 
 include ('dbconnect.php');
+include_once 'writemysqllog.php';
 // require_once __DIR__ . '/mylogger.php';
 
 // status: Order status. Possible values - tentative, approved, cancelled, disapproved
@@ -29,7 +30,8 @@ if (!curl_errno($ch)) {
     switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
         case 200:  # OK
         	//$cronlog -> info("status code : 200");
-        	error_log("status code : 200");
+        //	error_log("status code : 200");
+        	write_mysql_log("status code : 200", $conn);
             break;
         case 410:  # Gone
         	//$cronlog -> error("status code : 410 - URL Expired");

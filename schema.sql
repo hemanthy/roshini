@@ -1,23 +1,36 @@
- drop database testdb;
- create database testdb;
- use testdb;
+drop database testdb;
+create database testdb;
+use testdb;
 
  -- drop database id1145172_testdb;
  -- create database id1145172_testdb;
- -- use id1145172_testdb;
+-- use id1145172_testdb;
 
--- DROP TABLE user;
+-- DROP TABLE category;
+-- select * from mylog  order by log_id desc;
+-- INSERT INTO `testdb`.`my_log` (`remote_addr`, `request_uri`, `message`) VALUES ('dfsafs', 'dsfdsa', 'dsfdsfdsa');
+
+-- create table error(  id bigint(8) NOT NULL AUTO_INCREMENT,logmsg text,primary key (id));
+-- drop table my_log;
+ CREATE TABLE mylog(     log_id int(11) NOT NULL AUTO_INCREMENT,     remote_addr varchar(255) null,     request_uri varchar(255) null,     message text null,     log_date timestamp NOT NULL DEFAULT NOW(),     PRIMARY KEY  (log_id) );
 
 create table user (
   id bigint(8) NOT NULL AUTO_INCREMENT,
+  oauth_provider enum('Web','App','facebook','google','twitter') COLLATE utf8_unicode_ci NOT NULL,
+  oauth_uid varchar(100) COLLATE utf8_unicode_ci  NULL,
   name varchar(30) NOT NULL,
   email varchar(60) NOT NULL UNIQUE,
   password varchar(40) NOT NULL,
+  gender varchar(6) COLLATE utf8_unicode_ci  NULL,
+   locale varchar(10) COLLATE utf8_unicode_ci  NULL,
+   link varchar(255) COLLATE utf8_unicode_ci  NULL,
   active varchar(255) NOT NULL,
   resetToken varchar(255) DEFAULT NULL,
   resetComplete varchar(3) DEFAULT 'No',
   user_img TEXT,
   user_reference_code varchar(10),
+  created datetime NOT NULL default CURRENT_TIMESTAMP,
+ modified datetime NOT NULL default CURRENT_TIMESTAMP,
  -- active bool default false,
   PRIMARY KEY (id));
 
@@ -97,6 +110,7 @@ select * from user where email ='hemanthroshini@gmail.com';
 -- update user_transaction_details set payment_requested_amount = 89 where user_id = 1002;
 
 
+                        
 -- update user_store_order_details set aff_ext_param1 = 577 where id > 2;
 -- update user_transaction_history set payment_request_status = 'cancel' where user_id =1002;
 update user set password = 'be70992f04a63bc7d731a0ba36b94c5e' where email = 'adasddd@a.com';

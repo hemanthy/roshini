@@ -4,6 +4,8 @@ session_start();
 // include_once ('OrderDetailsPOJO.php');
 include_once ('dbconnect.php');
 
+include_once 'writemysqllog.php';
+
 $user_id = '';
 
 if (isset($_POST['feedback'])) {
@@ -28,7 +30,7 @@ if (isset($_POST['feedback'])) {
     }
     catch(PDOException $e)
     {
-        echo "Error: " . $e->getMessage();
+    	write_mysql_log($e->getMessage(), $conn);
     }
 
 }

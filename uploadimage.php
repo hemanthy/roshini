@@ -9,7 +9,6 @@ if (isset($_SESSION['user_reference_code'])) {
     $imgfile = $_SESSION['user_reference_code'];
 }
 
-$target_dir = "/storage/h10/172/id1145172/public_html/userpics/";
 $target_file = getcwd().DIRECTORY_SEPARATOR . "userpics/" . $imgfile.".jpg";
 $fileName =  $imgfile.".jpg";
 //$save_file_dir = "user_db/"  . $imgfile.".jpg";
@@ -64,6 +63,7 @@ if ($uploadOk == 0) {
         updateUserImgPath($conn, $save_file_dir);
     } else {
         echo "Sorry, there was an error uploading your file.";
+        write_mysql_log("Sorry, there was an error uploading your file : ".$_SESSION['usr_id'], $conn);
         //error_log("Sorry, there was an error uploading your file");
         //error_log("Error while updating user_img path : ","3","C:\xampp\php\logs\error.log");
     }
@@ -83,6 +83,7 @@ function updateUserImgPath($conn, $target_file)
         $stmt1->bindValue(':user_id', $_SESSION['usr_id'], PDO::PARAM_STR);
         $stmt1->execute();
     } catch (PDOException $e) {
+    	write_mysql_log($e->getMessage(), $conn);
     	//error_log("Error while updating user_img path : ". $_SESSION['usr_id'] ." ".$e->getMessage(),ERROR_LOG_PATH);
         //echo "Error: " . $e->getMessage();
     }

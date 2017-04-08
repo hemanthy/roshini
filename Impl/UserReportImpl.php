@@ -31,6 +31,7 @@ function getUserReportDetails($conn){
 	}
 	catch(PDOException $e)
 	{
+		write_mysql_log($e->getMessage(), $conn);
 		//echo "Error: " . $e->getMessage();
 		//error_log("Error occur while getting user_report_details ".$e->getMessage().$GLOBALS['user_id']);
 	}

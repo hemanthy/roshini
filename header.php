@@ -204,7 +204,8 @@ get: function(name) { return private[name]; }
 									<div class="box">
 										<div class="content">
 											<div class="social">
-												<a class="circle github" href="#">
+												<a id="facebook_login" href="#"><img src="images/login-button-png-18039-2.png"></img></a>
+												<!-- <a class="circle github" href="#">
 													<i class="fa fa-github fa-fw"></i>
 												</a>
 												<a id="google_login" class="circle google" href="#">
@@ -212,7 +213,7 @@ get: function(name) { return private[name]; }
 												</a>
 												<a id="facebook_login" class="circle facebook" href="#">
 													<i class="fa fa-facebook fa-fw"></i>
-												</a>
+												</a> -->
 											</div>
 											<div class="division">
 												<div class="line l"></div>
@@ -289,6 +290,7 @@ get: function(name) { return private[name]; }
     $('document').ready(function()
     {
         /* validation */
+        
         $("#login-form").validate({
             rules:
                 {
@@ -420,10 +422,69 @@ get: function(name) { return private[name]; }
             return false;
         }
 
+       /*  $( "#facebook_login").click(function() {
+        	//facebook_login
+        	debugger;
+        	$.ajax({
+
+                type : 'get',
+                url  : 'fb.php',
+                beforeSend: function()
+                {
+                    $("#error").fadeOut();
+                    //$("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
+                },
+                success :  function(response)
+                {
+                	debugger;
+                	if(response!=null && response.includes('url-')){
+                		var url = response.split('url-');
+                		console.log(url[1]);
+                		//location.href = url[1];
+                		window.open(url[1]);
+                	}else{
+						alert(response);
+                		}
+                }
+            });
+        });
+ */
 
     });
 </script>
-
+<script type="text/javascript">
+(function (jQuery) {
+    jQuery.oauthpopup = function (options) {
+        options.windowName = options.windowName || 'ConnectWithOAuth';
+        options.windowOptions = options.windowOptions || 'location=0,status=0,width='+options.width+',height='+options.height+',scrollbars=1';
+        options.callback = options.callback || function () {
+            window.location.reload();
+        };
+        var that = this;
+        that._oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
+        that._oauthInterval = window.setInterval(function () {
+            if (that._oauthWindow.closed) {
+                window.clearInterval(that._oauthInterval);
+                options.callback();
+            }
+        }, 1000);
+    };
+})(jQuery);
+$(document).ready(function(){
+    $('#facebook_login').click(function(e){
+        $.oauthpopup({
+            path: 'fb.php',
+			width:600,
+			height:300,
+            callback: function(){
+                window.location.reload();
+                window.close();
+            }
+        });
+		e.preventDefault();
+    });
+});
+</script>
 <script>
     $(document).ready(function(){
 

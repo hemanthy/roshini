@@ -40,7 +40,7 @@ where sod.aff_ext_param1=:aff_ext_param1 and u.user_reference_code=:user_referen
 
     if(count($result) == 0){
         echo 'zero count';
-        error_log("user_store_order_details record is zero count ".$userPojo->getUserReferenceCode());
+      //  error_log("user_store_order_details record is zero count ".$userPojo->getUserReferenceCode());
         //$cronlog -> info("user_store_order_details record is zero count".$userPojo->getUserReferenceCode());
         continue;
     }
@@ -84,13 +84,13 @@ where sod.aff_ext_param1=:aff_ext_param1 and u.user_reference_code=:user_referen
             $stmt1->bindParam(':user_id', $row['user_id'], PDO::PARAM_STR);
             $stmt1->bindParam(':store_id', $row['store_id'], PDO::PARAM_STR);
             $stmt1->execute();
-            error_log("user_report_details table is inserted ".$userPojo->getUserReferenceCode());
+            //error_log("user_report_details table is inserted ".$userPojo->getUserReferenceCode());
             //$cronlog -> info("user_report_details table is inserted ".$userPojo->getUserReferenceCode());
         }
     }
     catch(PDOException $e)
     {
-    	error_log("user_report_details table is inserted ".$userPojo->getUserReferenceCode());
+    	//error_log("user_report_details table is inserted ".$userPojo->getUserReferenceCode());
     	//$cronlog -> error($e->getMessage());
     }
 }

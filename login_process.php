@@ -1,9 +1,10 @@
 <?php
 session_start();
-
-/*if(isset($_SESSION['usr_id'])!="") {
+/* if(isset($_SESSION['usr_id'])!="") {
 	header("Location: index.php");
-}*/
+} */
+
+
 
 
 include_once 'dbconnect.php';
@@ -12,9 +13,9 @@ include_once 'pojo/UserDetailsPOJO.php';
 
 include_once 'phpmailer/mail.php';
 
-//include_once 'mylogger.php';
-
 include('Constants.php');
+
+include_once 'writemysqllog.php';
 
 $msg = '';
 
@@ -59,7 +60,7 @@ function userLogin(UserDetailsPOJO $udp)
 }
 
 
-function autoLogin($email,$con)
+function autoLoginfb($email,$con)
 {
   	$result = mysqli_query($con, "SELECT * FROM user WHERE email = '" . $email . "' and password = '" . md5('shh@3$%*') . "'");
 
@@ -74,17 +75,22 @@ function autoLogin($email,$con)
 }
 
 if (isset($_POST['login'])) {
-
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
-    
-    $udp = new UserDetailsPOJO();
-    
-    $udp -> setPassword($password);
-    $udp -> setEmailId($email);
-    $udp -> setPdoconn($conn);
-    
-    $msg = userLogin($udp);
+	
+	try {
+		$email = mysqli_real_escape_string($con, $_POST['email']);
+		$password = mysqli_real_escape_string($con, $_POST['password']);
+		
+		$udp = new UserDetailsPOJO();
+		
+		$udp -> setPassword($password);
+		$udp -> setEmailId($email);
+		$udp -> setPdoconn($conn);
+		
+		$msg = userLogin($udp);
+	} catch (Exception $e) {
+		write_mysql_log($e->getMessage(),$conn);
+	}
+   
 }
 
 //set validation error flag as false
@@ -109,40 +115,43 @@ $error = false;
 }*/
 
 if (isset($_POST['signup'])) {
-    $name = mysqli_real_escape_string($con, $_POST['name']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
-    $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
-    
-    $refNo = generateUsrRefNo ($conn);
-    
-    $udp = new UserDetailsPOJO();
-    
-    $udp -> setPassword($password);
-    $udp -> setEmailId($email);
-    $udp ->	setCpassword($cpassword);
-    $udp -> setName($name);
-    $udp -> setRefno($refNo);
-    $udp -> setPdoconn($conn);
-
-    
-    
-    if($password != $cpassword) {
-        $error = true;
-        $msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
-      //  $cpassword_error = "Password and Confirm Password doesn't match";
-    }else{
-    	$usrObj = getUserByEmailId ($udp);
-        if ($usrObj!=null && count($usrObj) > 0) {
-            $msg = Constants::EMAIL_ALREADY_EXISTS;
-        }else if(saveUser ($udp) == true) {
-            $msg = Constants::REGISTRATION_SUCCESSFUL;
-            // login
-           $msg = userLogin($udp);
-        } else {
-            $msg = "Error in registering...Please try again later!";
-        }
-    }
+	
+	try {
+		$name = mysqli_real_escape_string($con, $_POST['name']);
+		$email = mysqli_real_escape_string($con, $_POST['email']);
+		$password = mysqli_real_escape_string($con, $_POST['password']);
+		$cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
+		
+		$refNo = generateUsrRefNo ($conn);
+		
+		$udp = new UserDetailsPOJO();
+		
+		$udp -> setPassword($password);
+		$udp -> setEmailId($email);
+		$udp ->	setCpassword($cpassword);
+		$udp -> setName($name);
+		$udp -> setRefno($refNo);
+		$udp -> setPdoconn($conn);
+		
+		if($password != $cpassword) {
+			$error = true;
+			$msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
+			//  $cpassword_error = "Password and Confirm Password doesn't match";
+		}else{
+			$usrObj = getUserByEmailId ($udp);
+			if ($usrObj!=null && count($usrObj) > 0) {
+				$msg = Constants::EMAIL_ALREADY_EXISTS;
+			}else if(saveUser ($udp) == true) {
+				$msg = Constants::REGISTRATION_SUCCESSFUL;
+				// login
+				$msg = userLogin($udp);
+			} else {
+				$msg = "Error in registering...Please try again later!";
+			}
+		}
+	} catch (Exception $e) {
+		write_mysql_log($e->getMessage(),$conn);
+	}
 }
 
 
@@ -166,7 +175,7 @@ function sendMail(UserDetailsPOJO $udp){
 	$headers = "From: $name "."<noreply@specialcashback.com>\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	mail($to, $subject, $body, $headers);
+//	mail($to, $subject, $body, $headers);
 	/* try{
 		$mail = new Mail();
 		$mail->setFrom(SITEEMAIL);
@@ -252,7 +261,7 @@ function saveUser(UserDetailsPOJO $udp) {
 	$conn = $udp -> getPdoconn();
 	$udp -> setActivationcode($activasion);
 	
-	$stmt = $conn->prepare('INSERT INTO user (name,email,password,user_reference_code,user_img,active) VALUES (:name, :email, :password, :user_reference_code,:user_img,:active)');
+	$stmt = $conn->prepare('INSERT INTO user (name,email,password,user_reference_code,user_img,active,created) VALUES (:name, :email, :password, :user_reference_code,:user_img,:active,now())');
 	$rows = $stmt->execute(array(
 			':name' => $udp -> getName(),
 			':password' => md5($udp->getPassword()),
