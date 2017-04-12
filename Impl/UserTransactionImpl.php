@@ -48,7 +48,7 @@ function saveUserTransactionHistory($conn,$userDetailsPojo){
 	try {
 		$transaction_id = time() . mt_rand(100,999);
 	$stmt1 = $conn->prepare("insert into user_transaction_history (payment_requested_amount,payment_mode,payment_request_status,user_id,transaction_reference_id)
-    VALUES (:payment_requested_amount,:payment_mode,:payment_request_status,:user_id,:payment_approved_date,:transaction_reference_id);");
+    VALUES (:payment_requested_amount,:payment_mode,:payment_request_status,:user_id,:transaction_reference_id);");
 	$stmt1->execute(array(':payment_requested_amount' => $userDetailsPojo -> getPaymentRequestedAmount(),
 			'payment_mode' => $userDetailsPojo -> getPaymentMode(),
 			':payment_request_status' => 'pending',
