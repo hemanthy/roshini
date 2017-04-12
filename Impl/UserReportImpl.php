@@ -18,6 +18,7 @@ function getUserReportDetails($conn){
 			$userDetailsPojo = new UserDetailsPOJO();
 			$userDetailsPojo -> setOrderDate($row['order_date']);
 			$userDetailsPojo -> setStoreName($row['store_name']);
+			$userDetailsPojo -> setPurchase($row['purchase']);
 			if($row['cashback']!=null && $row['cashback'] > 0){
 				$userDetailsPojo -> setCashback($row['cashback']);
 			}else{

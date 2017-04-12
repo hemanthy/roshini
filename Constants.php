@@ -27,6 +27,9 @@ class Constants
     // Email ID already exists
     const EMAIL_ALREADY_EXISTS = 'EMAIL_ALREADY_EXISTS';
     
+    // Email ID Not Found
+    const EMAIL_NOT_FOUND = 'EMAIL_NOT_FOUND';
+    
     const ERROR_LOG_PATH = 'C:\xampp\php\logs\error.logs';
     
     

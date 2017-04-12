@@ -12,6 +12,11 @@ function showRegisterForm(){
         $('.login-footer').fadeOut('fast',function(){
             $('.register-footer').fadeIn('fast');
         });
+        
+        $('.forgotpassworBox').fadeOut('fast',function(){
+          //  $('.register-footer').fadeIn('fast');
+        });
+        
         $('.modal-title').html('Register with');
     }); 
     $('.error').removeClass('alert alert-danger').html('');
@@ -24,9 +29,34 @@ function showLoginForm(){
             $('.login-footer').fadeIn('fast');    
         });
         
+        $('.forgotpassworBox').fadeOut('fast',function(){
+            //  $('.register-footer').fadeIn('fast');
+          });
+        
         $('.modal-title').html('Login with');
     });       
      $('.error').removeClass('alert alert-danger').html(''); 
+}
+
+function forgotpassword(){
+	// login
+    $('#loginModal .registerBox').fadeOut('fast',function(){
+        $('.forgotpassworBox').fadeIn('fast');
+        $('.login-footer').fadeOut('fast',function(){
+            //$('.register-footer').fadeIn('fast');
+        });
+        $('.modal-title').html('Register with');
+    });
+    
+    // register
+    $('.loginBox').fadeOut('fast',function(){
+        $('.forgotpassworBox').fadeIn('fast');
+        $('.login-footer').fadeOut('fast',function(){
+            //$('.register-footer').fadeIn('fast');
+        });
+        $('.modal-title').html('Register with');
+    });
+    $('.error').removeClass('alert alert-danger').html('');
 }
 
 

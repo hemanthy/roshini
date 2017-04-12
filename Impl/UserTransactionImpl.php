@@ -1,4 +1,4 @@
-    <?php
+<?php
 /**
  * Created by PhpStorm.
  * User: heman
@@ -46,13 +46,15 @@ function getUserTransactionDetails($conn){
 
 function saveUserTransactionHistory($conn,$userDetailsPojo){
 	try {
-	$stmt1 = $conn->prepare("insert into user_transaction_history (payment_requested_amount,payment_mode,payment_request_status,user_id,payment_approved_date)
-    VALUES (:payment_requested_amount,:payment_mode,:payment_request_status,:user_id,:payment_approved_date);");
+		$transaction_id = time() . mt_rand(100,999);
+	$stmt1 = $conn->prepare("insert into user_transaction_history (payment_requested_amount,payment_mode,payment_request_status,user_id,transaction_reference_id)
+    VALUES (:payment_requested_amount,:payment_mode,:payment_request_status,:user_id,:payment_approved_date,:transaction_reference_id);");
 	$stmt1->execute(array(':payment_requested_amount' => $userDetailsPojo -> getPaymentRequestedAmount(),
 			'payment_mode' => $userDetailsPojo -> getPaymentMode(),
 			':payment_request_status' => 'pending',
 			':user_id' =>  $GLOBALS['user_id'],
-			':payment_approved_date' => null));
+			':transaction_reference_id' => $transaction_id,
+	));
 	} catch (PDOException $e) {
 		write_mysql_log($e->getMessage(), $conn);
 		// echo "Error: " . $e->getMessage();
@@ -76,10 +78,12 @@ function getUserTransactionHistory($conn) {
 			$paymentReqStatus = $row['payment_request_status'];
 			$paymentReqDate = $row['payment_requested_date'];
 			$paymentMode = $row['payment_mode'];
+			$transactionRefId = $row['transaction_reference_id'];
 			$userDetails->setPaymentRequestedAmount($paymentReqAmount);
 			$userDetails->setPaymentReqStatus($paymentReqStatus);
 			$userDetails->setPaymentReqDate($paymentReqDate);
 			$userDetails->setPaymentMode($paymentMode);
+			$userDetails->setTransactionRefId($transactionRefId);
 			array_push($userTransactionHistoryArray, $userDetails);
 		}
 		return $userTransactionHistoryArray;

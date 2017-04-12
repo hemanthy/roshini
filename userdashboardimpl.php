@@ -16,11 +16,11 @@ if (isset($_SESSION['usr_id'])) {
 try {
 
 	$userReportArray = getUserReportDetails($conn);
-	
+
 	$userTransactionDetails = getUserTransactionDetails($conn);
-	
+
 	echo json_encode(array('utds' => $userTransactionDetails,'usrReportArray' => $userReportArray));
-	
+
 } catch (Exception $e) {
 	write_mysql_log($e->getMessage(),$conn);
 }

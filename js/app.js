@@ -6,7 +6,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
     $scope.tabs = {selectedTab:-1};
     $scope.gridOptions = {};
     $scope.gridOptions.data = 'myData';
-    
+    $scope.paymentReqMode = 'true';
     $scope.myData = null;
     
     $scope.userHistory = null;
@@ -62,7 +62,9 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
           //  alert(JSON.stringify(response.data));
             var jsonData = JSON.stringify(response.data);
             if(response.data!=null && response.data!=''){
+            	
             	 $scope.myData = response.data.usrReportArray;
+            	 
             	 if(response.data.utds!=null && response.data.utds!=''){
             		 
             		 if(response.data.utds.availableamount==null){
@@ -82,7 +84,6 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             		 }else{
             			 $scope.redemptionMade = response.data.utds.redemptionMade;
             		 }
-            		 
             		 
             		 if(response.data.utds.paymentRequestedAmount==null){
             			 $scope.paymentRequestedAmount = 0;
@@ -117,6 +118,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
         }
 
         if(tabIndex==4){
+				
         	$scope.selectedtabname='Withdraw';
             $scope.withdrawAmount = '';
             $scope.today = new Date();
@@ -124,12 +126,8 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             $scope.userTransactionHistoryGridOptions = {};
             $scope.userTransactionHistoryGridOptions.data = 'userHistory';
 
-
-            /* $scope.userTransactionHistoryGridOptions.columnDefs = [
-                { name:'paymentRequestedAmount', displayName :'Payment Request Amount'},
-                { name:'paymentReqStatus', displayName :'Status'},
-                { name:'paymentReqDate', displayName :'Payment Request Date'}
-            ]; */
+			$('.withdrawinfo').removeClass('alert alert-info').html("");
+            $('.withdrawinfo').removeClass('alert alert-info');
             $scope.getUserAmountDetails();
            $scope.getUserTransactionHistory();
         }
@@ -164,9 +162,9 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
                     $scope.paytmnumber = response.data.paytmnumber;
                 }
             }
-            if(!$scope.banknumber){
+            if(!$scope.banknumber &&  !$scope.paytmnumber){
+				$('.withdrawinfo').removeClass('alert alert-info').html("");
                 $('.withdrawinfo').removeClass('alert alert-info');
-                $('.withdrawinfo').removeClass('alert alert-info').html("");
                 if($scope.availableamount > 0){
                     $('.withdrawinfo').addClass('alert alert-danger').html("Please Update Bank Details !!!");
                 }
@@ -175,8 +173,27 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
          //   $scope.getUserTransactionHistory();
         });
     }
+	
+	 $scope.saveWithdrawRequestError =  function(msg) {
+				$('.withdrawinfo').removeClass('alert alert-danger').html("");
+				$('.withdrawinfo').removeClass('alert alert-danger');
+			//	$('.withdrawinfo').addClass('alert alert-danger').html("Your earlier payment request is pending, cannot  request one more !!!");
+				$('.withdrawinfo').addClass('alert alert-danger').html(msg);
+	 }
 
   $scope.saveWithdrawRequest =  function() {
+  
+			if($scope.paymentReqMode=='false'){
+			    $scope.saveWithdrawRequestError("Your earlier payment request is pending, cannot  request one more !!!");
+				return;
+			}
+			
+			
+			if(!($scope.banknumber || $scope.paytmnumber)){
+				$scope.saveWithdrawRequestError("Please update payment details before withdraw request !!!");
+				return;
+			}
+  
         $http({
             method : "POST",
             url : "withdrawRequest.php",
@@ -186,23 +203,37 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
             //  var jsonData = JSON.stringify(response.data);
             //$scope.myData = response.data;
             console.log(response);
+			if(response.data && !angular.isUndefined(response.data.error)){
+				var msg =	response.data.error[0];
+				 $scope.saveWithdrawRequestError(msg);
+			}
+			$('.withdrawinfo').removeClass('alert alert-danger').html("");
             $('.withdrawinfo').removeClass('alert alert-danger');
-            $('.withdrawinfo').removeClass('alert alert-danger').html("");
-           $('.withdrawinfo').addClass('alert alert-info').html(response.data);
+            $('.withdrawinfo').addClass('alert alert-info').html(response.data);
            $scope.getUserTransactionHistory();
         });
     }
+	
     $scope.getUserTransactionHistory =  function() {
-        $http({
+	    $http({
             method : "POST",
             url : "withdrawRequest.php",
             data        : { isUsrTransactionHistory : true },
             dataType    : 'json'
         }).then(function (response) {
+		
             //  var jsonData = JSON.stringify(response.data);
             //$scope.myData = response.data;
             //console.log(response)
-            $scope.userHistory = response.data;
+			if(response.data && !angular.isUndefined(response.data)){
+				$scope.userHistory = response.data;
+				angular.forEach($scope.userHistory,function(value,index){
+					if(response.data[index].paymentReqStatus == 'pending'){
+						$scope.paymentReqMode = 'false';
+						return;
+					}
+				});
+			}
         });
     }
 

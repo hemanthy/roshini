@@ -22,7 +22,7 @@ function getUserPaymentDetails($conn){
 	}
 	
 //	$conn = $udp->getPdoconn();
-	$stmt2 = $conn->prepare("select * from user_payment_details upd where upd.user_id =:user_id order by upd.updated_date desc limit 0,1;");
+	$stmt2 = $conn->prepare("select * from user_payment_details upd where upd.user_id =:user_id and active = true order by upd.updated_date desc;");
 	$stmt2->execute(array(':user_id' => $user_id));
 	$usrResult = $stmt2->fetchAll();
 	try {
@@ -59,10 +59,21 @@ function getUserPaymentDetails($conn){
 
 function saveUserPaymentDetails(UserDetailsPOJO $udp){
 	try{
+		$conn = $udp->getPdoconn();
+		$userDetailsPojo = getUserPaymentDetails($conn);
+		
+		if(count($userDetailsPojo) > 0){
+			// De-active user payment details
+			$sql = "update user_payment_details set active = false where user_id =:user_id ;";
+			$stmt = $conn->prepare($sql);
+			$stmt->bindParam(':user_id', $GLOBALS['user_id'], PDO::PARAM_INT);
+			$stmt->execute(); 
+		}
+		
 	//	echo $GLOBALS['user_id'];
 		 $sql = "INSERT INTO user_payment_details(account_name,bank_name,bank_number,ifsc_code,paytm_mobile_number,is_paytm_active,user_id)
 VALUES(:account_name,:bank_name,:bank_number,:ifsc_code,:paytm_mobile_number,:is_paytm_active,:user_id);";
-		 $conn = $udp->getPdoconn();
+		
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(':account_name', $udp->getAccountname(), PDO::PARAM_STR);
 		$stmt->bindParam(':bank_name', $udp->getBankname(), PDO::PARAM_INT);

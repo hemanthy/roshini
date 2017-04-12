@@ -221,6 +221,10 @@
     .login .modal-dialog{
      	width: auto;
 	}
+	#hide-for-large-devices {
+		display: block;
+		visibility: visible;	
+	}
 }
 
 .big-login, .big-register{

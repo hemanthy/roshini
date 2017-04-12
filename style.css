@@ -2696,3 +2696,7 @@ hr.invishalf {
     border-left: none;
 }
 
+#hide-for-large-devices {
+	display: none;
+    visibility: hidden;	
+}

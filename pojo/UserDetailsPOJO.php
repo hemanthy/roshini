@@ -24,12 +24,14 @@ class UserDetailsPOJO {
     var $paymentReqDate;
     var $orderDate;
     var $storeName;
+    var $purchase;
     var $cashback;
     var $status;
     var $userReferenceCode;
     var $paymentMode;
     var $pdoconn;
     var $conn;
+    var $transactionRefId;
     
     /**
      *
@@ -410,6 +412,20 @@ class UserDetailsPOJO {
 	}
 	public function setUserimg($userimg) {
 		$this->userimg = $userimg;
+		return $this;
+	}
+	public function getTransactionRefId() {
+		return $this->transactionRefId;
+	}
+	public function setTransactionRefId($transactionRefId) {
+		$this->transactionRefId = $transactionRefId;
+		return $this;
+	}
+	public function getPurchase() {
+		return $this->purchase;
+	}
+	public function setPurchase($purchase) {
+		$this->purchase = $purchase;
 		return $this;
 	}
 	

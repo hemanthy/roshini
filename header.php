@@ -26,7 +26,11 @@ get: function(name) { return private[name]; }
 	#loginModal .sidebar .widget {
 		margin-bottom : 0px;
 	}
-
+	
+	.navbar-toggle {
+	    float: left;
+	}
+	
 </style>
 
 <link href="css/login-register.css" rel="stylesheet" />
@@ -36,6 +40,49 @@ get: function(name) { return private[name]; }
 <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js" type="text/javascript"></script>-->
 <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 <script src="js/js-validate.js"></script>
+
+
+<div id="hide-for-large-devices">
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" id="navbartopleft" class="navbar-toggle collapsed" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+                        </button>
+						<button type="button" id="backarrowhide">
+							<span class="glyphicon glyphicon-arrow-left" style="font-size: 28px"></span>
+						</button>
+                    </div>
+					<div id="navbartopleftfade" class="navbar" style="position: absolute;z-index: 10000; background-color: #FFF !important;">
+                        <ul class="nav navbar-nav">
+                            <li><a class="" href="index.php" title="">Home</a></li>
+                            <li><a class="active" href="store-single.php" title="">Flipkart Store</a></li>
+						</ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <?php if (!isset($_SESSION['usr_id'])) { ?>
+                                <li><a data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a></li>
+                                <li><a class="" title="" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a></li>
+                                <input type="hidden" value="headerpage" id="loginSource"/>
+                            <?php } else { ?>
+                                <li style="font-size: 16px;margin-top: 6px;">Hi <?php echo $_SESSION['usr_name']; ?></li>
+                                <li><a href="logout.php">Log Out</a></li>
+                                <li class="dropdown hasmenu userpanel">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php if (isset($_SESSION['user_img'])) echo $_SESSION['user_img']; ?>" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
+                                    <ul class="dropdown-menu start-right" role="menu">
+                                        <li><a href="user-dashboard.php?1"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                                        <li><a href="user-dashboard.php?2"><i class="fa fa-heart-o"></i> My Wallet</a></li>
+                                        <li><a href="user-dashboard.php?3"><i class="fa fa-dashboard"></i> Bank Details</a></li>
+                                        <li><a href="user-dashboard.php?4"><i class="fa fa-heart-o"></i> Withdraw</a></li>
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+				</div>
+          
+</div>
 
 <div class="header">
     <div class="logo-wrapper">
@@ -116,7 +163,7 @@ get: function(name) { return private[name]; }
         </div>
         <!-- end container -->
     </div>
-    <div class="menu-wrapper">
+    <div id="hide-for-small-devices" class="menu-wrapper">
         <div class="container">
             <div class="hovermenu ttmenu menu-color">
                 <div class="navbar navbar-default" role="navigation">
@@ -129,7 +176,7 @@ get: function(name) { return private[name]; }
                         </button>
                     </div>
                     <!-- end navbar-header -->
-                    <div class="navbar-collapse collapse">
+                    <div class="navbar">
                         <ul class="nav navbar-nav">
                             <li><a class="" href="index.php" title="">Home</a></li>
                             <li><a class="active" href="store-single.php" title="">Flipkart Store</a></li>
@@ -225,7 +272,7 @@ get: function(name) { return private[name]; }
 												<form method="POST" action="" accept-charset="UTF-8" id="login-form">
 													<input type="email" class="form-control" placeholder="Email address" name="email" id="email"  />
 													<input id="password" class="form-control" type="password" placeholder="Password" name="password">
-													<input class="btn btn-default btn-login" type="submit" name="login" value="login" id="btn-login">
+													<input class="btn btn-info btn-login" type="submit" name="login" value="login" id="btn-login">
 												</form>
 												<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
 											</div>
@@ -248,11 +295,27 @@ get: function(name) { return private[name]; }
 													<input type="password" name="cpassword" placeholder="Confirm Password" required class="form-control" />
 													<span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
 
-													<input class="btn btn-default btn-register" type="submit" value="Create account" name="signup">
+														<input class="btn btn-info btn-register" type="submit" value="Create account" name="signup">
 												</form>
 												<span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
 												<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
 											</div>
+										</div>
+									</div>
+									<div class="box">
+										<div class="content forgotpassworBox" style="display:none;">
+											<div class="col-md-12 text-center">
+							                        <div class="white-well">
+							                            <h2>Forgot your password?</h2>
+							                            <legend></legend>
+							                            <p>Please insert your email in the input below and we will send an email with the link to reset your password.</p>
+							                            <form class="form-inline" action="" accept-charset="UTF-8" method="post" id="resetpasswordform">
+							                                <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+							                                <input type="hidden" name="passwordreset"  class="form-control">
+							                                <input type="submit" name="commit" value="Reset" id="resetpasswordbtn" class="btn btn-fill btn-info">
+														</form>                      
+														  </div>
+							                    </div>
 										</div>
 									</div>
 								</div>
@@ -260,6 +323,9 @@ get: function(name) { return private[name]; }
 									<div class="forgot login-footer">
 												<span>Looking to
 													 <a href="javascript: showRegisterForm();"><b>create an account</b></a>
+												?</span>
+												<span>Looking to
+													 <a href="javascript: forgotpassword();"><b>forgot password</b></a>
 												?</span>
 									</div>
 									<div class="forgot register-footer" style="display:none">
@@ -350,7 +416,7 @@ get: function(name) { return private[name]; }
             return false;
         }
 
-
+        
 
        /*  Signup submit*/
         $("#sign-form").validate({
@@ -422,6 +488,27 @@ get: function(name) { return private[name]; }
             return false;
         }
 
+         $( "#resetpasswordbtn").click(function() {
+                    var data = $("#resetpasswordform").serialize();
+                    $.ajax({
+                        type : 'POST',
+                        url  : 'login_process.php',
+                        data : data,
+                        dataType:"text",
+                        beforeSend: function()
+                        {
+                            $("#error").fadeOut();
+                            $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
+                            //$("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
+                        },
+                        success :  function(response)
+                        {
+                           
+                        }
+                    });
+                    return false;
+                });
+
        /*  $( "#facebook_login").click(function() {
         	//facebook_login
         	debugger;
@@ -452,6 +539,7 @@ get: function(name) { return private[name]; }
 
     });
 </script>
+
 <script type="text/javascript">
 (function (jQuery) {
     jQuery.oauthpopup = function (options) {
@@ -494,5 +582,21 @@ $(document).ready(function(){
         $( ".modal-title" ).click(function() {
             hideModal();
         });
+		
+		$("#backarrowhide").hide();
+		
+		$("#navbartopleftfade").animate({left:-200, opacity:"show"}, 0);
+		
+		$("#navbartopleft").click(function(){
+			$("#navbartopleftfade").animate({left:-2, opacity:"show"}, 1500);
+			$("#backarrowhide").show();
+			$("#navbartopleft").hide();
+		});
+		
+		$("#backarrowhide").click(function(){
+			$("#navbartopleftfade").animate({left:-200, opacity:"show"}, 1500);
+			$("#backarrowhide").hide();
+			$("#navbartopleft").show();
+		});
     });
 </script>

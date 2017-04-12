@@ -76,6 +76,7 @@ function autoLoginfb($email,$con)
 
 if (isset($_POST['login'])) {
 	
+	
 	try {
 		$email = mysqli_real_escape_string($con, $_POST['email']);
 		$password = mysqli_real_escape_string($con, $_POST['password']);
@@ -92,6 +93,30 @@ if (isset($_POST['login'])) {
 	}
    
 }
+
+if (isset($_POST['passwordreset'])) {
+
+
+	try {
+		$email = mysqli_real_escape_string($con, $_POST['email']);
+		
+		$udp = new UserDetailsPOJO();
+		$udp -> setEmailId($email);
+		
+		$usrObj = getUserByEmailId ($udp);
+		if ($usrObj!=null && count($usrObj) > 0) {
+			echo Constants::EMAIL_ALREADY_EXISTS;
+		}else{
+			
+		}
+	} catch (Exception $e) {
+		write_mysql_log($e->getMessage(),$conn);
+	}
+	 
+}
+
+
+
 
 //set validation error flag as false
 $error = false;

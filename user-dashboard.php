@@ -423,6 +423,7 @@ START SITE HERE
 											<tr>
 												<th>Order Date</th>
 												<th>Store Name</th>
+												<th>Purchase</th>
 												<th>Cashback</th>
 												<th>Status</th>
 											</tr>
@@ -431,6 +432,7 @@ START SITE HERE
 											<tr ng-repeat="x in myData">
 												<td>{{x.orderDate}}</td>
 												<td>{{x.storeName}}</td>
+												<td>{{x.purchase}}</td>
 												<td>{{x.cashback}}</td>
 												<td>{{x.status}}</td>
 											</tr>
@@ -541,9 +543,7 @@ START SITE HERE
 									</div>
 								</form>
 							</div>
-
-							<div class="widget clearfix" ng-show="userHistory"
-								id="userHistory">
+							<div class="widget clearfix" ng-show="userHistory" id="userHistory">
 								<div class="coupon-tab nopadtop clearfix">
 									<table id="showcashbacktableid"
 										class="table table-sm table-striped table-bordered table-hover table-responsive">
@@ -552,7 +552,7 @@ START SITE HERE
 												<th>Payment Request Amount</th>
 												<th>Status</th>
 												<th>Payment Request Date</th>
-												<!-- <th>Payment Reference</th> -->
+												<th>Payment Reference</th>
 												<th>Payment Mode</th>
 											</tr>
 										</thead>
@@ -561,13 +561,11 @@ START SITE HERE
 												<td>{{x.paymentRequestedAmount}}</td>
 												<td>{{x.paymentReqStatus}}</td>
 												<td>{{x.paymentReqDate}}</td>
-												<!-- <td>{{x.paymentMode}}</td> -->
+												<td>{{x.transactionRefId}}</td>
 												<td>{{x.paymentMode}}</td>
 											</tr>
 										</tbody>
 									</table>
-
-									<!-- <div ui-grid="userTransactionHistoryGridOptions" ui-grid-edit ui-grid-cellnav  class="grid"></div> -->
 								</div>
 							</div>
 
