@@ -27,33 +27,17 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
     	 //alert($scope.paymentdetails.ispaytmactive);
   //  	$scope.paymentdetails.ispaytmactive = '0';
 	
-	 var tabIndex = 1;
+	 var tabValue = 'Dashboard';
     var url = window.location.href;
-		if(url.indexOf("#")!=-1){
-		url = url.replace('#', '');
-		}
-
-        if(url.indexOf("?")!=-1){
-            var splitUrl = url.split("?");
-            if(splitUrl.length=2){
-                var secondUrl = splitUrl[1];
-                if(secondUrl==""){
-                    $scope.tabs.selectedTab = tabIndex;
-                }else{
-                    $scope.initvalue=secondUrl;
-                    $scope.tabs.selectedTab = secondUrl;
-                    tabIndex = secondUrl;
-                }
-            }
-        }
-        $scope.tabChanged(tabIndex);
+    var view =  $scope.getParameterByName('view');
+    $scope.tabChanged(view);
     }
     $scope.tabChanged = function(tabIndex){
         $scope.tabs.selectedTab = tabIndex;
-        if(tabIndex==1){
+        if(tabIndex=='Dashboard'){
         	$scope.selectedtabname='Dashboard';
         }
-    if(tabIndex==2){
+    if(tabIndex=='My Wallet'){
     	$scope.selectedtabname='My Wallet';
         $http({
             method : "GET",
@@ -97,7 +81,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
            // $scope.myData = response.data;
         });
     }
-        if(tabIndex==3){
+        if(tabIndex=='Bank Details'){
         	$scope.selectedtabname='Bank Details';
         $http({
                 method : "get",
@@ -117,7 +101,7 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
 
         }
 
-        if(tabIndex==4){
+        if(tabIndex=='Withdraw'){
 				
         	$scope.selectedtabname='Withdraw';
             $scope.withdrawAmount = '';
@@ -276,6 +260,16 @@ app.controller('MainCtrl',  ['$scope', '$http', '$timeout', '$interval', functio
     			
     		}
     	}
+    }
+    
+    $scope.getParameterByName = function (name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
     
 }]);

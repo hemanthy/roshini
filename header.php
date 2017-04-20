@@ -33,6 +33,7 @@ get: function(name) { return private[name]; }
 	
 </style>
 
+
 <link href="css/login-register.css" rel="stylesheet" />
 <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -58,7 +59,7 @@ get: function(name) { return private[name]; }
 					<div id="navbartopleftfade" class="navbar" style="position: absolute;z-index: 10000; background-color: #FFF !important;">
                         <ul class="nav navbar-nav">
                             <li><a class="" href="index.php" title="">Home</a></li>
-                            <li><a class="active" href="store-single.php" title="">Flipkart Store</a></li>
+                            <li><a class="active" href="store/filpkart" title="">Flipkart Store</a></li>
 						</ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -71,10 +72,10 @@ get: function(name) { return private[name]; }
                                 <li class="dropdown hasmenu userpanel">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php if (isset($_SESSION['user_img'])) echo $_SESSION['user_img']; ?>" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
                                     <ul class="dropdown-menu start-right" role="menu">
-                                        <li><a href="user-dashboard.php?1"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                                        <li><a href="user-dashboard.php?2"><i class="fa fa-heart-o"></i> My Wallet</a></li>
-                                        <li><a href="user-dashboard.php?3"><i class="fa fa-dashboard"></i> Bank Details</a></li>
-                                        <li><a href="user-dashboard.php?4"><i class="fa fa-heart-o"></i> Withdraw</a></li>
+                                        <li><a href="user-dashboard.php?view=Dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                                        <li><a href="user-dashboard.php?view=My Wallet"><i class="fa fa-heart-o"></i> My Wallet</a></li>
+                                        <li><a href="user-dashboard.php?view=Bank Details"><i class="fa fa-dashboard"></i> Bank Details</a></li>
+                                        <li><a href="user-dashboard.php?view=Withdraw"><i class="fa fa-heart-o"></i> Withdraw</a></li>
                                     </ul>
                                 </li>
                             <?php } ?>
@@ -179,7 +180,7 @@ get: function(name) { return private[name]; }
                     <div class="navbar">
                         <ul class="nav navbar-nav">
                             <li><a class="" href="index.php" title="">Home</a></li>
-                            <li><a class="active" href="store-single.php" title="">Flipkart Store</a></li>
+                            <li><a class="active" href="store/filpkart" title="">Flipkart Store</a></li>
                             <!--<li><a class="" href="Stores.php" title="">Stores</a></li>-->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -193,13 +194,10 @@ get: function(name) { return private[name]; }
                                 <li class="dropdown hasmenu userpanel">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php if (isset($_SESSION['user_img'])) echo $_SESSION['user_img']; ?>" alt="" class="img-circle"> <span class="fa fa-angle-down"></span></a>
                                     <ul class="dropdown-menu start-right" role="menu">
-                                        <li><a href="user-dashboard.php?1"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                                        <li><a href="user-dashboard.php?2"><i class="fa fa-heart-o"></i> My Wallet</a></li>
-                                        <li><a href="user-dashboard.php?3"><i class="fa fa-dashboard"></i> Bank Details</a></li>
-                                        <li><a href="user-dashboard.php?4"><i class="fa fa-heart-o"></i> Withdraw</a></li>
-                                        <!--<li><a href="user-favorites.php"><i class="fa fa-star"></i> Favorite Stores</a></li>
-                                        <li><a href="user-submit.php"><i class="fa fa-bullhorn"></i> Submit Coupon</a></li>
-                                        <li><a href="logout.php"><i class="fa fa-lock"></i> Sign Out</a></li>-->
+                                        <li><a href="user-dashboard.php?view=Dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                                        <li><a href="user-dashboard.php?view=My Wallet"><i class="fa fa-heart-o"></i> My Wallet</a></li>
+                                        <li><a href="user-dashboard.php?view=Bank Details"><i class="fa fa-dashboard"></i> Bank Details</a></li>
+                                        <li><a href="user-dashboard.php?view=Withdraw"><i class="fa fa-heart-o"></i> Withdraw</a></li>
                                     </ul>
                                 </li>
                             <?php } ?>

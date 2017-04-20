@@ -2,14 +2,28 @@
 <html lang="en">
 <?php
 try {
+	
 session_start();
+$storename = '';
+if (isset($_GET['str'])) {
+	
+	$storename = $_GET['str'];
+	
+}
+
+
 include_once ('dbconnect.php');
 
 include_once 'writemysqllog.php';
 
+
+$url = $_SERVER['REQUEST_URI'];
+
 try {
 	$stmt = $conn->prepare("select * from store s, category c where s.id=:storeId and c.store_id =:storeId;");
-	$stmt->execute(array(':storeId' => 1));
+	if($storename== 'filpkart'){
+		$stmt->execute(array(':storeId' => 1));
+	}
 	$storeResult = $stmt->fetchAll();
 } catch (Exception $e) {
 	write_mysql_log($e->getMessage(), $conn);
@@ -31,7 +45,8 @@ try {
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
-
+    
+	<base href="http://localhost:8080/roshini/"/>
     <!-- FAVICONS -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -60,18 +75,18 @@ try {
     <![endif]-->
 
     <!-- Skin Examples -->
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin1.css" title="skin1" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin2.css" title="skin2" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin3.css" title="skin3" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin4.css" title="skin4" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin5.css" title="skin5" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin6.css" title="skin6" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin7.css" title="skin7" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin8.css" title="skin8" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin9.css" title="skin9" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin10.css" title="skin10" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin11.css" title="skin11" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin12.css" title="skin12" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin1.css" title="skin1" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin2.css" title="skin2" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin3.css" title="skin3" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin4.css" title="skin4" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin5.css" title="skin5" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin6.css" title="skin6" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin7.css" title="skin7" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin8.css" title="skin8" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin9.css" title="skin9" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin10.css" title="skin10" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin11.css" title="skin11" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin12.css" title="skin12" media="all" />
     <!-- END Skin Examples -->
 
     <!-- Style switcher -->
@@ -214,6 +229,7 @@ START SITE HERE
                                         <h3>Flipkart.com</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-xs-12">
+                                    $url = $_SERVER['REQUEST_URI'];
                                         <?php if (!isset($_SESSION['usr_id'])) { ?>
                                             <input type="hidden" value="storePage" id="usrRef"/>
                                             <a data-toggle="modal" href="javascript:void(0)" class="gp-button btn btn-primary btn1" onclick="openLoginModalStore();">Get Cashback</a>

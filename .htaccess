@@ -1,9 +1,25 @@
-#RewriteEngine on
-#RewriteCond %{REQUEST_FILENAME} !-f
+#Options +SymLinksIfOwnerMatch 
+#RewriteEngine On 
+#RewriteCond %{REQUEST_FILENAME} !-f 
 #RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^(.*)$ /roshini/redirecturl.php?path=$1 [NC,L,QSA]
+#RewriteRule . /redirecturl.php [L]
 
+#RewriteRule ^locations(/.*)?$ http://localhost:8080/roshini/index.php [L,NC]
 
-#RewriteEngine on
+#Redirect /store-single.php?filpkart /default.html
 
-#RewriteRule ^((?!index\.php).+)$ /index.php [L]
+RewriteEngine On 
+ErrorDocument 404 http://localhost:8080/roshini/info.php
+
+RewriteCond %{REQUEST_URI} !(\.gif|\.jpg|\.png)$ [NC]
+
+RewriteRule ^store/([a-z]+) store-single.php?str=$1
+
+#RewriteRule ^user-dashboard/ user-dashboard.php?view=$1
+
+#RewriteCond %{QUERY_STRING} ^view=(.*)$
+#RewriteRule ^user-dashboard/?$ user-dashboard.php?view=$1 [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^view=16$
+RewriteRule ^user-dashboard.php$ http://www.example.com/furniture.html? [L,R=301]
+

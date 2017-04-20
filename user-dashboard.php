@@ -1,5 +1,12 @@
 <?php
 session_start ();
+
+if (isset($_GET['view'])) {
+
+	$id = $_GET['view'];
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +25,8 @@ session_start ();
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="keywords" content="">
+
+<base href="http://localhost:8080/roshini/"/>
 
 <!-- FAVICONS -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -261,33 +270,39 @@ START SITE HERE
 			<div class="container">
 				<div class="row">
 					<div class="sidebar col-md-4">
-						<div class="widget clearfix">
-							<ul class="nav nav-pills nav-stacked">
-								<li ng-class="tabs.selectedTab == 1 ? 'active' : ''"><a href="#"
-									ng-click="tabChanged(1);"><span class="glyphicon glyphicon-off"></span>
-										Dashboard</a></li>
-								<li ng-class="tabs.selectedTab == 2 ? 'active' : ''"><a href="#"
-									ng-click="tabChanged(2);"><span class="fa fa-heart-o"></span>
-										My Wallet</a></li>
-								<li ng-class="tabs.selectedTab == 3 ? 'active' : ''"><a href="#"
-									ng-click="tabChanged(3);"><span class="fa fa-heart-o"></span>
-										Bank Details</a></li>
-								<li ng-class="tabs.selectedTab == 4 ? 'active' : ''"><a href="#"
-									ng-click="tabChanged(4);"><span class="fa fa-heart-o"></span>
-										Withdraw</a></li>
-								<!-- <li ng-class="tabs.selectedTab === 4 ? 'active' : ''">
-                                 <a  href="#" ng-click="tabChanged(4);"><span class="fa fa-heart-o"></span>  Missing Cashback</a>
-                             </li>
-                             <li><a href="user-favorites.php"><span class="fa fa-star"></span>  Favorite Stores</a></li>
-                             <li><a href="user-submit.php"><span class="fa fa-bullhorn"></span>  Submit a Coupon</a></li>-->
-								<li><a href="logout.php"><span class="fa fa-lock"></span> Logout</a></li>
-							</ul>
-						</div>
+							<div class="widget clearfix">
+							    <ul class="nav nav-pills nav-stacked">
+							        <li ng-class="tabs.selectedTab == 'Dashboard' ? 'active' : ''">
+							            <a ng-click="tabChanged('Dashboard');">
+							                <span class="glyphicon glyphicon-off"></span>Dashboard</a>
+							        </li>
+							        <li ng-class="tabs.selectedTab == 'My Wallet' ? 'active' : ''">
+							        	<a   ng-click="tabChanged('My Wallet');">
+							        		<span class="fa fa-heart-o"></span>
+											My Wallet
+										</a>
+							        </li>
+							        <li ng-class="tabs.selectedTab == 'Bank Details' ? 'active' : ''">
+							        		<a    ng-click="tabChanged('Bank Details');">
+							        		<span class="fa fa-heart-o"></span>
+													Bank Details
+											</a>
+							        </li>
+							        <li ng-class="tabs.selectedTab == 'Withdraw' ? 'active' : ''">
+							        		<a  ng-click="tabChanged('Withdraw');">
+							        			<span class="fa fa-heart-o"></span>
+												Withdraw
+											</a>
+							        </li>
+							        <li><a href="logout.php"><span class="fa fa-lock"></span> Logout</a>
+							        </li>
+							    </ul>
+							</div>
 						<!-- end widget -->
 					</div>
 					<!-- end col -->
 
-					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 1">
+					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 'Dashboard'">
 						<div class="widget clearfix">
 
 							<form id="uploadimage" class="contact-form newsletter" action=""
@@ -381,7 +396,7 @@ START SITE HERE
 						</div>
 					</div>
 					<!-- end content -->
-					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 2">
+					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 'My Wallet'">
 						<div class="coupon-list list-wrapper">
 							<div class="coupon-wrapper">
 								<div class="row tile_count">
@@ -444,7 +459,7 @@ START SITE HERE
 								
 						</div>
 					</div>
-					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 3">
+					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 'Bank Details'">
 						<div class="coupon-tab post-wrapper nopadtop clearfix">
 							<hr class="invis3">
 							<h3>Please Select your Payment Method</h3>
@@ -509,7 +524,7 @@ START SITE HERE
 
 					</div>
 
-					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 4">
+					<div class="sidebar col-md-8" ng-show="tabs.selectedTab == 'Withdraw'">
 						<div class="sidebar col-md-12">
 							<div class="withdrawinfo"></div>
 							<div class="widget clearfix">
