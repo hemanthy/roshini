@@ -1,10 +1,10 @@
-drop database testdb;
-create database testdb;
-use testdb;
+-- drop database testdb;
+-- create database testdb;
+-- use testdb;
 
- -- drop database id1145172_testdb;
- -- create database id1145172_testdb;
--- use id1145172_testdb;
+--  drop database id1145172_testdb;
+--  create database id1145172_testdb;
+ use id1145172_testdb;
 
 -- DROP TABLE category;
 -- select * from mylog  order by log_id desc;
@@ -25,8 +25,9 @@ create table user (
    locale varchar(10) COLLATE utf8_unicode_ci  NULL,
    link varchar(255) COLLATE utf8_unicode_ci  NULL,
   active varchar(255) NOT NULL,
+  activeToken varchar(255) DEFAULT NULL,
   resetToken varchar(255) DEFAULT NULL,
-  resetComplete varchar(3) DEFAULT 'No',
+  resetComplete varchar(3) DEFAULT 'Yes',
   user_img TEXT,
   user_reference_code varchar(10),
   created datetime NOT NULL default CURRENT_TIMESTAMP,
@@ -79,7 +80,7 @@ create table user_store_order_details(id bigint NOT NULL AUTO_INCREMENT,category
 select * from user_store_order_details;
 
 -- drop table user_transaction_details;
-create table user_transaction_details (id bigint not null auto_increment,payment_requested_amount float default 0,available_amount float default 0,pending_amount float default 0,redemption_amount float default 0,payment_request_status varchar(20),payment_mode varchar(10),payment_requested_date TIMESTAMP,payment_approved_date TIMESTAMP,user_id bigint,primary key(id),foreign key (user_id) references user(id));
+create table user_transaction_details (id bigint not null auto_increment,payment_requested_amount float default 0,available_amount float default 0,pending_amount float default 0,redemption_amount float default 0,payment_request_status varchar(20),payment_mode varchar(10),payment_approved_date TIMESTAMP,user_id bigint,primary key(id),foreign key (user_id) references user(id));
  insert into user_transaction_details (user_id,available_amount) VALUES (1,120);
 -- update user_transaction_details set available_amount = 100  where user_id = 1002;
 -- drop table user_transaction_history;
@@ -109,7 +110,6 @@ select * from store s, category c where s.id=1 and c.store_id =1;
 select * from user_payment_details;
 select * from user_payment_details upd,user_transaction_details utd where upd.user_id =utd.user_id and utd.user_id = 1;
 
-select * from user_transaction_details order by payment_requested_date DESC;
 select * from user;
 select * from store;
 select * from user_transaction_details;

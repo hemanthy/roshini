@@ -49,6 +49,7 @@ if($fid!=null){
       <meta name="author" content="">
       <meta name="keywords" content="">
       <!-- FAVICONS -->
+	  <base href="<?php echo BASE_URL; ?>"/>
       <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
       <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
       <link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
@@ -215,31 +216,6 @@ if($fid!=null){
                <span data-u="arrowright" class="jssora22r" style="top:0px;right:8px;width:40px;height:58px;" data-autocenter="2"></span>
                <!-- end slider -->
                <hr class="invis1">
-               <!--<div class="row">
-                  <div class="col-md-12">
-                     <h4>Popular Stores</h4>
-                  </div>
-                 </div>-->
-               <!--<div class="text-center store-list row">
-                  <div class="col-md-4 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
-                     <div class="post-media">
-                        <a href="coupon-single.php"><img src="uploads/store_01.jpg" alt="" class="img-responsive"></a>
-                        <small>Takifest.com</small>
-                     </div>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-                     <div class="post-media">
-                        <a href="coupon-single.php"><img src="uploads/store_02.jpg" alt="" class="img-responsive"></a>
-                        <small>WPServis.com</small>
-                     </div>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="2s">
-                     <div class="post-media">
-                        <a href="coupon-single.php"><img src="uploads/store_03.jpg" alt="" class="img-responsive"></a>
-                        <small>PurplebyBanu.com</small>
-                     </div>
-                  </div>
-               </div>-->
                <!-- end container -->
             </div>
             <!-- end section -->
@@ -270,7 +246,7 @@ if($fid!=null){
                         <div class="coupon-list">
                             <div class="coupon-wrapper">
                                 <div class="post-media">
-                                    <a href="store-single.php">
+                                    <a href="store/flipkart">
                                     	<img src="images/logo/flipkart.1483720555.png" width="318" height="187">
                                     </a>
                                 </div><!-- end media -->
@@ -289,7 +265,7 @@ if($fid!=null){
                                             <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite it"><i class="fa fa-heart-o"></i></a>
                                         </div>
                                     </div> --> <!-- end coupon-top -->
-                                    <h3><a href="/stores/store-single.php">Flipkart.com</a></h3>
+                                    <h3><a href="store/flipkart">Flipkart.com</a></h3>
                                     <p>At reasonable prices, quality assurance, 100% secure shopping. </p>
                                 </div><!-- end meta -->
                             </div><!-- end coupon-wrapper -->
@@ -302,8 +278,8 @@ if($fid!=null){
                         <div class="coupon-list">
                             <div class="coupon-wrapper">
                                 <div class="post-media">
-                                    <a href="store-single.php">
-                                       <img src="http://st1.bgr.in/wp-content/uploads/2014/12/paytm-logo.jpg" width="318" height="187" onMouseOver="Comingsoon('https://thecliparts.com/wp-content/uploads/2016/11/note-coming-soon-clipart.png',this)" onMouseOut="Comingsoon('http://st1.bgr.in/wp-content/uploads/2014/12/paytm-logo.jpg',this)">
+                                    <a href="#">
+                                       <img src="images/paytm-logo.jpg" width="318" height="187" onMouseOver="Comingsoon('images/note-coming-soon-clipart.png',this)" onMouseOut="Comingsoon('images/paytm-logo.jpg',this)">
                                     </a>
                                 </div><!-- end media -->
 
@@ -321,7 +297,7 @@ if($fid!=null){
                                             <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite it"><i class="fa fa-heart-o"></i></a>
                                         </div>
                                     </div> --> <!-- end coupon-top -->
-                                    <h3><a href="/stores/store-single.php">Paytm.com</a></h3>
+                                    <h3><a href="#">Paytm.com</a></h3>
                                     <p>At reasonable prices, quality assurance, 100% secure shopping. </p>
                                 </div><!-- end meta -->
                             </div><!-- end coupon-wrapper -->
@@ -336,8 +312,8 @@ if($fid!=null){
                         <div class="coupon-list">
                             <div class="coupon-wrapper">
                                 <div class="post-media">
-                                    <a href="coupon-single.php">
-                                        <img src="http://www.musthavedeal.com/wp-content/uploads/2016/10/Amazon-logo.jpg" style="height: 187px;" alt="" onMouseOver="Comingsoon('https://thecliparts.com/wp-content/uploads/2016/11/note-coming-soon-clipart.png',this)" onMouseOut="Comingsoon('http://www.musthavedeal.com/wp-content/uploads/2016/10/Amazon-logo.jpg',this)">
+                                    <a href="#">
+                                        <img src="images/amazon-logo.jpg" style="height: 187px;" alt="" onMouseOver="Comingsoon('images/note-coming-soon-clipart.png',this)" onMouseOut="Comingsoon('images/amazon-logo.jpg',this)">
                                     </a>
                                 </div><!-- end media -->
 
@@ -355,7 +331,7 @@ if($fid!=null){
                                             <a href="coupon-favorites.php" data-toggle="tooltip" data-placement="bottom" title="Favorite it"><i class="fa fa-heart-o"></i></a>
                                         </div>
                                     </div><!-- end coupon-top -->
-                                    <h3><a href="coupon-single.php">Amazon.in</a></h3>
+                                    <h3><a href="#">Amazon.in</a></h3>
                                     <p>Those new members to the site via our instant KnowLogoDesign.com...</p>
 
                                 </div><!-- end meta -->
@@ -367,12 +343,12 @@ if($fid!=null){
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4><a href="coupon-single.php">10% Discount Coupon from KnowLogoDesign</a></h4>
+                                            <h4><a href="#">10% Discount Coupon from KnowLogoDesign</a></h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <a href="store-single.php"><img src="uploads/store_04.jpg" alt="" class="img-responsive"></a>
+                                                    <a href="#"><img src="uploads/store_04.jpg" alt="" class="img-responsive"></a>
                                                     <div class="modal-button">
                                                         <a href="http://themeforest.net/" target="_blank" title="" class="btn btn-default btn-block">Visit Store <i class="fa fa-angle-right"></i></a>
                                                     </div>
@@ -433,12 +409,12 @@ if($fid!=null){
 
                   <!-- end col -->
                 </div><!-- end row -->
-
+				<hr class="invis1">
                 <!--<div class="loadmorebutton text-center clearfix">
                     <a href="stores.php" class="btn btn-custom">Browse more stores</a>
                 </div>--><!-- end loadmore -->
 
-                <hr class="invis1">
+              <!--  <hr class="invis1">
 				
 				<div class="section-title row text-center">
                     <div class="col-md-8 col-md-offset-2">
@@ -446,7 +422,7 @@ if($fid!=null){
 						<hr>
 						<p class="lead">Recent discount coupon codes from hundreds of stores. With our codes take a few seconds you can earn unlimited discounts.</p>
                     </div>
-                </div><!-- end title -->
+                </div> 
 				<hr class="invis1">
 			   <div class="grid-coupons">
 				  <div class="col-md-3 col-sm-6 col-xs-12" style="border:2px dashed #00bcd4 !important;">
@@ -455,7 +431,7 @@ if($fid!=null){
 					  </div>
 					  <div class="col-md-6 col-sm-4">
 							<p style="display: table-cell;vertical-align: middle;text-align: center;">Join and Get Sign up Bonus</p>
-					  </div><!-- end media -->
+					  </div>
 				  </div>
 				  <div class="col-md-3 col-sm-6 col-xs-12" style="border:2px dashed #00bcd4 !important;">
 					  <div class="col-md-6 col-sm-4">
@@ -463,7 +439,7 @@ if($fid!=null){
 					  </div>
 					  <div class="col-md-6 col-sm-4">
 							<p style="display: table-cell;vertical-align: middle;text-align: center;">Extra CashBack on Every Order</p>
-					  </div><!-- end media -->
+					  </div>
 				  </div>
 				  <div class="col-md-3 col-sm-6 col-xs-12" style="border:2px dashed #00bcd4 !important;">
 					  <div class="col-md-6 col-sm-4">
@@ -471,7 +447,7 @@ if($fid!=null){
 					  </div>
 					  <div class="col-md-6 col-sm-4">
 							<p style="display: table-cell;vertical-align: middle;text-align: center;">Shop Store via AvailCashback</p>
-					  </div><!-- end media -->
+					  </div>
 				  </div>
 				  <div class="col-md-3 col-sm-6 col-xs-12" style="border:2px dashed #00bcd4 !important;">
 					  <div class="col-md-6 col-sm-4">
@@ -479,10 +455,9 @@ if($fid!=null){
 					  </div>
 					  <div class="col-md-6 col-sm-4" style="padding-left:0px;padding-right: 0px;">
 							<p style="display: table-cell;vertical-align: middle;text-align: center;">Transfer CashBack To NEFT/Paytm</p>
-					  </div><!-- end media -->
+					  </div>
 				  </div>
-				  <!-- end row -->
-			   </div>
+			   </div>  -->
             </div>
         </div>
 		<div id="footerId"></div>

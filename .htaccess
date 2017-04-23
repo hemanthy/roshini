@@ -16,9 +16,12 @@ RewriteCond %{REQUEST_URI} !(\.gif|\.jpg|\.png)$ [NC]
 RewriteRule ^store/([a-z]+) store-single.php?str=$1
 
 #RewriteRule ^user-dashboard/ user-dashboard.php?view=$1
+#RewriteRule ^user-dashboard/ user-dashboard.php?view=$1
 
 #RewriteCond %{QUERY_STRING} ^view=(.*)$
-#RewriteRule ^user-dashboard/?$ user-dashboard.php?view=$1 [R=301,L]
+#RewriteRule /howitworks /howitworks.php
+#RewriteRule ^howitworks /howitworks.php
+RewriteRule ^how-it-works?$ howitworks.php
 
 RewriteCond %{QUERY_STRING} ^view=16$
 RewriteRule ^user-dashboard.php$ http://www.example.com/furniture.html? [L,R=301]

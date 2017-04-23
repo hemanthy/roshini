@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 ?>
 <script>
 var config = (function() {
@@ -58,8 +60,9 @@ get: function(name) { return private[name]; }
                     </div>
 					<div id="navbartopleftfade" class="navbar" style="position: absolute;z-index: 10000; background-color: #FFF !important;">
                         <ul class="nav navbar-nav">
-                            <li><a class="" href="index.php" title="">Home</a></li>
-                            <li><a class="active" href="store/filpkart" title="">Flipkart Store</a></li>
+                            <li><a class=""  href="index.php" title="">Home</a></li>
+                            <li><a href="store/flipkart" title="">Flipkart Store</a></li>
+                            <li><a href="how-it-works" title="">How It Works</a></li>
 						</ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -122,7 +125,7 @@ get: function(name) { return private[name]; }
                                </div>
                             </div-->
                             <div class="pull-right text-right hidden-xs">
-                                <label>Search : <a href="#">Flipkart</a>, <a href="#">Amazon</a>, <a href="#">Snapdeal</a> etc.</label>
+                                <label>Search : <a href="#">Flipkart</a><!-- , <a href="#">Amazon</a>, <a href="#">Snapdeal</a> etc. --></label>
                             </div>
                         </div>
                     </form>
@@ -177,11 +180,11 @@ get: function(name) { return private[name]; }
                         </button>
                     </div>
                     <!-- end navbar-header -->
-                    <div class="navbar">
+                    <div id="navhighlight" class="navbar">
                         <ul class="nav navbar-nav">
-                            <li><a class="" href="index.php" title="">Home</a></li>
-                            <li><a class="active" href="store/filpkart" title="">Flipkart Store</a></li>
-                            <!--<li><a class="" href="Stores.php" title="">Stores</a></li>-->
+                            <li><a id="homenav" href="index.php" title="">Home</a></li>
+                            <li><a id="flipkartnav" href="store/flipkart" title="">Flipkart Store</a></li>
+                            <li><a id="howitworks" href="how-it-works" title="">How It Works</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -305,7 +308,6 @@ get: function(name) { return private[name]; }
 											<div class="col-md-12 text-center">
 							                        <div class="white-well">
 							                            <h2>Forgot your password?</h2>
-							                            <legend></legend>
 							                            <p>Please insert your email in the input below and we will send an email with the link to reset your password.</p>
 							                            <form class="form-inline" action="" accept-charset="UTF-8" method="post" id="resetpasswordform">
 							                                <input type="email" name="email" id="email" class="form-control" placeholder="Email">
@@ -497,11 +499,25 @@ get: function(name) { return private[name]; }
                         {
                             $("#error").fadeOut();
                             $("#btn-login").html('<img src="btn-ajax-loader.gif" /> &nbsp; Signing In ...');
+							$('.error').removeClass('alert alert-danger').html('');
                             //$("#btn-login").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
                         },
                         success :  function(response)
                         {
-                           
+							var res =	JSON.parse(response);
+							if(res.success!=null){
+								var data = res;
+									if(data.success){
+										$('.error').removeClass('alert alert-danger').html('');
+										$('.error').addClass('alert alert-danger').html(data.message);
+									}else{
+										$('.error').removeClass('alert alert-danger').html('');
+										$('.error').addClass('alert alert-danger').html(data.message);
+									}
+							}
+							
+							
+                           console.log(response);
                         }
                     });
                     return false;
@@ -595,6 +611,17 @@ $(document).ready(function(){
 			$("#navbartopleftfade").animate({left:-200, opacity:"show"}, 1500);
 			$("#backarrowhide").hide();
 			$("#navbartopleft").show();
+		});
+
+		$("#flipkartnav").each(function() {
+			var url = window.location.href;
+		    if (url.includes("flipkart")) {
+		        $("#flipkartnav").addClass("active");
+		    }else  if (url.includes("how-it-works")) {
+		    	 $("#howitworks").addClass("active");
+		    }else if (!(url.includes("user-dashboard"))) {
+		    	$("#homenav").addClass("active");
+		    }
 		});
     });
 </script>

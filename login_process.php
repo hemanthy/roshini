@@ -96,24 +96,42 @@ if (isset($_POST['login'])) {
 
 if (isset($_POST['passwordreset'])) {
 
-
+$data = array();
 	try {
 		$email = mysqli_real_escape_string($con, $_POST['email']);
 		
 		$udp = new UserDetailsPOJO();
 		$udp -> setEmailId($email);
+		$udp -> setPdoconn($conn);
 		
 		$usrObj = getUserByEmailId ($udp);
 		if ($usrObj!=null && count($usrObj) > 0) {
-			echo Constants::EMAIL_ALREADY_EXISTS;
+			$resultusr = resetPasswordTknisAlreadyExists($udp);
+			if(count($resultusr) > 0){
+				
+					$data['success'] = true;
+					$data['message'] = "Password reset confirmation email has been sent to $email.  <br> If email doesn't appear, <br> please check your SPAM !!!";
+					// send mail
+			}else {
+				$stmt = resetPasswordToken($udp);
+				if($stmt->rowCount() == 1){
+					$data['success'] = true;
+					$data['message'] = "Password reset confirmation email has been sent to $email.  <br> If email doesn't appear, <br> please check your SPAM !!!";
+				}
+			}
 		}else{
-			
+			$data['success'] = false;
+			$data['message'] = "$email email is not registered with us.";
 		}
 	} catch (Exception $e) {
-		write_mysql_log($e->getMessage(),$conn);
+		$data['success'] = false;
+		write_mysql_log($e,$conn);
 	}
+	
+	echo json_encode($data);
 	 
 }
+
 
 
 
@@ -159,7 +177,6 @@ if (isset($_POST['signup'])) {
 		$udp -> setPdoconn($conn);
 		
 		if($password != $cpassword) {
-			$error = true;
 			$msg = Constants::PASSWORD_CONFIRM_PASSWORD_DOESNOT_MATCH;
 			//  $cpassword_error = "Password and Confirm Password doesn't match";
 		}else{
@@ -183,7 +200,7 @@ if (isset($_POST['signup'])) {
 echo $msg;
 
 
-function sendMail(UserDetailsPOJO $udp){
+function sendMailForAccountActiviation(UserDetailsPOJO $udp){
 	//send email
 	
 	$name = "Specialcashback";
@@ -200,7 +217,7 @@ function sendMail(UserDetailsPOJO $udp){
 	$headers = "From: $name "."<noreply@specialcashback.com>\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-//	mail($to, $subject, $body, $headers);
+	mail($to, $subject, $body, $headers);
 	/* try{
 		$mail = new Mail();
 		$mail->setFrom(SITEEMAIL);
@@ -212,6 +229,45 @@ function sendMail(UserDetailsPOJO $udp){
 		
 	} */
 	
+}
+
+
+function sendMailForPasswordResetToken(UserDetailsPOJO $udp){
+	//send email
+	
+	$resettoken = $udp -> getResetPasswordToken();
+	
+	$emailId = $udp -> getEmailId();
+
+	$name = "Specialcashback";
+	$to = $udp -> getEmailId();
+	$userName = $udp -> getName();
+	$subject = "Reset Password";
+	$body = "<p>Hi $userName </p>
+	<p>Greetings from Specialcashback !</p>
+	<p>You have requested to reset your password. <br>	<a href=".DIR."activeresetpassword.php?a=$resettoken&b=$emailId>Click here</a> to change the password. </p>
+	<p>Alternately you can use below URL directly in browser. </p>
+	<p>".DIR."activeresetpassword.php?a=$resettoken&b=$emailId</a></p>
+	<p>Regards,</p>
+	<p>Specialcashback Team</p>";
+	
+	// echo $body;
+	
+	$headers = "From: $name "."<noreply@specialcashback.com>\r\n";
+	$headers .= 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		mail($to, $subject, $body, $headers);
+	/* try{
+		$mail = new Mail();
+		$mail->setFrom(SITEEMAIL);
+		$mail->addAddress($to);
+		$mail->subject($subject);
+		$mail->body($body);
+		$mail->send();
+		}catch (Exception $ex){
+
+		} */
+
 }
 
 
@@ -269,6 +325,40 @@ function getUserByEmailId(UserDetailsPOJO $udp) {
 	return $usrObj;
 }
 
+function resetPasswordTknisAlreadyExists(UserDetailsPOJO $udp) {
+	$conn =	$udp -> getPdoconn();
+	$stmt = $conn->prepare('SELECT * FROM user WHERE email =:email and resettoken is not null');
+	$stmt->execute(array(
+			':email' => $udp -> getEmailId()
+	));
+	$usrObj = $stmt->fetchAll();
+
+	if (count($usrObj) > 0) {
+		foreach($usrObj as $row){
+			$resettoken = $row['resetToken'];
+			$udp -> setResetPasswordToken($resettoken);
+		}
+		sendMailForPasswordResetToken($udp);
+	}
+	return $usrObj;
+}
+
+
+function resetPasswordToken(UserDetailsPOJO $udp) {
+	$conn =	$udp -> getPdoconn();
+	$email = $udp -> getEmailId();
+	$randnumber = uniqid(rand(),true);
+	$resetToken = md5($randnumber.''.$email);
+	$udp -> setResetPasswordToken($resetToken);
+	$query = "UPDATE user SET resetToken = '$resetToken' , resetComplete = 'No' WHERE email =:email";
+	$stmt = $conn->prepare($query);
+	$stmt->execute(array(
+			':email' => $udp -> getEmailId()
+	));
+	
+	sendMailForPasswordResetToken($udp);
+	return $stmt;
+}
 
 /**
  * @param name
@@ -286,14 +376,15 @@ function saveUser(UserDetailsPOJO $udp) {
 	$conn = $udp -> getPdoconn();
 	$udp -> setActivationcode($activasion);
 	
-	$stmt = $conn->prepare('INSERT INTO user (name,email,password,user_reference_code,user_img,active,created) VALUES (:name, :email, :password, :user_reference_code,:user_img,:active,now())');
+	$stmt = $conn->prepare('INSERT INTO user (name,email,password,user_reference_code,user_img,activeToken,active,created) VALUES (:name, :email, :password, :user_reference_code,:user_img,:activeToken,:active,now())');
 	$rows = $stmt->execute(array(
 			':name' => $udp -> getName(),
 			':password' => md5($udp->getPassword()),
 			':email' => $udp -> getEmailId(),
 			':user_reference_code' => $udp -> getRefno(),
 			':user_img' => "uploads/female.png",
-			':active' => $activasion
+			':active' => 'No',
+			':activeToken' => $activasion
 	));
 	if($rows != null && $rows==true){
 		$id = $conn->lastInsertId('id');
@@ -303,7 +394,7 @@ function saveUser(UserDetailsPOJO $udp) {
 	
 //	error_log("user created successfully", 3, require_once __DIR__ ."/php_error.log");
 	
-	sendMail($udp);
+	sendMailForAccountActiviation($udp);
 //	$id = $db->lastInsertId('memberID');
 	return $rows;
 }

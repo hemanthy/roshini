@@ -40,6 +40,6 @@ class Constants
 
 }
 
-define('DIR','http://specialcashback.000webhostapp.com/');
+define('DIR','https://specialcashback.000webhostapp.com/');
 define('SITEEMAIL','noreply@specialcashback.000webhostapp.com');
 define ('ERROR_LOG_PATH', 'C:\xampp\php\logs\error.logs');

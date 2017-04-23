@@ -2202,6 +2202,8 @@ a.carousel-control {
     .modal-sm {
         width: 300px;
     }
+	
+
 }
 
 @media (min-width: 992px) {
@@ -2639,6 +2641,7 @@ small {
 	padding: 15px;
     font-size: 14px;
     font-weight: bold;
+	border: 1px solid #ddd;
 }
 
 .coupon-tab  table thead {
@@ -2699,4 +2702,8 @@ hr.invishalf {
 #hide-for-large-devices {
 	display: none;
     visibility: hidden;	
+}
+
+#leftnav {
+	cursor: pointer;
 }

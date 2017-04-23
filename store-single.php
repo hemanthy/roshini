@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-try {
-	
-session_start();
-$storename = '';
-if (isset($_GET['str'])) {
-	
-	$storename = $_GET['str'];
-	
-}
-
 
 include_once ('dbconnect.php');
 
 include_once 'writemysqllog.php';
 
+try {
+	
+session_start();
 
-$url = $_SERVER['REQUEST_URI'];
+
+$uistorename = '';
+$storeid = '';
+if (isset($_GET['str'])) {
+	
+	$uistorename = $_GET['str'];
+	//echo $uistorename;
+	
+}
 
 try {
-	$stmt = $conn->prepare("select * from store s, category c where s.id=:storeId and c.store_id =:storeId;");
-	if($storename== 'filpkart'){
-		$stmt->execute(array(':storeId' => 1));
+
+$query = 'SELECT * FROM store order by store_name';
+
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$storeResult = $stmt->fetchAll();
+if(count($storeResult) > 0 ) {
+	foreach($storeResult as $row){
+		$store_name = $row['store_name'];
+		if(strtolower($store_name)  == strtolower($uistorename)){
+			$storeid = $row['id'];
+			break;
+		}
 	}
-	$storeResult = $stmt->fetchAll();
+}
+
+if($storeid==''){
+	write_mysql_log("Store Not Found..". $uistorename, $conn);
+}
+
+// $timestamp    = strtotime('February 2017');
+$first_day_this_month = date('Y-t-01'); // hard-coded '01' for first day
+$last_day_this_month  = date('Y-m-t');
+
+$query = "select * from store s, category c, store_commission sc where s.id=:storeId and c.store_id =:storeId and s.id = sc.store_id
+and c.start_day >= '$first_day_this_month' and c.end_day <= '$last_day_this_month' 
+and sc.start_day >= '$first_day_this_month' and sc.end_day <= '$last_day_this_month';";
+// echo $query;
+$stmt = $conn->prepare($query);
+$stmt->execute(array(':storeId' => $storeid));
+$storeResult = $stmt->fetchAll();
 } catch (Exception $e) {
 	write_mysql_log($e->getMessage(), $conn);
 }
@@ -46,7 +73,8 @@ try {
     <meta name="author" content="">
     <meta name="keywords" content="">
     
-	<base href="http://localhost:8080/roshini/"/>
+	<base href="<?php echo BASE_URL; ?>"/>
+	
     <!-- FAVICONS -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -75,18 +103,18 @@ try {
     <![endif]-->
 
     <!-- Skin Examples -->
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin1.css" title="skin1" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin2.css" title="skin2" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin3.css" title="skin3" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin4.css" title="skin4" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin5.css" title="skin5" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin6.css" title="skin6" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin7.css" title="skin7" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin8.css" title="skin8" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin9.css" title="skin9" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin10.css" title="skin10" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin11.css" title="skin11" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="/css/skins/skin12.css" title="skin12" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin1.css" title="skin1" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin2.css" title="skin2" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin3.css" title="skin3" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin4.css" title="skin4" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin5.css" title="skin5" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin6.css" title="skin6" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin7.css" title="skin7" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin8.css" title="skin8" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin9.css" title="skin9" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin10.css" title="skin10" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin11.css" title="skin11" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="css/skins/skin12.css" title="skin12" media="all" />
     <!-- END Skin Examples -->
 
     <!-- Style switcher -->
@@ -193,7 +221,7 @@ START SITE HERE
         <div class="container">
             <div class="page-title pull-left">
                 <p>This is an example subtitle for the single store.</p>
-                <h3>Flipkart Cashback</h3>
+                <h3><?php echo $store_name ?> Cashback</h3>
             </div><!-- end title -->
             <div class="pull-right hidden-xs">
                 <div class="bread">
@@ -217,7 +245,7 @@ START SITE HERE
                                 <div class="post-media text-center">
                                     <a href="coupon-single.php">
                                     	<img src="images/logo/FlipkartL.png" alt="" class="img-responsive"></a>
-                                    <small><a href="#">Flipkart.com</a></small>
+                                    <small><a href="#"><?php echo $store_name ?>.com</a></small>
                                 </div>
                                 <!-- end media -->
                             </div>
@@ -226,10 +254,9 @@ START SITE HERE
                             <div class="col-md-8 col-sm-8 col-xs-12">
                                 <div class="coupon-meta">
                                     <div class="col-md-6 col-sm-4 col-xs-12">
-                                        <h3>Flipkart.com</h3>
+                                        <h3><?php $store_name ?></h3>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-xs-12">
-                                    $url = $_SERVER['REQUEST_URI'];
                                         <?php if (!isset($_SESSION['usr_id'])) { ?>
                                             <input type="hidden" value="storePage" id="usrRef"/>
                                             <a data-toggle="modal" href="javascript:void(0)" class="gp-button btn btn-primary btn1" onclick="openLoginModalStore();">Get Cashback</a>
@@ -241,7 +268,7 @@ START SITE HERE
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <p><?php  print_r($storeResult[0]['description']); ?></p>
+                                    <p><?php if(count($storeResult) > 0 ) { print_r($storeResult[0]['description']); } ?></p>
                                 </div>
                                 <!-- end meta -->
                                 <!-- end coupon-top -->
@@ -262,18 +289,16 @@ START SITE HERE
                               <li role="presentation"><a href="#printablecoupons" aria-controls="printablecoupons" role="tab" data-toggle="tab">Printable Coupons</a></li>
                           </ul> -->
 
-
-
-                        <table id="showcashbacktableid" class="table table-sm table-striped table-bordered table-hover table-responsive">
-                            <thead class="thead-inverse">
-                            <tr>
-                                <th>Flipkart Offers</th>
-                                <th>Cashback</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
+							<table id="showcashbacktableid" width="100%">
+							  <thead>
+								<tr>
+									<th><?php echo $store_name ?> Offers</th>
+									<th>Cashback</th>
+									<th>Action</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								 <?php
                             try{
                                 foreach($storeResult as $row){
                                     $categoryName = $row['category_name'];
@@ -285,16 +310,17 @@ START SITE HERE
                                     $finalCommissionPercent = $cashbackPercent - $totalCommissionPercent;
                                     ?>
                                     <tr>
-                                    
-                                        <td><?php echo $categoryName;?></td>
-                                        <td><?php echo $finalCommissionPercent;?>%</td>
-                                        <td>
-                                            <?php if (!isset($_SESSION['usr_id'])) { ?>
-                                				<input type="hidden" value="storepage" id="loginSource"/>
-                                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-default btn-block" onclick="openLoginModalStore();">Get Cashback</a>
-                                            <?php } else { ?>
-                                                <a href="gotostore.php?ref=1" target="_blank" class="btn btn-default btn-block">Get Cashback</a>
-                                            <?php } ?>
+										<th><?php echo $categoryName;?></th>
+										<td data-th="Cashback"><div><?php echo $finalCommissionPercent;?>%</div></td>
+										<td data-th="Action">
+											<div>
+												<?php if (!isset($_SESSION['usr_id'])) { ?>
+													<input type="hidden" value="storepage" id="loginSource"/>
+													<a data-toggle="modal" href="javascript:void(0)" class="btn btn-default btn-block" onclick="openLoginModalStore();">Get Cashback</a>
+												<?php } else { ?>
+													<a href="gotostore.php?ref=1" target="_blank" class="btn btn-default btn-block">Get Cashback</a>
+												<?php } ?>
+											</div>
                                         </td>
                                     </tr>
                                     <?php
@@ -304,8 +330,8 @@ START SITE HERE
                             	write_mysql_log($e->getMessage(),$conn);
                             }
                             ?>
-                            </tbody>
-                        </table>
+							  </tbody>
+							</table>
                         <!-- Tab panes -->
                     </div>
                     <hr class="invishalf">
@@ -345,19 +371,19 @@ START SITE HERE
                     <div class="widget custom-widget clearfix">
                         <a href="user-submit.php">
                             <i class="fa fa-bullhorn alignleft fa-3x"></i>
-                            <h4>Go to Flipkart store</h4>
+                            <h4>Go to <?php echo $store_name ?> store</h4>
                             <p>Get cashback</p>
                         </a>
                     </div><!-- end widget -->
 
                     <div class="widget clearfix">
                         <div class="widget-title">
-                            <h4><span>Guidelines To Earn reward Points from Flipkart</span></h4>
+                            <h4><span>Guidelines To Earn reward Points from <?php echo $store_name ?></span></h4>
                         </div>
 
                         <div class="best-coupons">
                             <ul class="customlist">
-                                <li>For shopping with Flipkart, access its online Flipkart using your cashback account (can be made free after signing up at cashback.in)</li>
+                                <li>For shopping with <?php echo $store_name ?>, access its online <?php echo $store_name ?> using your cashback account (can be made free after signing up at cashback.in)</li>
                                 <li><a href="#">44$ off CompanieNamis Discount</a></li>
                                 <li><a href="#">10% Discount Coupon from KnowLogoDesign</a></li>
                                 <li><a href="#">Free Shipping for All Orders</a></li>
