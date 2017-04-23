@@ -32,6 +32,7 @@ class UserDetailsPOJO {
     var $pdoconn;
     var $conn;
     var $transactionRefId;
+    var $resetPasswordToken;
     
     /**
      *
@@ -428,6 +429,14 @@ class UserDetailsPOJO {
 		$this->purchase = $purchase;
 		return $this;
 	}
+	public function getResetPasswordToken() {
+		return $this->resetPasswordToken;
+	}
+	public function setResetPasswordToken($resetPasswordToken) {
+		$this->resetPasswordToken = $resetPasswordToken;
+		return $this;
+	}
+	
 	
 }
 ?>
