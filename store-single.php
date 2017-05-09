@@ -30,7 +30,7 @@ $storeResult = $stmt->fetchAll();
 if(count($storeResult) > 0 ) {
 	foreach($storeResult as $row){
 		$store_name = $row['store_name'];
-		if(strtolower($store_name)  == strtolower($uistorename)){
+		if($store_name == $uistorename){
 			$storeid = $row['id'];
 			break;
 		}
@@ -42,13 +42,12 @@ if($storeid==''){
 }
 
 // $timestamp    = strtotime('February 2017');
-$first_day_this_month = date('Y-t-01'); // hard-coded '01' for first day
+$first_day_this_month = date('Y-m-01'); // hard-coded '01' for first day
 $last_day_this_month  = date('Y-m-t');
 
 $query = "select * from store s, category c, store_commission sc where s.id=:storeId and c.store_id =:storeId and s.id = sc.store_id
 and c.start_day >= '$first_day_this_month' and c.end_day <= '$last_day_this_month' 
 and sc.start_day >= '$first_day_this_month' and sc.end_day <= '$last_day_this_month';";
-// echo $query;
 $stmt = $conn->prepare($query);
 $stmt->execute(array(':storeId' => $storeid));
 $storeResult = $stmt->fetchAll();
@@ -221,7 +220,7 @@ START SITE HERE
         <div class="container">
             <div class="page-title pull-left">
                 <p>This is an example subtitle for the single store.</p>
-                <h3><?php echo $store_name ?> Cashback</h3>
+                <h3>Flipkart Cashback</h3>
             </div><!-- end title -->
             <div class="pull-right hidden-xs">
                 <div class="bread">
@@ -245,7 +244,7 @@ START SITE HERE
                                 <div class="post-media text-center">
                                     <a href="coupon-single.php">
                                     	<img src="images/logo/FlipkartL.png" alt="" class="img-responsive"></a>
-                                    <small><a href="#"><?php echo $store_name ?>.com</a></small>
+                                    <small><a href="#">Flipkart.com</a></small>
                                 </div>
                                 <!-- end media -->
                             </div>
@@ -254,7 +253,7 @@ START SITE HERE
                             <div class="col-md-8 col-sm-8 col-xs-12">
                                 <div class="coupon-meta">
                                     <div class="col-md-6 col-sm-4 col-xs-12">
-                                        <h3><?php $store_name ?></h3>
+                                        <h3>Flipkart.com</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-xs-12">
                                         <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -292,7 +291,7 @@ START SITE HERE
 							<table id="showcashbacktableid" width="100%">
 							  <thead>
 								<tr>
-									<th><?php echo $store_name ?> Offers</th>
+									<th>Flipkart Offers</th>
 									<th>Cashback</th>
 									<th>Action</th>
 								</tr>
@@ -371,19 +370,19 @@ START SITE HERE
                     <div class="widget custom-widget clearfix">
                         <a href="user-submit.php">
                             <i class="fa fa-bullhorn alignleft fa-3x"></i>
-                            <h4>Go to <?php echo $store_name ?> store</h4>
+                            <h4>Go to Flipkart store</h4>
                             <p>Get cashback</p>
                         </a>
                     </div><!-- end widget -->
 
                     <div class="widget clearfix">
                         <div class="widget-title">
-                            <h4><span>Guidelines To Earn reward Points from <?php echo $store_name ?></span></h4>
+                            <h4><span>Guidelines To Earn reward Points from Flipkart</span></h4>
                         </div>
 
                         <div class="best-coupons">
                             <ul class="customlist">
-                                <li>For shopping with <?php echo $store_name ?>, access its online <?php echo $store_name ?> using your cashback account (can be made free after signing up at cashback.in)</li>
+                                <li>For shopping with Flipkart, access its online Flipkart using your cashback account (can be made free after signing up at cashback.in)</li>
                                 <li><a href="#">44$ off CompanieNamis Discount</a></li>
                                 <li><a href="#">10% Discount Coupon from KnowLogoDesign</a></li>
                                 <li><a href="#">Free Shipping for All Orders</a></li>

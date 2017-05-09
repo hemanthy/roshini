@@ -4,6 +4,7 @@ session_start();
 
 ?>
 <script>
+
 var config = (function() {
 var private = {
     'INCORRECT_EMAIL_OR_PASSWORD' : 'Incorrect Email or Password!!!',
@@ -60,9 +61,9 @@ get: function(name) { return private[name]; }
                     </div>
 					<div id="navbartopleftfade" class="navbar" style="position: absolute;z-index: 10000; background-color: #FFF !important;">
                         <ul class="nav navbar-nav">
-                            <li><a class=""  href="index.php" title="">Home</a></li>
-                            <li><a href="store/flipkart" title="">Flipkart Store</a></li>
-                            <li><a href="how-it-works" title="">How It Works</a></li>
+                            <li><a id="homenav" class="" href="/" title="">Home</a></li>
+                            <li><a  id="flipkartnav" href="store/flipkart" title="">Flipkart Store</a></li>
+                            <li><a id="howitworks" href="how-it-works" title="">How It Works</a></li>
 						</ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -93,7 +94,7 @@ get: function(name) { return private[name]; }
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-sm-6">
-                    <a class="navbar-brand" href="index.php">YourCoupon <small>Discount Coupon Codes</small></a>
+                    <a class="navbar-brand" href="/">YourCoupon <small>Discount Coupon Codes</small></a>
                 </div>
                 <!-- end col -->
                 <div class="col-md-6 col-sm-6">
@@ -182,9 +183,10 @@ get: function(name) { return private[name]; }
                     <!-- end navbar-header -->
                     <div id="navhighlight" class="navbar">
                         <ul class="nav navbar-nav">
-                            <li><a id="homenav" href="index.php" title="">Home</a></li>
-                            <li><a id="flipkartnav" href="store/flipkart" title="">Flipkart Store</a></li>
+                            <li><a id="homenav" class="" href="/" title="">Home</a></li>
+                            <li><a  id="flipkartnav" href="store/flipkart" title="">Flipkart Store</a></li>
                             <li><a id="howitworks" href="how-it-works" title="">How It Works</a></li>
+                            <!--<li><a class="" href="Stores.php" title="">Stores</a></li>-->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <?php if (!isset($_SESSION['usr_id'])) { ?>
@@ -273,6 +275,7 @@ get: function(name) { return private[name]; }
 												<form method="POST" action="" accept-charset="UTF-8" id="login-form">
 													<input type="email" class="form-control" placeholder="Email address" name="email" id="email"  />
 													<input id="password" class="form-control" type="password" placeholder="Password" name="password">
+													<input class="form-control" type="hidden" id="browserinfo" name="browserinfo" value="">
 													<input class="btn btn-info btn-login" type="submit" name="login" value="login" id="btn-login">
 												</form>
 												<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
@@ -295,8 +298,10 @@ get: function(name) { return private[name]; }
 
 													<input type="password" name="cpassword" placeholder="Confirm Password" required class="form-control" />
 													<span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
+													
+													<input class="form-control" type="hidden" id="browserinfosignup" name="browserinfosignup" value="">
 
-														<input class="btn btn-info btn-register" type="submit" value="Create account" name="signup">
+													<input class="btn btn-info btn-register" type="submit" value="Create account" name="signup">
 												</form>
 												<span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
 												<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
@@ -614,14 +619,32 @@ $(document).ready(function(){
 		});
 
 		$("#flipkartnav").each(function() {
+			debugger;
 			var url = window.location.href;
 		    if (url.includes("flipkart")) {
-		        $("#flipkartnav").addClass("active");
+		        $("#navhighlight #flipkartnav").addClass("active");
+		        $("#navbartopleftfade #flipkartnav").addClass("active");
+		        
 		    }else  if (url.includes("how-it-works")) {
-		    	 $("#howitworks").addClass("active");
+		    	 $("#navhighlight #howitworks").addClass("active");
+		    	 $("#navbartopleftfade #howitworks").addClass("active");
 		    }else if (!(url.includes("user-dashboard"))) {
-		    	$("#homenav").addClass("active");
+		    	$("#navhighlight #homenav").addClass("active");
+		    	$("#navbartopleftfade #homenav").addClass("active");
 		    }
 		});
+
+		var txt = "";
+	    txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+	    txt+= "<p>Browser Name: " + navigator.appName + "</p>";
+	    txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
+	    txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+	    txt+= "<p>Platform: " + navigator.platform + "</p>";
+	    txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
+
+		$( "#browserinfosignup" ).val (txt);
+		$( "#browserinfo" ).val (txt);
+		
     });
+
 </script>

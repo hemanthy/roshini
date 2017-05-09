@@ -1,6 +1,9 @@
 <?php
 session_start ();
 
+include_once 'dbconnect.php';
+
+
 if (isset($_GET['view'])) {
 
 	$id = $_GET['view'];
@@ -26,7 +29,7 @@ if (isset($_GET['view'])) {
 <meta name="author" content="">
 <meta name="keywords" content="">
 
-<base href="http://localhost:8080/roshini/"/>
+<base href="<?php echo BASE_URL; ?>"/>
 
 <!-- FAVICONS -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -270,7 +273,7 @@ START SITE HERE
 			<div class="container">
 				<div class="row">
 					<div class="sidebar col-md-4">
-							<div class="widget clearfix">
+							<div id="leftnav" class="widget clearfix">
 							    <ul class="nav nav-pills nav-stacked">
 							        <li ng-class="tabs.selectedTab == 'Dashboard' ? 'active' : ''">
 							            <a ng-click="tabChanged('Dashboard');">
@@ -436,6 +439,7 @@ START SITE HERE
 										class="table table-sm table-striped table-bordered table-hover table-responsive">
 										<thead class="thead-inverse">
 											<tr>
+												<th>Order No</th>
 												<th>Order Date</th>
 												<th>Store Name</th>
 												<th>Purchase</th>
@@ -445,11 +449,12 @@ START SITE HERE
 										</thead>
 										<tbody>
 											<tr ng-repeat="x in myData">
-												<td>{{x.orderDate}}</td>
-												<td>{{x.storeName}}</td>
-												<td>{{x.purchase}}</td>
-												<td>{{x.cashback}}</td>
-												<td>{{x.status}}</td>
+												<th><div>{{$index + 1}}</div></th>
+												<td data-th="Order Date"><div>{{x.orderDate}}</div></td>
+												<td data-th="Store Name"><div>{{x.storeName}}</div></td>
+												<td data-th="Purchase"><div>{{x.purchase}}</div></td>
+												<td data-th="Cashback"><div>{{x.cashback}}</div></td>
+												<td data-th="Status"><div>{{x.status}}</div></td>
 											</tr>
 										</tbody>
 									</table>
@@ -564,6 +569,7 @@ START SITE HERE
 										class="table table-sm table-striped table-bordered table-hover table-responsive">
 										<thead class="thead-inverse">
 											<tr>
+												<th>Payment No</th>
 												<th>Payment Request Amount</th>
 												<th>Status</th>
 												<th>Payment Request Date</th>
@@ -573,11 +579,12 @@ START SITE HERE
 										</thead>
 										<tbody>
 											<tr ng-repeat="x in userHistory">
-												<td>{{x.paymentRequestedAmount}}</td>
-												<td>{{x.paymentReqStatus}}</td>
-												<td>{{x.paymentReqDate}}</td>
-												<td>{{x.transactionRefId}}</td>
-												<td>{{x.paymentMode}}</td>
+												<th><div>{{$index + 1}}</div></th>
+												<td data-th="Pmt Req Amt"><div>{{x.paymentRequestedAmount}}</div></td>
+												<td data-th="Status"><div>{{x.paymentReqStatus}}</div></td>
+												<td data-th="Pmt Req Date"><div>{{x.paymentReqDate}}</div></td>
+												<td data-th="Pmt RefId"><div>{{x.transactionRefId}}</div></td>
+												<td data-th="Pmt Mode"><div>{{x.paymentMode}}</div></td>
 											</tr>
 										</tbody>
 									</table>

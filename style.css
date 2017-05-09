@@ -2002,7 +2002,7 @@ hr.invis3 {
 .copyrights p {
     margin-bottom: 0;
     padding-bottom: 0;
-}☺
+}
 
 .copyrights p,
 .copyrights a {
@@ -2641,9 +2641,20 @@ small {
 	padding: 15px;
     font-size: 14px;
     font-weight: bold;
-	border: 1px solid #ddd;
+    border-top : 0px;
+/* 	border: 1px solid #ddd; */
 }
 
+ #showcashbacktableid tr {
+ 	border: 1px solid #ddd;
+ }
+ 
+ #showcashbacktableid td {
+ 	border-left : 1px solid #ddd;
+ 	border-right : 1px solid #ddd;
+ }
+ 
+ 
 .coupon-tab  table thead {
 	   background: url(images/table_bg.jpg) repeat;
    	   font-size: 12px;
