@@ -103,17 +103,68 @@ include_once 'writemysqllog.php';
 								<li class="list-group-item">
 									<div class="row">
 										<div class="col-xs-10">
-											<h4>Login &amp; Browse our Retailer &amp; Product Offers</h4>
-											<p>Join/Login to CashKaro.com. You can search for any product you want to<br>buy, or search by retailer of your choice</p>
+											<h4>Register &amp; Login</h4>
+											<p>Register to Avail cashback and login to it.</p>
 										</div>
 										<div class="col-xs-2">
 											<span class="fa fa-truck  fa fa-inr fa-3x"></span>
 										</div>
 									</div>
 								</li>
-								<hr class="invis2">
-								<li class="list-group-item"><div class="row"><div class="col-xs-10"><h4>Login &amp; Browse our Retailer &amp; Product Offers</h4><p>Join/Login to CashKaro.com. You can search for any product you want to<br>buy, or search by retailer of your choice</p></div><div class="col-xs-2"><span class="fa fa-truck  fa fa-inr fa-3x"></span></div></div></li>
-								<li class="fa fa-money">Second item</li>
+								<hr class="invis2"/>
+								<li class="list-group-item"><div class="row">
+										<div class="col-xs-10">
+											<h4>Click on Retailer in Avail CB  &amp; Buy</h4>
+											<p>
+												Go to Retailer's e.g. flipkart through Avail Cashback,  Browse the products which you like and buy them normally as you usually do.
+											</p>
+										</div>
+										<div class="col-xs-2">
+											<span class="fa fa-truck  fa fa-inr fa-3x"></span>
+										</div>
+									</div>
+								</li>
+								<hr class="invis2"/>
+								<li class="list-group-item"><div class="row">
+										<div class="col-xs-10">
+											<h4>Notifying Cashback status</h4>
+											<p>
+												Cashback will get updated to your Avail CB account after 30 mins you buy and status shows pending.
+											</p>
+										</div>
+										<div class="col-xs-2">
+											<span class="fa fa-truck  fa fa-inr fa-3x"></span>
+										</div>
+									</div>
+								</li>
+								<hr class="invis2"/>
+								<li class="list-group-item"><div class="row">
+										<div class="col-xs-10">
+											<h4>Confirming on Cashback status</h4>
+											<p>
+												Cashback confirmation period depends on retailer's giving commission to us which normally takes place within 4-12weeks. once Retailer's confirmed the cashback, we will change the status to confirmed.
+											</p>
+											<p>Note: Retailers normally wait for 30days period to check if there are any cancellations.</p>
+										</div>
+										<div class="col-xs-2">
+											<span class="fa fa-truck  fa fa-inr fa-3x"></span>
+										</div>
+									</div>
+								</li>
+								<hr class="invis2"/>
+								<li class="list-group-item"><div class="row">
+										<div class="col-xs-10">
+											<h4>Request CASHBACK to your Bank account or Paytm Wallet</h4>
+											<p>
+												You can request for cashback if you have atleast Rs.100/- as confirmed Cashback  and We transfer the cashback amount for free to your bank account or paytm Wallet.
+											</p>
+										</div>
+										<div class="col-xs-2">
+											<span class="fa fa-truck  fa fa-inr fa-3x"></span>
+										</div>
+									</div>
+								</li>
+							<li class="fa fa-money">Second item</li>
 								<li class="fa fa-desktop">Third item</li>
 								<li class="fa fa-laptop">Third item</li>
 								<li class="fa fa-shopping-basket">Third item</li>
